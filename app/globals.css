@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: 222.2 47.4% 11.2%;
+  --secondary: 210 40% 96.1%;
+  --accent: 210 40% 96.1%;
+  --muted: 210 40% 96.1%;
+  --border: 214.3 31.8% 91.4%;
+}
+
+.dark {
+  --primary: 210 40% 98%;
+  --secondary: 217.2 32.6% 17.5%;
+  --muted: 217.2 32.6% 17.5%;
+  --border: 217.2 32.6% 17.5%;
+}
+
+html,
+body,
+:root {
+  height: 100%;
+}
+
+body {
+  @apply bg-background text-foreground antialiased;
+  font-feature-settings: "rlig" 1, "calt" 1;
+}
+
+.gradient-text {
+  @apply bg-clip-text text-transparent;
+  background-image: linear-gradient(
+    90deg,
+    hsl(var(--primary)) 0%,
+    #5b7cfa 50%,
+    #66e2ff 100%
+  );
+}
+
+.glass {
+  @apply bg-white/60 dark:bg-black/30 backdrop-blur-md border border-white/20 dark:border-white/10;
+}
+
+.prose img {
+  @apply rounded-lg shadow-sm;
+}
+
+.doc-grid {
+  background-image: linear-gradient(to right, rgba(120, 120, 120, 0.12) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(120, 120, 120, 0.12) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+

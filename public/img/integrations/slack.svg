@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" width="120" height="40">
+  <rect width="120" height="40" rx="8" fill="#111827"/>
+  <g fill="#fff">
+    <circle cx="24" cy="20" r="6" fill="#36C5F0"/>
+    <circle cx="34" cy="20" r="6" fill="#2EB67D"/>
+    <circle cx="29" cy="15" r="6" fill="#E01E5A"/>
+    <circle cx="29" cy="25" r="6" fill="#ECB22E"/>
+    <text x="48" y="25" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#fff">Slack</text>
+  </g>
+</svg>
+
+
