@@ -1,4 +1,4 @@
-
+"use client";
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import { 
@@ -67,7 +67,7 @@ const FeatureGrid: React.FC = () => {
       
       <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
         {features.map((feature, index) => (
-          <ModernCard variant="default" className="hover:border-foreground/20 group">
+          <ModernCard variant="default" className="hover:border-foreground/20 group" key={index}>
             <ModernCardHeader>
               <ModernCardIcon className="bg-background border border-border group-hover:border-foreground/20">
                 {feature.icon}

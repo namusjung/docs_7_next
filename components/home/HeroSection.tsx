@@ -1,4 +1,4 @@
-
+"use client";
 import React, { useEffect } from 'react';
 import { ArrowRight, BookOpen, Code2 } from 'lucide-react';
 import ModernButton from '@/components/ui/ModernButton';
@@ -81,8 +81,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({ theme, type = "", title, desc
             <div 
               className="absolute inset-0 z-10 flex items-center justify-center"
               style={{
-                maskImage: `url('/logo-no-outline.svg')`,
-                WebkitMaskImage: `url('/logo-no-outline.svg')`,
+                maskImage: `url('/img/logo-no-outline.svg')`,
+                WebkitMaskImage: `url('/img/logo-no-outline.svg')`,
                 maskSize: type === "other" ? '300px auto': '400px auto',
                 WebkitMaskSize: type === "other" ? '300px auto': '400px auto',
                 maskPosition: 'center',

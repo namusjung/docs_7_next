@@ -15,6 +15,7 @@ import Accordion from "@/components/docs/Accordion";
 import ApiRequest from "@/components/docs/ApiRequest";
 import ApiResponse from "@/components/docs/ApiResponse";
 import { getTableOfContents, getPrevNext } from "@/lib/navigation-utils";
+import Head from "next/head";
 
 type Params = any;
 
@@ -49,6 +50,7 @@ export default async function ApiDocPage({ params }: { params: Promise<Params> }
     const { prev, next } = getPrevNext(navItems, slug);
 
     return (
+      <>
       <div className="container grid grid-cols-1 lg:grid-cols-[240px_minmax(0,1fr)_200px] gap-8 py-10">
         <aside className="hidden lg:block">
           <nav className="sticky top-24 space-y-4">
@@ -115,6 +117,7 @@ export default async function ApiDocPage({ params }: { params: Promise<Params> }
           </div>
         </div>
       </div>
+      </>
     );
   } catch (e) {
     notFound();

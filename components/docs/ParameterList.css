@@ -1,0 +1,40 @@
+
+.parameter-list-content {
+  @apply divide-y divide-border;
+}
+
+.parameter-list-content h4 {
+  @apply px-0 py-0 m-0 pl-2 border-0;
+}
+
+.parameter-list-content h4 strong {
+  @apply text-foreground font-semibold mr-2;
+}
+
+.parameter-list-content h4 code {
+  @apply inline-flex items-center px-2 !py-0 rounded-md text-xs font-mono !bg-transparent;
+}
+
+.parameter-list-content h4 + p {
+  @apply px-4 pb-3 pt-0 m-0 pl-2 text-sm text-muted-foreground leading-relaxed bg-white dark:bg-neutral-900;
+}
+
+.parameter-list-content h4 + p a {
+  @apply text-primary hover:text-primary/80 underline underline-offset-4 transition-colors font-medium;
+}
+
+.parameter-list-content hr {
+  @apply hidden;
+}
+.parameter-list-content p{
+  @apply !text-[12px];
+}
+
+/* Ensure proper spacing and styling for the parameter entries */
+.parameter-list-content > * {
+  @apply border-b border-border last:border-b-0;
+}
+
+.parameter-list-content > h4:first-child {
+  @apply border-t-0;
+}
