@@ -18,6 +18,41 @@ import { getTableOfContents, getPrevNext } from "@/lib/navigation-utils";
 
 type Params = any;
 
+export async function generateMetadata({ params }: { params: Params }) {
+  try {
+    const { slug } = await params;
+    const raw = readMarkdownFile(process.cwd() + "/public/docs", slug);
+    const { frontmatter } = parseFrontmatter(raw);
+
+    console.log(frontmatter);
+
+    const title = frontmatter.title ? `${frontmatter.title} | 7en.ai Docs` : "7en.ai Docs";
+    const description = frontmatter.description || "7en.ai help documentation.";
+    const url = `https://docs.7en.ai/docs/${slug.join("/")}`;
+
+    return {
+      title,
+      description,
+      openGraph: {
+        title,
+        description,
+        url,
+        type: "article",
+      },
+      twitter: {
+        card: "summary_large_image",
+        title,
+        description,
+      },
+    };
+  } catch (e) {
+    return {
+      title: "7en.ai Docs",
+      description: "API documentation not found.",
+    };
+  }
+}
+
 export default async function DocPage({ params }: { params: Params }) {
   try {
     params = await params;
@@ -48,7 +83,7 @@ export default async function DocPage({ params }: { params: Params }) {
             ))}
           </nav>
         </aside>
-        <article className="prose prose-slate dark:prose-invert max-w-none">
+        <article className="prose prose-slate dark:prose-invert max-w-none pt-10">
           <div className="text-sm text-foreground/60 mb-4">
             <a href="/docs" className="hover:underline">Docs</a> / {breadcrumbs.map((b, i) => (
               <span key={b.href}>

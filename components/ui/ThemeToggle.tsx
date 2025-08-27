@@ -1,6 +1,8 @@
 "use client";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import ModernButton from "./ModernButton";
+import { Moon, Sun } from "lucide-react";
 
 export default function ThemeToggle() {
   const { theme, setTheme } = useTheme();
@@ -9,13 +11,16 @@ export default function ThemeToggle() {
   if (!mounted) return null;
   const isDark = theme === "dark" || (!theme && typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: dark)").matches);
   return (
-    <button
+    <ModernButton
       aria-label="Toggle theme"
-      className="px-3 py-2 rounded-md border hover:bg-foreground/5"
+      variant="ghost"
+      size="sm"
+      className="inline-flex items-center gap-2 h-8 w-8"
       onClick={() => setTheme(isDark ? "light" : "dark")}
+      iconOnly
     >
-      {isDark ? "🌙" : "☀️"}
-    </button>
+      {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4"/> }
+    </ModernButton>
   );
 }
 

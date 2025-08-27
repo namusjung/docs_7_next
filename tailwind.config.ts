@@ -40,10 +40,9 @@ const config: Config = {
         },
       },
       fontFamily: {
-        heading: ["Pavanam", "system-ui", "sans-serif"],
-        body: ["Mona Sans", "Inter", "system-ui", "sans-serif"],
-        mono: ["ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
-      },
+				primary: ['Pavanam', 'sans-serif'],
+				secondary: ['Mona Sans', 'sans-serif']
+			},
       keyframes: {
         grid: {
           "0%, 100%": { opacity: "0.6" },

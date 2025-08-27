@@ -1,4 +1,13 @@
-import * as Markdoc from "@markdoc/markdoc";
+import { heading } from "@/schema/Heading.markdoc";
+
+
+const variables = {
+  api: {
+    base_url: "api.7en.ai/",
+    key: "Api-Key YOUR_API_KEY",
+  },
+  renderApiOnly: false, // Flag to control rendering of API-specific tags
+};
 
 export const nodes = {
   fence: {
@@ -18,72 +27,97 @@ export const nodes = {
       lightbox: { type: Boolean, default: false },
     },
   },
-  heading: {
-    attributes: {
-      id: { type: String },
-    },
-  },
+  heading
 };
 
 export const tags = {
-  section: {
+  "section": {
     render: "DocSection",
     attributes: {
       id: { type: String, required: true },
       title: { type: String, required: true },
     },
   },
-  callout: {
+  "callout": {
     render: "Callout",
     attributes: {
       type: { type: String, matches: ["info", "warning", "error", "success"], default: "info" },
       title: { type: String },
     },
   },
-  Grid: {
+  "grid": {
     render: "Grid",
     attributes: {
       columns: { type: Number, default: 2 },
       gap: { type: String, default: "6" },
     },
   },
-  Card: {
+  "card": {
     render: "Card",
     attributes: {
       title: { type: String },
       icon: { type: String },
     },
   },
-  Accordion: {
+  "accordion": {
     render: "Accordion",
   },
-  endpoint: {
+  "endpoint": {
     render: "ApiEndpoint",
     attributes: {
       method: { type: String, required: true },
       url: { type: String, required: true },
     },
   },
-  request: {
-    render: "ApiRequest",
-  },
-  Response: {
-    render: "ApiResponse",
-  },
   "parameter-list": {
     render: "ParameterList",
+    attributes: {
+      title: { type: String, required: false },
+    },
   },
   "code-block": {
     render: "CodeBlock",
   },
-  image: {
+  "image": {
     render: "DocImage",
   },
 };
 
+export const apiTags = {
+  request: {
+    render: "ApiRequest",
+  },
+  response: {
+    render: "ApiResponse",
+    attributes: {
+      status: { type: String },
+      hasDropdown: { type: Boolean, required: false },
+      title: { type: String, default: "Response" },
+      language: { type: String, default: "json" },
+      copy: { type: Boolean, default: true },
+      statusBadge: { type: Boolean, default: true },
+    },
+  },
+};
+
+// Configuration for main content (all tags except request and response)
 export const config = {
   nodes,
-  tags,
+  tags: { ...tags, ...apiTags }, // Include all tags for parsing
+  variables: {
+    ...variables,
+    renderApiOnly: false, // Render all tags except API-specific ones
+  },
+};
+
+// Configuration for API content (only request and response)
+export const apiConfig = {
+  nodes,
+  tags: { ...tags, ...apiTags }, // Include all tags for parsing
+  variables: {
+    ...variables,
+    renderApiOnly: true, // Render only API-specific tags
+  },
 };
 
 export type Frontmatter = {
@@ -92,8 +126,6 @@ export type Frontmatter = {
   order?: number;
   description?: string;
   breadcrumb_chain?: [];
-  next? : {};
+  next?: {};
   prev?: {};
 };
-
-

@@ -11,8 +11,6 @@ prev:
 order: 1
 ---
 
-# Create Agent
-
 Create a new AI agent with custom configuration and knowledge sources. Agents can be configured with different models, prompts, and knowledge bases to handle specific use cases.
 
 
@@ -53,20 +51,23 @@ The Create Agent endpoint allows you to set up a new AI agent tailored to your s
 ```
 {% /parameter-list %}
 
-{% request-code title="Create agent" %}
+{% request title="Create agent" %}
+```json
 [
   {
     "language": "curl",
-    "code": "curl -X POST 'https://{% $api.base_url %}v1/agents/' -H 'Authorization: {% $api.key %}' -H 'Content-Type: application/json' -d '{\"name\": \"Updated Agent\", \"description\": \"An updated AI assistant\", \"systemPrompt\": \"You are an updated AI assistant. Provide concise and accurate responses.\"}'"
+    "code": "curl -X POST 'https://{% $api.base_url %}v1/agents/' -H 'Authorization: {% $api.key %}'\\ -H 'Content-Type: application/json'\\ -d '{\"name\": \"Updated Agent\", \"description\": \"An updated AI assistant\", \"systemPrompt\": \"You are an updated AI assistant. Provide concise and accurate responses.\"}'"
   },
   {
     "language": "javascript",
     "code": "fetch('https://{% $api.base_url %}v1/agents/', {\n  method: 'POST',\n  headers: {\n    'Authorization': '{% $api.key %}',\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n    \"name\": \"Updated Agent\",\n    \"description\": \"An updated AI assistant\",\n    \"systemPrompt\": \"You are an updated AI assistant. Provide concise and accurate responses.\"\n  })\n})"
   }
 ]
-{% /request-code %}
+```
+{% /request %}
 
-{% response status="200" hasDropdown="false" title="Response" %}
+{% response status="200" hasDropdown="false" title="Response Example" %}
+```json
 {
   "status": "success",
   "data": {
@@ -103,7 +104,7 @@ The Create Agent endpoint allows you to set up a new AI agent tailored to your s
       "conversationMemory": false,
       "multilingualSupport": false
     },
-    knowledge_sources: [],
+    "knowledge_sources": [],
     "model": {
       "temperature": 0.7,
       "token_length": 16000,
@@ -115,13 +116,14 @@ The Create Agent endpoint allows you to set up a new AI agent tailored to your s
     "updated_at": "2025-08-05T07:38:35.903607Z"
   }
 }
+```
 {% /response %}
 
 ## Error Responses
 
 
-{% code-block status="401" title="400 Bad Request" %}
-```
+
+```json
 {
   "error": {
     "code": "VALIDATION_ERROR",
@@ -135,12 +137,10 @@ The Create Agent endpoint allows you to set up a new AI agent tailored to your s
   }
 }
 ```
-{% /code-block %}
 
 ### 401 Unauthorized
 
-{% code-block status="401" title="Unauthorized" language="json" %}
-```
+```json
 {
   error: {
     code: "authentication_required",
@@ -152,7 +152,6 @@ The Create Agent endpoint allows you to set up a new AI agent tailored to your s
   }
 }
 ```
-{% /code-block %}
 
 ## Best Practices
 

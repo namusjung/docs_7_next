@@ -1,6 +1,6 @@
 
 .parameter-list-content {
-  @apply divide-y divide-border;
+  @apply divide-border !bg-white dark:!bg-slate-700/50;
 }
 
 .parameter-list-content h4 {
@@ -16,7 +16,7 @@
 }
 
 .parameter-list-content h4 + p {
-  @apply px-4 pb-3 pt-0 m-0 pl-2 text-sm text-muted-foreground leading-relaxed bg-white dark:bg-neutral-900;
+  @apply px-4 pb-3 pt-0 m-0 pl-2 text-sm text-muted-foreground leading-relaxed !bg-white dark:bg-neutral-900;
 }
 
 .parameter-list-content h4 + p a {

@@ -1,10 +1,11 @@
 import Link from "next/link";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import Image from "next/image";
+import ModernButton from "./ModernButton";
 
 export default function SiteHeader() {
   return (
-    <header className="sticky top-0 z-40 border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="fixed top-0 left-0 right-0 z-40 border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container h-14 flex items-center justify-between">
         <div className="flex items-center gap-6">
           <Link href="/" className="font-heading font-semibold">
@@ -22,8 +23,27 @@ export default function SiteHeader() {
           </nav>
         </div>
         <div className="flex items-center gap-2">
-          <a href="https://dashboard.7en.ai" className="text-sm underline underline-offset-4">Dashboard</a>
+
           <ThemeToggle />
+          <Link href="/docs/getting-started/introduction">
+            <ModernButton 
+              variant="outline"
+              size="sm"
+              className="inline-flex items-center gap-2"
+            >
+              Login
+            </ModernButton>
+            </Link>
+            <Link href="/api/api-reference/">
+            <ModernButton 
+              variant="primary"
+              size="sm"
+              className="inline-flex items-center gap-2"
+            >
+              Signup
+            </ModernButton>
+            </Link>
+          
         </div>
       </div>
     </header>

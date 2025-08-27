@@ -44,6 +44,9 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wght@0,200..900;1,200..900&family=Pavanam&display=swap" rel="stylesheet"></link>
+      </head>
       <body className="min-h-screen">
         <Providers>
           <SiteHeader />
