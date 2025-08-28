@@ -1,7 +1,7 @@
 import { heading } from "@/schema/Heading.markdoc";
+import { inline } from "@markdoc/markdoc/dist/src/schema";
 
-
-const variables = {
+export const variables = {
   api: {
     base_url: "api.7en.ai/",
     key: "Api-Key YOUR_API_KEY",
@@ -27,7 +27,7 @@ export const nodes = {
       lightbox: { type: Boolean, default: false },
     },
   },
-  heading
+  heading,
 };
 
 export const tags = {
@@ -41,9 +41,21 @@ export const tags = {
   "callout": {
     render: "Callout",
     attributes: {
-      type: { type: String, matches: ["info", "warning", "error", "success"], default: "info" },
-      title: { type: String },
-    },
+        type: {
+          type: String,
+          default: 'info',
+          matches: ['info', 'warning', 'success', 'error', 'tip']
+        },
+        title: {
+          type: String,
+          required: false
+        },
+        collapsible: {
+          type: Boolean,
+          required: false,
+          default: false
+        }
+      },
   },
   "grid": {
     render: "Grid",
@@ -80,6 +92,21 @@ export const tags = {
   },
   "image": {
     render: "DocImage",
+    attributes: {
+      src: { type: String, required: true },
+      alt: { type: String },
+      caption: { type: String },
+      width: { type: String },
+      height: { type: String },
+      type: { type: String },
+      lightbox: { type: Boolean },
+      autoPlay: { type: Boolean },
+      muted: { type: Boolean },
+      loop: { type: Boolean },
+      controls: { type: Boolean },
+      poster: { type: String }
+    },
+    selfClosing: true
   },
 };
 

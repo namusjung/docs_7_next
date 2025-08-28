@@ -1,6 +1,6 @@
 
 .parameter-list-content {
-  @apply divide-border !bg-white dark:!bg-slate-700/50;
+  @apply divide-border !bg-white dark:!bg-transparent;
 }
 
 .parameter-list-content h4 {

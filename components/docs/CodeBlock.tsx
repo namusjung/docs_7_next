@@ -1,5 +1,7 @@
 "use client";
 import { useState } from "react";
+import { SyntaxHighlighter } from "../ui/SyntaxHighlighter";
+import { ScrollArea } from "../ui/ScrollArea";
 
 type Props = {
   content: string;
@@ -7,12 +9,12 @@ type Props = {
   title?: string;
 };
 
-export default function CodeBlock({ content, language, title }: Props) {
+export default function CodeBlock({ content, language="text", title }: Props) {
   const [copied, setCopied] = useState(false);
   return (
     <div className="group relative my-4 border rounded-lg overflow-hidden">
-      <div className="flex items-center justify-between px-3 py-2 bg-muted/40 text-xs">
-        <span className="font-mono">{title || language || "code"}</span>
+      <div className=" absolute top-0 right-0 left-0 z-10 flex items-start justify-between px-2 py-2 bg-transparent text-xs">
+        <span className="font-mono inline-block">{title || language || "code"}</span>
         <button
           className="px-2 py-1 rounded bg-foreground/10 hover:bg-foreground/20"
           onClick={async () => {
@@ -25,7 +27,14 @@ export default function CodeBlock({ content, language, title }: Props) {
           {copied ? "Copied" : "Copy"}
         </button>
       </div>
-      <pre className="overflow-x-auto p-4 text-sm leading-relaxed bg-background"><code className={`language-${language}`}>{content}</code></pre>
+      <ScrollArea>
+        <SyntaxHighlighter
+          code={content}
+          language={language}
+          showCopyButton={false}
+          className="bg-background !overflow-visible !max-h-none"
+        />
+      </ScrollArea>
     </div>
   );
 }

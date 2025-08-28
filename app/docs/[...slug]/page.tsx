@@ -24,7 +24,6 @@ export async function generateMetadata({ params }: { params: Params }) {
     const raw = readMarkdownFile(process.cwd() + "/public/docs", slug);
     const { frontmatter } = parseFrontmatter(raw);
 
-    console.log(frontmatter);
 
     const title = frontmatter.title ? `${frontmatter.title} | 7en.ai Docs` : "7en.ai Docs";
     const description = frontmatter.description || "7en.ai help documentation.";
@@ -71,10 +70,10 @@ export default async function DocPage({ params }: { params: Params }) {
           <nav className="sticky top-24 space-y-4">
             {getDocsGroupedNav().map((group) => (
               <div key={group.section}>
-                <p className="text-xs uppercase tracking-wide text-foreground/60 mb-1">{group.section.replace(/-/g, " ")}</p>
+                <p className="text-xs uppercase tracking-wide !text-gray-600/40 dark:!text-gray-600/70 mb-1">{group.section.replace(/-/g, " ")}</p>
                 <div className="space-y-1">
                   {group.items.map((item) => (
-                    <a key={item.slug.join("/")} href={`/docs/${item.slug.join("/")}`} className="block text-sm hover:underline">
+                    <a key={item.slug.join("/")} href={`/docs/${item.slug.join("/")}`} className={`block text-[13px]  px-4 py-1.5 pl-2 hover:bg-muted hover:!text-black dark:hover:!text-white rounded-lg ${params.slug.join("/") === item.slug.join("/") ? "!bg-muted !text-black dark:!text-white" : ""}`}>
                       {item.frontmatter.title || item.slug[item.slug.length - 1]}
                     </a>
                   ))}
@@ -83,7 +82,7 @@ export default async function DocPage({ params }: { params: Params }) {
             ))}
           </nav>
         </aside>
-        <article className="prose prose-slate dark:prose-invert max-w-none pt-10">
+        <article className="prose prose-slate dark:prose-invert max-w-none pt-14">
           <div className="text-sm text-foreground/60 mb-4">
             <a href="/docs" className="hover:underline">Docs</a> / {breadcrumbs.map((b, i) => (
               <span key={b.href}>

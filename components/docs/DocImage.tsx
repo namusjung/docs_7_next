@@ -1,28 +1,53 @@
 "use client";
-import Image from "next/image";
+import React from 'react';
+import { MediaViewer } from '@/components/ui/MediaViewer';
 
-type Props = {
+interface DocsImageProps {
   src: string;
   alt?: string;
   caption?: string;
+  width?: any;
+  height?: any;
+  type?: 'image' | 'video';
   lightbox?: boolean;
-};
-
-export default function DocImage({ src, alt, caption }: Props) {
-  return (
-    <figure className="my-6">
-      <Image
-        src={src}
-        alt={alt ?? ""}
-        width={1200}
-        height={720}
-        className="rounded-lg border"
-      />
-      {caption ? (
-        <figcaption className="text-center text-sm text-foreground/60 mt-2">
-          {caption}
-        </figcaption>
-      ) : null}
-    </figure>
-  );
+  autoPlay?: boolean;
+  muted?: boolean;
+  loop?: boolean;
+  controls?: boolean;
+  poster?: string;
 }
+
+export function DocImage({ 
+  src, 
+  alt, 
+  caption, 
+  width, 
+  height,
+  type,
+  lightbox,
+  autoPlay,
+  muted,
+  loop,
+  controls,
+  poster
+}: DocsImageProps) {
+  return (
+    <div>
+    <MediaViewer
+      src={src}
+      alt={alt}
+      caption={caption}
+      type={type}
+      lightbox={lightbox}
+      autoPlay={autoPlay}
+      muted={muted}
+      loop={loop}
+      controls={controls}
+      width={width}
+      height={height}
+      poster={poster}
+    />
+    </div>
+  );
+};
+export default DocImage;

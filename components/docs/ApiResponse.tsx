@@ -74,7 +74,7 @@ export const ApiResponse: React.FC<ResponseExampleProps> = ({
       
       {/* Code Content with Syntax Highlighting and ScrollArea */}
       {isExpanded && (
-        <ScrollArea className="h-96">
+        <ScrollArea className="max-h-96">
           <SyntaxHighlighter
             code={code}
             language={language}

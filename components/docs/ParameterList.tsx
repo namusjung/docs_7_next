@@ -109,7 +109,7 @@ const NestedParameterItem: React.FC<NestedParameterItemProps> = ({ parameter, le
 
   return (
     <div className="border-b border-border/30 last:border-b-0 pl-6" style={{}}>
-      <div className="flex items-start hover:bg-muted/20 transition-colors flex-row-reverse" style={{ paddingLeft }}>
+      <div className="flex items-start transition-colors flex-row-reverse" style={{ paddingLeft }}>
         {hasChildren && (
           <button
             onClick={() => setIsExpanded(!isExpanded)}

@@ -1,6 +1,6 @@
 ---
 type: "docs"
-title: "Getting Started"
+title: Introduction
 order: 1
 breadcrumb_chain:
   - { label: "Home", href: "/" }

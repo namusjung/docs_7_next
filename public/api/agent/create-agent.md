@@ -8,7 +8,7 @@ next:
 prev: 
   href: /api/api-reference/agent/agent-object
   title: "Agent Object"
-order: 1
+order: 2
 ---
 
 Create a new AI agent with custom configuration and knowledge sources. Agents can be configured with different models, prompts, and knowledge bases to handle specific use cases.

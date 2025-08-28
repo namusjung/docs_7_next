@@ -24,7 +24,7 @@ body,
 }
 
 body {
-  @apply bg-neutral-50 dark:bg-neutral-900/60 text-foreground antialiased;
+  @apply bg-neutral-50 dark:bg-neutral-800/60 text-foreground antialiased;
   font-feature-settings: "rlig" 1, "calt" 1;
 }
 
@@ -124,7 +124,7 @@ body {
   }
   
   .prose pre {
-    @apply !bg-white dark:!bg-slate-700/50 text-foreground p-6 rounded-none overflow-x-auto mb-0;
+    @apply !bg-[#f9f9f9] dark:!bg-slate-700/50 text-foreground p-6 rounded-none overflow-x-auto mb-0;
   }
   
   .prose pre code {
