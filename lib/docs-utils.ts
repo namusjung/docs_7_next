@@ -64,26 +64,36 @@ export function getAllSlugs(baseDir: string): string[][] {
   return results;
 }
 
-export function getDocsNav(): NavItem[] {
-  const slugs = getAllSlugs(DOCS_DIR);
-  
-  const items = slugs.map((slug) => {
-    const raw = readMarkdownFile(DOCS_DIR, slug);
+function buildNavItems(baseDir: string, slugs: string[][]): NavItem[] {
+  return slugs.map((slug) => {
+    const raw = readMarkdownFile(baseDir, slug);
     const { frontmatter } = parseFrontmatter(raw);
     return { slug, frontmatter };
   });
-  items.sort((a, b) => (a.frontmatter.order ?? 999) - (b.frontmatter.order ?? 999));
+}
+
+function sortNavItems(items: NavItem[]) {
+  items.sort((a, b) => {
+    const sectionA = a.slug[0] ?? "";
+    const sectionB = b.slug[0] ?? "";
+    if (sectionA !== sectionB) return sectionA.localeCompare(sectionB);
+    const orderDiff = (a.frontmatter.order ?? 999) - (b.frontmatter.order ?? 999);
+    if (orderDiff !== 0) return orderDiff;
+    return a.slug.join("/").localeCompare(b.slug.join("/"));
+  });
+}
+
+export function getDocsNav(): NavItem[] {
+  const slugs = getAllSlugs(DOCS_DIR);
+  const items = buildNavItems(DOCS_DIR, slugs);
+  sortNavItems(items);
   return items;
 }
 
 export function getApiNav(): NavItem[] {
   const slugs = getAllSlugs(API_DIR);
-  const items = slugs.map((slug) => {
-    const raw = readMarkdownFile(API_DIR, slug);
-    const { frontmatter } = parseFrontmatter(raw);
-    return { slug, frontmatter };
-  });
-  items.sort((a, b) => (a.frontmatter.order ?? 999) - (b.frontmatter.order ?? 999));
+  const items = buildNavItems(API_DIR, slugs);
+  sortNavItems(items);
   return items;
 }
 
@@ -112,11 +122,13 @@ export function getApiGroupedNav(): GroupedNav {
   return groupByTopFolder(getApiNav());
 }
 
-export function buildBreadcrumbs(slug: string[]) {
-  const parts: { name: string; href: string }[] = [];
+export type BreadcrumbItem = { name: string; href?: string };
+
+export function buildBreadcrumbs(slug: string[], basePath: "/docs" | "/api" = "/docs"): BreadcrumbItem[] {
+  const parts: BreadcrumbItem[] = [];
   for (let i = 0; i < slug.length; i++) {
     const name = slug[i].replace(/-/g, " ");
-    const href = "/docs/" + slug.slice(0, i + 1).join("/");
+    const href = `${basePath}/${slug.slice(0, i + 1).join("/")}`;
     parts.push({ name, href });
   }
   return parts;

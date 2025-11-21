@@ -152,7 +152,7 @@ export type Frontmatter = {
   type?: "docs" | "api";
   order?: number;
   description?: string;
-  breadcrumb_chain?: [];
+  breadcrumb_chain?: { label?: string; href?: string }[];
   next?: {};
   prev?: {};
 };

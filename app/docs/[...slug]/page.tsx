@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import React from "react";
 import * as Markdoc from "@markdoc/markdoc";
-import { buildBreadcrumbs, getDocsNav, parseFrontmatter, readMarkdownFile, getDocsGroupedNav } from "@/lib/docs-utils";
+import { getDocsNav, parseFrontmatter, readMarkdownFile, getDocsGroupedNav } from "@/lib/docs-utils";
 import { config } from "@/lib/markdoc.config";
 import Callout from "@/components/docs/Callout";
 import DocSection from "@/components/docs/DocSection";
@@ -60,7 +60,14 @@ export default async function DocPage({ params }: { params: Params }) {
     const ast = Markdoc.parse(markdown);
     const content = Markdoc.transform(ast, config);
     const toc = getTableOfContents(ast);
-    const breadcrumbs = buildBreadcrumbs(params.slug);
+    const breadcrumbs = (Array.isArray(frontmatter.breadcrumb_chain)
+      ? frontmatter.breadcrumb_chain
+          .map((item: any) => ({
+            name: item?.label ?? item?.name ?? "",
+            href: item?.href || undefined,
+          }))
+          .filter((item: { name: string }) => item.name)
+      : []) as { name: string; href?: string }[];
     const navItems = getDocsNav();
     const { prev, next } = getPrevNext(navItems, params.slug);
 
@@ -83,15 +90,20 @@ export default async function DocPage({ params }: { params: Params }) {
           </nav>
         </aside>
         <article className="prose prose-slate dark:prose-invert max-w-none pt-14">
-          <div className="text-sm text-foreground/60 mb-4">
-            <a href="/docs" className="hover:underline">Docs</a> / {breadcrumbs.map((b, i) => (
-              <span key={b.href}>
-                <a href={b.href} className="hover:underline">{b.name}</a>
-                {i < breadcrumbs.length - 1 ? " / " : null}
-              </span>
-            ))}
-          </div>
-          <h1 className="font-heading font-semibold text-3xl">{frontmatter.title}</h1>
+          {breadcrumbs.length > 0 && (
+            <div className="text-sm text-foreground/60 mb-4">
+              {breadcrumbs.map((b, i) => (
+                <span key={`${b.name}-${b.href ?? i}`}>
+                  {b.href ? (
+                    <a href={b.href} className="hover:underline">{b.name}</a>
+                  ) : (
+                    <span className="text-foreground/60">{b.name}</span>
+                  )}
+                  {i < breadcrumbs.length - 1 ? " / " : null}
+                </span>
+              ))}
+            </div>
+          )}
           {Markdoc.renderers.react(content, React, {
             components: {
               Callout,
@@ -107,6 +119,22 @@ export default async function DocPage({ params }: { params: Params }) {
               ApiResponse,
             },
           })}
+          <div className="mt-12 flex items-center justify-between border-t border-border pt-6 not-prose">
+            <div>
+              {prev ? (
+                <a href={`/docs/${prev.slug.join("/")}`} className="text-sm underline underline-offset-4">
+                  ← {prev.frontmatter.title || prev.slug[prev.slug.length - 1]}
+                </a>
+              ) : <span />}
+            </div>
+            <div>
+              {next ? (
+                <a href={`/docs/${next.slug.join("/")}`} className="text-sm underline underline-offset-4">
+                  {next.frontmatter.title || next.slug[next.slug.length - 1]} →
+                </a>
+              ) : <span />}
+            </div>
+          </div>
         </article>
         <aside className="hidden lg:block">
           <div className="sticky top-24 text-sm">
@@ -114,7 +142,7 @@ export default async function DocPage({ params }: { params: Params }) {
             <ul className="space-y-1">
               {toc.map((i) => (
                 <li key={i.id} className={i.level === 3 ? "ml-3" : ""}>
-                  <a href={`#${i.id}`} className="text-foreground/70 hover:text-foreground hover:underline">
+                  <a href={`#${i.id}`} className="text-foreground/70 hover:text-foreground hover:underline text-[12px]">
                     {i.title}
                   </a>
                 </li>
@@ -122,22 +150,6 @@ export default async function DocPage({ params }: { params: Params }) {
             </ul>
           </div>
         </aside>
-        <div className="lg:col-span-3 mt-8 flex items-center justify-between">
-          <div>
-            {prev ? (
-              <a href={`/docs/${prev.slug.join("/")}`} className="text-sm underline underline-offset-4">
-                ← {prev.frontmatter.title || prev.slug[prev.slug.length - 1]}
-              </a>
-            ) : <span />}
-          </div>
-          <div>
-            {next ? (
-              <a href={`/docs/${next.slug.join("/")}`} className="text-sm underline underline-offset-4">
-                {next.frontmatter.title || next.slug[next.slug.length - 1]} →
-              </a>
-            ) : <span />}
-          </div>
-        </div>
       </div>
     );
   } catch (e) {

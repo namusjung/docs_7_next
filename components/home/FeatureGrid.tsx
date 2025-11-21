@@ -39,7 +39,7 @@ const FeatureGrid: React.FC = () => {
       ),
       title: "API Reference",
       description: "Comprehensive API documentation to harness 7en.ai's custom AI solutions.",
-      link: "/api/api-reference"
+      link: "/api/introduction"
     },
     {
       icon: (

@@ -89,6 +89,14 @@ export default async function ApiDocPage({ params }: { params: Promise<Params> }
     const toc = getTableOfContents(ast);
     const navItems = getApiNav();
     const { prev, next } = getPrevNext(navItems, slug);
+    const breadcrumbs = (Array.isArray(frontmatter.breadcrumb_chain)
+      ? frontmatter.breadcrumb_chain
+          .map((item: any) => ({
+            name: item?.label ?? item?.name ?? "",
+            href: item?.href || undefined,
+          }))
+          .filter((item: { name: string }) => item.name)
+      : []) as { name: string; href?: string }[];
 
     
 
@@ -112,9 +120,22 @@ export default async function ApiDocPage({ params }: { params: Promise<Params> }
           </nav>
         </aside>
         <article className="prose prose-slate dark:prose-invert max-w-none pt-14">
-          <h1 className="font-heading font-semibold text-3xl">{frontmatter.title}</h1>
+          {breadcrumbs.length > 0 && (
+            <div className="text-sm text-foreground/60 mb-4">
+              {breadcrumbs.map((b, i) => (
+                <span key={`${b.name}-${b.href ?? i}`}>
+                  {b.href ? (
+                    <a href={b.href} className="hover:underline">{b.name}</a>
+                  ) : (
+                    <span className="text-foreground/60">{b.name}</span>
+                  )}
+                  {i < breadcrumbs.length - 1 ? " / " : null}
+                </span>
+              ))}
+            </div>
+          )}
               {renderContent}
-          <div className="lg:col-span-3 mt-8 flex items-center justify-between">
+          <div className="mt-12 flex items-center justify-between border-t border-border pt-6 not-prose">
             <div>
               {prev ? (
                 <a href={`/api/${prev.slug.join("/")}`} className="text-sm underline underline-offset-4">
