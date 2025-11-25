@@ -44,55 +44,48 @@ export const ApiRequest: React.FC<RequestCodePanelProps> = ({
   const [isExpanded, setIsExpanded] = useState(true);
 
   console.log('RequestCodePanel: Received children:', children);
+  console.log('RequestCodePanel: Children type:', typeof children);
 
   const cleanBodyContent = (arr: any) => {
       // Step 1: Filter out null and whitespace
       const filtered = arr.filter((item: any) => typeof item === 'string' && item.trim() !== '');
       return filtered;
-
-      // Step 2: Reconstruct objects
-      // let results: any;
-      // let current: any;
-      // let currentKeys: any;
-
-      // filtered.forEach((item: any) => {
-      //   const trimmed = item.trim();
-      //   if (trimmed.startsWith('"language":')) {
-      //     current.language = trimmed.split(':')[1].trim().slice(1, -1); // Extract "curl" or "javascript"
-      //   } else if (trimmed.startsWith('"code":')) {
-      //     currentKeys = 'code';
-      //     current.code = trimmed.split(':')[1].trim().slice(1); // Start code string
-      //   } else if (currentKeys === 'code') {
-      //     current.code += trimmed; // Append to code
-      //   }
-
-      //   if (current.language && current.code) {
-      //     results.push({
-      //       language: current.language,
-      //       code: current.code.replace(/https:\/\/,/g, 'https://').replace(/Authorization: ,/, 'Authorization: Bearer <token>').trim(),
-      //     });
-      //     current = {};
-      //     currentKeys = null;
-      //   }
-      // });
-
-      // return results;
     };
   
 
   // Parse the JSON array from children with better error handling
   let languages: CodeLanguage[] = [];
   try {
-    if (children && Array.isArray(children.props.children)) {
-      //console.log('RequestCodePanel: Attempting to parse:', children.trim());
-      const cleaned = cleanBodyContent(children.props.children);
-      languages = JSON.parse(cleaned.join());
+    let contentString = '';
+    
+    // Handle different children structures
+    if (children && typeof children === 'object') {
+      // Check if it's a CodeBlock component (common case after Markdoc transform)
+      if (children.props && children.props.content) {
+        contentString = children.props.content;
+        console.log('RequestCodePanel: Found content in CodeBlock props:', contentString);
+      }
+      // Handle array of children
+      else if (Array.isArray(children)) {
+        const cleaned = cleanBodyContent(children);
+        contentString = cleaned.join('');
+      } 
+      // Handle props.children array
+      else if (children.props && Array.isArray(children.props.children)) {
+        const cleaned = cleanBodyContent(children.props.children);
+        contentString = cleaned.join('');
+      }
+    }
+    
+    // If we have a content string, parse it
+    if (contentString) {
+      languages = JSON.parse(contentString);
       console.log('RequestCodePanel: Successfully parsed languages:', languages);
     }
   } catch (error) {
     console.error('RequestCodePanel: Failed to parse languages JSON:', error);
     // If parsing fails, create a single text entry
-    languages = [{ language: 'text', code: children }];
+    languages = [{ language: 'text', code: typeof children === 'string' ? children : JSON.stringify(children, null, 2) }];
   }
 
   const [selectedLanguage, setSelectedLanguage] = useState(languages[0]?.language || 'text');

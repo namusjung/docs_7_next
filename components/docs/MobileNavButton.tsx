@@ -8,6 +8,8 @@ import { MobileNavContext } from "./MobileNavContext";
 
 export default function MobileNavButton() {
   const pathname = usePathname();
+  const context = useContext(MobileNavContext);
+  
   const isDocsOrApiPage = pathname?.startsWith("/docs") || pathname?.startsWith("/api");
   
   // Only show on docs/api pages and on mobile (below 768px)
@@ -16,7 +18,6 @@ export default function MobileNavButton() {
   }
 
   // Try to get context - if not available, don't render
-  const context = useContext(MobileNavContext);
   if (!context) {
     // Context not available yet (page might not have loaded provider)
     return null;

@@ -1,7 +1,7 @@
 ---
 type: api
 title: Update Agent
-endpoint: PUT /{% $api.version %}/agents/{id}
+endpoint: PUT /$api.version/agents/{id}
 prev: 
   href: /api/api-reference/agent/create-agent
   title: "Create Agent"
@@ -241,11 +241,11 @@ The Update Agent endpoint enables you to modify an existing AI agent's propertie
 [
   {
     "language": "curl",
-    "code": "curl -X PUT 'https://{% $api.base_url %}{% $api.version %}/agents/11' -H 'Authorization: {% $api.key %}' -H 'Content-Type: application/json' -d '{\"name\": \"Updated Agent\", \"description\": \"An updated AI assistant\", \"systemPrompt\": \"You are an updated AI assistant. Provide concise and accurate responses.\"}'"
+    "code": "curl -X PUT 'https://$api.base_url/$api.version/agents/11' -H 'Authorization: $api.key' -H 'Content-Type: application/json' -d '{\"name\": \"Updated Agent\", \"description\": \"An updated AI assistant\", \"systemPrompt\": \"You are an updated AI assistant. Provide concise and accurate responses.\"}'"
   },
   {
     "language": "javascript",
-    "code": "fetch('https://{% $api.base_url %}{% $api.version %}/agents/11', {\n  method: 'PUT',\n  headers: {\n    'Authorization': '{% $api.key %}',\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n    \"name\": \"Updated Agent\",\n    \"description\": \"An updated AI assistant\",\n    \"systemPrompt\": \"You are an updated AI assistant. Provide concise and accurate responses.\"\n  })\n})"
+    "code": "fetch('https://$api.base_url/$api.version/agents/11', {\n  method: 'PUT',\n  headers: {\n    'Authorization': '$api.key',\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n    \"name\": \"Updated Agent\",\n    \"description\": \"An updated AI assistant\",\n    \"systemPrompt\": \"You are an updated AI assistant. Provide concise and accurate responses.\"\n  })\n})"
   }
 ]
 ```
@@ -320,7 +320,7 @@ The Update Agent endpoint enables you to modify an existing AI agent's propertie
 ## Best Practices
 
 - **Partial Updates**: Only include the fields you want to update in the request body to avoid unintentionally resetting other fields. Use `PATCH` method to partial update.
-  {% endpoint url="/{% $api.version %}/agents/{id}" method="PATCH" /%}
+  {% endpoint url="/$api.version/agents/{id}" method="PATCH" /%}
   ##### Request Body
   ```json
   {
