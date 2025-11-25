@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 import Providers from "@/components/Providers";
 import { Viewport } from "next";
 import SiteHeader from "@/components/ui/SiteHeader";
+import { MobileNavProvider } from "@/components/docs/MobileNavContext";
 
 
 export const metadata = {
@@ -51,8 +52,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       </head>
       <body className="min-h-screen">
         <Providers>
-          <SiteHeader />
-          {children}
+          <MobileNavProvider>
+            <SiteHeader />
+            {children}
+          </MobileNavProvider>
         </Providers>
       </body>
     </html>

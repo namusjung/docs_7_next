@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import React from "react";
+import Link from "next/link";
 import * as Markdoc from "@markdoc/markdoc";
 import { parseFrontmatter, readMarkdownFile, getApiNav, getApiGroupedNav } from "@/lib/docs-utils";
 import { apiConfig, config } from "@/lib/markdoc.config";
@@ -17,6 +18,8 @@ import ApiRequest from "@/components/docs/ApiRequest";
 import ApiResponse from "@/components/docs/ApiResponse";
 import { getTableOfContents, getPrevNext } from "@/lib/navigation-utils";
 import Head from "next/head";
+import MobileNav from "@/components/docs/MobileNav";
+import CTA from "@/components/home/CTA";
 
 type Params = any;
 
@@ -85,6 +88,13 @@ export default async function ApiDocPage({ params }: { params: Promise<Params> }
      const renderContent = Markdoc.renderers.react(content, React, {components});
      const renderApiContent = Markdoc.renderers.react(apiContent, React, {components});
 
+    // Check if API content is meaningful (not just "No API content available")
+    const hasApiContent = apiContent && 
+      apiContent.$$mdtype === "Tag" && 
+      !(apiContent.name === "p" && 
+        Array.isArray(apiContent.children) && 
+        apiContent.children.length === 1 &&
+        apiContent.children[0] === "No API content available");
 
     const toc = getTableOfContents(ast);
     const navItems = getApiNav();
@@ -98,21 +108,25 @@ export default async function ApiDocPage({ params }: { params: Promise<Params> }
           .filter((item: { name: string }) => item.name)
       : []) as { name: string; href?: string }[];
 
-    
+    // Adjust grid columns based on whether API content exists
+    const gridCols = hasApiContent 
+      ? "lg:grid-cols-[150px_minmax(0,1fr)_450px]" 
+      : "lg:grid-cols-[150px_minmax(0,1fr)_150px]";
 
     return (
       <>
-      <div className="container grid grid-cols-1 lg:grid-cols-[150px_minmax(0,1fr)_450px] gap-8 py-10">
-        <aside className="hidden lg:block w-[150px]">
+        <MobileNav groupedNav={getApiGroupedNav()} currentSlug={slug} basePath="/api" />
+        <div className={`container grid grid-cols-1 ${gridCols} gap-8 py-10`}>
+          <aside className="hidden lg:block w-[150px]">
           <nav className="sticky top-24 space-y-4">
             {getApiGroupedNav().map((group) => (
               <div key={group.section}>
                 <p className="text-xs uppercase tracking-wide !text-gray-600/40 dark:!text-gray-600/70 mb-1">{group.section.replace(/-/g, " ")}</p>
                 <div className="space-y-1">
                   {group.items.map((item) => (
-                    <a key={item.slug.join("/")} href={`/api/${item.slug.join("/")}`} className={`block text-[13px]  px-4 py-1.5 pl-2 hover:bg-muted hover:!text-black dark:hover:!text-white rounded-lg ${slug.join("/") === item.slug.join("/") ? "!bg-muted !text-black dark:!text-white" : ""}`}>
+                    <Link key={item.slug.join("/")} href={`/api/${item.slug.join("/")}`} className={`block text-[13px]  px-4 py-1.5 pl-2 hover:bg-muted hover:!text-black dark:hover:!text-white rounded-lg ${slug.join("/") === item.slug.join("/") ? "!bg-muted !text-black dark:!text-white" : ""}`}>
                       {item.frontmatter.title || item.slug[item.slug.length - 1]}
-                    </a>
+                    </Link>
                   ))}
                 </div>
               </div>
@@ -125,7 +139,7 @@ export default async function ApiDocPage({ params }: { params: Promise<Params> }
               {breadcrumbs.map((b, i) => (
                 <span key={`${b.name}-${b.href ?? i}`}>
                   {b.href ? (
-                    <a href={b.href} className="hover:underline">{b.name}</a>
+                    <Link href={b.href} className="hover:underline">{b.name}</Link>
                   ) : (
                     <span className="text-foreground/60">{b.name}</span>
                   )}
@@ -135,28 +149,36 @@ export default async function ApiDocPage({ params }: { params: Promise<Params> }
             </div>
           )}
               {renderContent}
+          <CTA
+          button1="Get Started"
+          button2="Learn More"
+          button1Link="https://app.7en.ai"
+          button2Link="https://app.7en.ai"
+          />
           <div className="mt-12 flex items-center justify-between border-t border-border pt-6 not-prose">
             <div>
               {prev ? (
-                <a href={`/api/${prev.slug.join("/")}`} className="text-sm underline underline-offset-4">
+                <Link href={`/api/${prev.slug.join("/")}`} className="text-sm underline underline-offset-4">
                   ← {prev.frontmatter.title || prev.slug[prev.slug.length - 1]}
-                </a>
+                </Link>
               ) : <span />}
             </div>
             <div>
               {next ? (
-                <a href={`/api/${next.slug.join("/")}`} className="text-sm underline underline-offset-4">
+                <Link href={`/api/${next.slug.join("/")}`} className="text-sm underline underline-offset-4">
                   {next.frontmatter.title || next.slug[next.slug.length - 1]} →
-                </a>
+                </Link>
               ) : <span />}
             </div>
           </div>
         </article>
-        <aside className="hidden lg:block">
-          <div className="sticky top-24 text-sm">
+        {hasApiContent && (
+          <aside className="hidden lg:block">
+            <div className="sticky top-24 text-sm">
               {renderApiContent}
-          </div>
-        </aside>
+            </div>
+          </aside>
+        )}
       </div>
       </>
     );

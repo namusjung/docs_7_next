@@ -3,6 +3,7 @@ import ThemeToggle from "@/components/ui/ThemeToggle";
 import Image from "next/image";
 import ModernButton from "./ModernButton";
 import { Book, BookOpen, Code } from "lucide-react";
+import MobileNavButton from "@/components/docs/MobileNavButton";
 
 export default function SiteHeader() {
   return (
@@ -29,7 +30,7 @@ export default function SiteHeader() {
               Docs
             </ModernButton>
             </Link>
-            <Link href="/api/reference" className="hover:underline">
+            <Link href="/api/api-reference/introduction" className="hover:underline">
             <ModernButton
             variant="ghost"
             size="md"
@@ -42,9 +43,8 @@ export default function SiteHeader() {
           </nav>
         </div>
         <div className="flex items-center gap-2">
-
           <ThemeToggle />
-          <Link href="/docs/getting-started/introduction">
+          <Link href="/docs/getting-started/introduction" className="hidden md:block">
             <ModernButton 
               variant="outline"
               size="sm"
@@ -53,7 +53,7 @@ export default function SiteHeader() {
               Login
             </ModernButton>
             </Link>
-            <Link href="/api/api-reference/">
+            <Link href="/api/api-reference/" className="hidden md:block">
             <ModernButton 
               variant="primary"
               size="sm"
@@ -62,7 +62,7 @@ export default function SiteHeader() {
               Signup
             </ModernButton>
             </Link>
-          
+          <MobileNavButton />
         </div>
       </div>
     </header>

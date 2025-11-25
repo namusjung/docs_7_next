@@ -7,6 +7,7 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
 
 interface FlickeringGridProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -35,87 +36,93 @@ export const FlickeringGrid: React.FC<FlickeringGridProps> = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const [isInView, setIsInView] = useState(false);
   const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 });
-  const [currentTheme, setCurrentTheme] = useState<string>('');
+  const { theme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  const [colorKey, setColorKey] = useState(0);
 
-  // Listen for theme changes
+  // Track mounted state
   useEffect(() => {
-    const detectTheme = () => {
-      const isDark = document.documentElement.classList.contains('dark');
-      const theme = isDark ? 'dark' : 'light';
-      setCurrentTheme(theme);
-    };
+    setMounted(true);
+  }, []);
 
-    // Initial theme detection
-    detectTheme();
-
-    // Create observer to watch for theme changes
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-          detectTheme();
-        }
-      });
+  // Force color recalculation when theme changes
+  useEffect(() => {
+    if (!mounted) return;
+    
+    // Watch for theme class changes on html element
+    const observer = new MutationObserver(() => {
+      // Wait a bit for CSS variables to update
+      setTimeout(() => {
+        setColorKey(prev => prev + 1);
+      }, 100);
     });
-
+    
     observer.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ['class']
     });
-
-    return () => observer.disconnect();
-  }, []);
+    
+    // Also trigger on theme change from next-themes
+    const timeoutId = setTimeout(() => {
+      setColorKey(prev => prev + 1);
+    }, 100);
+    
+    return () => {
+      observer.disconnect();
+      clearTimeout(timeoutId);
+    };
+  }, [theme, resolvedTheme, mounted]);
 
   const memoizedColor = useMemo(() => {
-    const toRGBA = (color: string) => {
-      if (typeof window === "undefined") {
-        return `rgba(0, 0, 0,`;
+    if (typeof window === "undefined" || !mounted) {
+      return `rgba(0, 0, 0,`;
+    }
+    
+    // Create a temporary element to resolve CSS variables
+    const tempElement = document.createElement("div");
+    tempElement.style.position = "absolute";
+    tempElement.style.visibility = "hidden";
+    tempElement.style.width = "1px";
+    tempElement.style.height = "1px";
+    tempElement.style.color = color;
+    document.body.appendChild(tempElement);
+    
+    try {
+      // Get the computed color value (this resolves CSS variables)
+      const computedStyle = window.getComputedStyle(tempElement);
+      const resolvedColor = computedStyle.color;
+      
+      // Parse RGB from the resolved color string (format: "rgb(r, g, b)" or "rgba(r, g, b, a)")
+      const rgbMatch = resolvedColor.match(/\d+/g);
+      if (rgbMatch && rgbMatch.length >= 3) {
+        const r = parseInt(rgbMatch[0]);
+        const g = parseInt(rgbMatch[1]);
+        const b = parseInt(rgbMatch[2]);
+        document.body.removeChild(tempElement);
+        return `rgba(${r}, ${g}, ${b},`;
       }
       
-      // Handle CSS custom properties
-      if (color.startsWith('hsl(var(')) {
-        const computedStyle = getComputedStyle(document.documentElement);
-        const cssVar = color.match(/--[\w-]+/)?.[0];
-        if (cssVar) {
-          const hslValue = computedStyle.getPropertyValue(cssVar).trim();
-          if (hslValue) {
-            // Convert HSL to RGBA
-            const [h, s, l] = hslValue.split(' ').map(v => parseFloat(v.replace('%', '')));
-            const hue = h / 360;
-            const saturation = s / 100;
-            const lightness = l / 100;
-            
-            const c = (1 - Math.abs(2 * lightness - 1)) * saturation;
-            const x = c * (1 - Math.abs((hue * 6) % 2 - 1));
-            const m = lightness - c / 2;
-            
-            let r = 0, g = 0, b = 0;
-            if (hue < 1/6) { r = c; g = x; b = 0; }
-            else if (hue < 2/6) { r = x; g = c; b = 0; }
-            else if (hue < 3/6) { r = 0; g = c; b = x; }
-            else if (hue < 4/6) { r = 0; g = x; b = c; }
-            else if (hue < 5/6) { r = x; g = 0; b = c; }
-            else { r = c; g = 0; b = x; }
-            
-            r = Math.round((r + m) * 255);
-            g = Math.round((g + m) * 255);
-            b = Math.round((b + m) * 255);
-            
-            return `rgba(${r}, ${g}, ${b},`;
-          }
-        }
-      }
-      
+      // Fallback: use canvas to parse
       const canvas = document.createElement("canvas");
       canvas.width = canvas.height = 1;
       const ctx = canvas.getContext("2d");
-      if (!ctx) return "rgba(255, 0, 0,";
-      ctx.fillStyle = color;
-      ctx.fillRect(0, 0, 1, 1);
-      const [r, g, b] = Array.from(ctx.getImageData(0, 0, 1, 1).data);
-      return `rgba(${r}, ${g}, ${b},`;
-    };
-    return toRGBA(color);
-  }, [color, currentTheme]); // Add currentTheme as dependency
+      if (ctx) {
+        ctx.fillStyle = resolvedColor || color;
+        ctx.fillRect(0, 0, 1, 1);
+        const [r, g, b] = Array.from(ctx.getImageData(0, 0, 1, 1).data);
+        document.body.removeChild(tempElement);
+        return `rgba(${r}, ${g}, ${b},`;
+      }
+      
+      document.body.removeChild(tempElement);
+      return "rgba(0, 0, 0,";
+    } catch (e) {
+      if (tempElement.parentNode) {
+        document.body.removeChild(tempElement);
+      }
+      return "rgba(0, 0, 0,";
+    }
+  }, [color, theme, resolvedTheme, mounted, colorKey]);
 
   const setupCanvas = useCallback(
     (canvas: HTMLCanvasElement, width: number, height: number) => {
@@ -181,7 +188,7 @@ export const FlickeringGrid: React.FC<FlickeringGridProps> = ({
   useEffect(() => {
     const canvas = canvasRef.current;
     const container = containerRef.current;
-    if (!canvas || !container) return;
+    if (!canvas || !container || !mounted) return;
 
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
@@ -199,8 +206,25 @@ export const FlickeringGrid: React.FC<FlickeringGridProps> = ({
     updateCanvasSize();
 
     let lastTime = 0;
+    let currentColor = memoizedColor;
+    
     const animate = (time: number) => {
       if (!isInView) return;
+
+      // Redraw if color changed
+      if (currentColor !== memoizedColor) {
+        currentColor = memoizedColor;
+        // Force immediate redraw with new color
+        drawGrid(
+          ctx,
+          canvas.width,
+          canvas.height,
+          gridParams.cols,
+          gridParams.rows,
+          gridParams.squares,
+          gridParams.dpr,
+        );
+      }
 
       const deltaTime = (time - lastTime) / 1000;
       lastTime = time;
@@ -233,16 +257,15 @@ export const FlickeringGrid: React.FC<FlickeringGridProps> = ({
 
     intersectionObserver.observe(canvas);
 
-    if (isInView) {
-      animationFrameId = requestAnimationFrame(animate);
-    }
+    // Start animation
+    animationFrameId = requestAnimationFrame(animate);
 
     return () => {
       cancelAnimationFrame(animationFrameId);
       resizeObserver.disconnect();
       intersectionObserver.disconnect();
     };
-  }, [setupCanvas, updateSquares, drawGrid, width, height, isInView, currentTheme]); // Add currentTheme dependency
+  }, [setupCanvas, updateSquares, drawGrid, width, height, isInView, memoizedColor, mounted]);
 
   return (
     <div

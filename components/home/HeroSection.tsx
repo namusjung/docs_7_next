@@ -47,7 +47,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ theme, type = "", title, desc
                     Getting Started
                   </ModernButton>
                   </Link>
-                  <Link href="/api/api-reference/">
+                  <Link href="/api/api-reference/introduction">
                   <ModernButton 
                     variant="outline"
                     className="inline-flex items-center gap-2"
