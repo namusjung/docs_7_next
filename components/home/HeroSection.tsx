@@ -4,6 +4,7 @@ import { ArrowRight, BookOpen, Code2 } from 'lucide-react';
 import ModernButton from '@/components/ui/ModernButton';
 import { FlickeringGrid } from '@/components/ui/flickering-grid-hero';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 interface HeroSectionProps {
   theme: string;
@@ -13,9 +14,14 @@ interface HeroSectionProps {
 }
 
 const HeroSection: React.FC<HeroSectionProps> = ({ theme, type = "", title, description }) => {
+    const router = useRouter();
+    
     useEffect(() => {
       theme = "dark";
-    },[theme]);
+      // Prefetch the pages for instant navigation
+      router.prefetch('/docs/getting-started/introduction');
+      router.prefetch('/api/api-reference/introduction');
+    },[theme, router]);
   return (
     <section className="bg-background border-b border-border/50 py-0 relative overflow-hidden">
       <div className="max-w-6xl mx-auto px-6 md:px-0 relative z-10">
@@ -38,24 +44,22 @@ const HeroSection: React.FC<HeroSectionProps> = ({ theme, type = "", title, desc
             {
               type !== "other" && (
                 <div className="flex flex-wrap gap-4">
-                  <Link href="/docs/getting-started/introduction">
                   <ModernButton 
                     variant="primary"
                     className="inline-flex items-center gap-2"
+                    onClick={() => router.push('/docs/getting-started/introduction')}
                   >
                     <ArrowRight className="h-4 w-4" />
                     Getting Started
                   </ModernButton>
-                  </Link>
-                  <Link href="/api/api-reference/introduction">
                   <ModernButton 
                     variant="outline"
                     className="inline-flex items-center gap-2"
+                    onClick={() => router.push('/api/api-reference/introduction')}
                   >
                     <Code2 className="h-4 w-4" />
                     API Reference
                   </ModernButton>
-                  </Link>
                 </div>
               )
             }

@@ -1,7 +1,7 @@
 ---
 type: api
 title: Delete Agent
-endpoint: DELETE /agents/{id}
+endpoint: DELETE /$api.version/agents/{id}
 next: 
   href: /api/api-reference/agent/list-all-agents
   title: "List All Agents"

@@ -10,8 +10,7 @@ prev:
 order: 1
 breadcrumb_chain:
   - { label: "Home", href: "/" }
-  - { label: "API", href: "/" }
-  - { label: "Errors" }
+  - { label: "API", href: "" }
 ---
 # Introduction
 

@@ -2,9 +2,17 @@
 type: api
 title: Agent Object
 order: 1
+prev: 
+  href: /api/api-reference/agent/list-all-agents
+  title: "List All Agents"
+next: 
+  href: /api/api-reference/agent/update-agent
+  title: "Update Agent"
+breadcrumb_chain:
+  - { label: "Home", href: "/" }
+  - { label: "API", href: "/api/api-reference/introduction/" }
+  - { label: "Agent Object" }
 ---
-
-## Agent Object
 
 Here is the json object structure and its description.
 

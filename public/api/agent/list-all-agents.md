@@ -1,7 +1,7 @@
 ---
 type: api
 title: List All Agents
-endpoint: GET /agents
+endpoint: GET /$api.version/agents/
 next: 
   href: /api/api-reference/agent/create-agent
   title: "Create Agent"

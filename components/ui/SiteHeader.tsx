@@ -1,20 +1,23 @@
+"use client";
 import Link from "next/link";
 import ThemeToggle from "@/components/ui/ThemeToggle";
+import { useTheme } from "next-themes";
 import Image from "next/image";
 import ModernButton from "./ModernButton";
 import { Book, BookOpen, Code } from "lucide-react";
 import MobileNavButton from "@/components/docs/MobileNavButton";
 
 export default function SiteHeader() {
+  const { theme, setTheme } = useTheme();
   return (
     <header className="fixed top-0 left-0 right-0 z-40 border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container h-14 flex items-center justify-between">
         <div className="flex items-center gap-6">
           <Link href="/" className="font-heading font-semibold">
           <Image 
-            src="/img/logo-no-outline.svg" 
+            src={theme === "dark" ? "/img/logo-white-01.svg" : "/img/logo-no-outline.svg"} 
             alt="7en.ai" 
-            className="h-5 dark:hidden"
+            className="h-5"
             width={80}
             height={24}
           />

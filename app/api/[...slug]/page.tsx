@@ -3,7 +3,7 @@ import React from "react";
 import Link from "next/link";
 import * as Markdoc from "@markdoc/markdoc";
 import { parseFrontmatter, readMarkdownFile, getApiNav, getApiGroupedNav } from "@/lib/docs-utils";
-import { apiConfig, config } from "@/lib/markdoc.config";
+import { apiConfig, config, variables } from "@/lib/markdoc.config";
 import { customTransform } from "@/lib/markdoc-utils";
 import Callout from "@/components/docs/Callout";
 import DocSection from "@/components/docs/DocSection";
@@ -96,6 +96,27 @@ export default async function ApiDocPage({ params }: { params: Promise<Params> }
         apiContent.children.length === 1 &&
         apiContent.children[0] === "No API content available");
 
+    // Parse endpoint from frontmatter (e.g., "POST /v1/agents")
+    let endpointData: { method: string; url: string } | null = null;
+    if (frontmatter.endpoint && typeof frontmatter.endpoint === 'string') {
+      // Interpolate variables in the endpoint string
+      let endpointString = frontmatter.endpoint;
+      if (variables.api) {
+        endpointString = endpointString
+          .replace(/\$api\.base_url/g, variables.api.base_url || '')
+          .replace(/\$api\.key/g, variables.api.key || '')
+          .replace(/\$api\.version/g, variables.api.version || '');
+      }
+      
+      const parts = endpointString.trim().split(/\s+/);
+      if (parts.length >= 2) {
+        endpointData = {
+          method: parts[0],
+          url: parts.slice(1).join(' ')
+        };
+      }
+    }
+
     const toc = getTableOfContents(ast);
     const navItems = getApiNav();
     const { prev, next } = getPrevNext(navItems, slug);
@@ -174,7 +195,10 @@ export default async function ApiDocPage({ params }: { params: Promise<Params> }
         </article>
         {hasApiContent && (
           <aside className="hidden lg:block">
-            <div className="sticky top-24 text-sm">
+            <div className="sticky top-24 text-sm space-y-4">
+              {endpointData && (
+                <ApiEndpoint method={endpointData.method} url={endpointData.url} />
+              )}
               {renderApiContent}
             </div>
           </aside>

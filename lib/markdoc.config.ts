@@ -4,7 +4,7 @@ import { Tag } from "@markdoc/markdoc";
 
 export const variables = {
   api: {
-    base_url: "api.7en.ai/",
+    base_url: "api.7en.ai",
     key: "Api-Key YOUR_API_KEY",
     version: "v1",
   },
@@ -197,6 +197,7 @@ export type Frontmatter = {
   type?: "docs" | "api";
   order?: number;
   description?: string;
+  endpoint?: string;
   breadcrumb_chain?: { label?: string; href?: string }[];
   next?: {};
   prev?: {};

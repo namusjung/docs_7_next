@@ -1,7 +1,7 @@
 ---
 type: api
 title: Create Agent
-endpoint: POST /v1/agents
+endpoint: POST /$api.version/agents/
 next: 
   href: /docs/getting-started/introduction
   title: "Introduciton"
@@ -9,6 +9,10 @@ prev:
   href: /api/api-reference/agent/agent-object
   title: "Agent Object"
 order: 2
+breadcrumb_chain:
+  - { label: "Home", href: "/" }
+  - { label: "API", href: "/api/api-reference/introduction/" }
+  - { label: "Create Agent" }
 ---
 
 Create a new AI agent with custom configuration and knowledge sources. Agents can be configured with different models, prompts, and knowledge bases to handle specific use cases.
