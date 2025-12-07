@@ -1,18 +1,13 @@
 ---
 type: docs
-title: Build your agent
-order: 2
+title: Basic Settings
+order: 1
 next: 
   href: /docs/integrations
   title: "Integrations"
 prev: 
   href: /docs/getting-started/introduction
   title: "Getting Started with 7en.ai"
-breadcrumb_chain:
-  - { label: "Home", href: "/" }
-  - { label: "Docs", href: "/docs/getting-started/introduction" }
-  - { label: "Tutorials", href: "/docs/tutorials" }
-  - { label: "Build Your Agent"}
 ---
 
 

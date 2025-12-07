@@ -1,0 +1,52 @@
+---
+type: docs
+title: Quick Suggestions
+order: 1
+next: 
+  href: /docs/integrations
+  title: "Integrations"
+prev: 
+  href: /docs/getting-started/introduction
+  title: "Getting Started with 7en.ai"
+---
+
+{% section id="quick-suggestions" title="Quick Suggestions" %}
+
+The Quick Suggestions section allows you to configure preset questions that appear as clickable buttons (conversation starters) when a user opens the chat widget. These suggestions guide users toward common topics and reduce the friction of typing out full queries manually.
+
+### Configuration Fields
+
+| Field | Description | Example |
+|-------|-------------|---------|
+| **Suggestion Text** | The specific question or prompt text that will appear inside the clickable chip. | `What are your services?` |
+| **Add Suggestion** | A button to create a new entry in the list. You can add multiple suggestions to cover different topics. | `+ Add Suggestion` |
+| **Remove (X)** | Allows you to delete an existing suggestion from the list if it is no longer relevant. | `(X icon)` |
+
+### Feature Overview
+
+* **Quick Suggestions** serve as "icebreakers" between the user and the AI.
+* **Visual Placement:** They appear immediately above the text input field in the chat interface.
+* **Interaction:** When a user clicks a suggestion, that text is immediately sent as a message, triggering the AI's response.
+* **Default Behavior:** If no suggestions are configured, the chat interface will simply show the welcome message and a blank input field.
+
+{% callout type="tip" title="Best Practices for Suggestions" collapsible=true %}
+
+| Category | Best Practice |
+|----------|---------------|
+| **Keep it Short and Punchy** | Space is limited, especially on mobile. Keep suggestions under 5–7 words. |
+| | **Bad:** "Can you please tell me about how much your different subscription plans cost?" |
+| | **Good:** "What is your pricing?" |
+| **Focus on High-Intent Topics** | Use your FAQs to determine what goes here. Prioritize topics like "Pricing" or "Support" that 80% of users ask about. |
+| **Guide the User Journey** | Use suggestions to show users what the bot is capable of (e.g., if your bot can track orders, add a "Track my order" suggestion). |
+
+{% /callout %}
+
+### Example Configurations
+
+| Use Case | Suggestions |
+|----------|-------------|
+| **SaaS / Product** | <ul><li>"What are your working hours?"</li><li>"Show me pricing plans"</li><li>"Book a demo"</li></ul> |
+| **E-Commerce Store** | <ul><li>"Where is my order?"</li><li>"What is your return policy?"</li><li>"Recommend a gift"</li></ul> |
+| **Customer Support** | <ul><li>"How do I reset my password?"</li><li>"Talk to a human agent"</li><li>"Submit a ticket"</li></ul> |
+
+{% /section %}
