@@ -20,6 +20,7 @@ import { getTableOfContents, getPrevNext } from "@/lib/navigation-utils";
 import Head from "next/head";
 import MobileNav from "@/components/docs/MobileNav";
 import CTA from "@/components/home/CTA";
+import { MediaViewer } from "@/components/ui/MediaViewer";
 
 type Params = any;
 
@@ -73,6 +74,7 @@ const components: any = {
               Accordion,
               ApiRequest,
               ApiResponse,
+              MediaViewer
             };
 
 

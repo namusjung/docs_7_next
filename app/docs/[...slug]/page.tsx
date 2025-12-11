@@ -18,6 +18,7 @@ import ApiResponse from "@/components/docs/ApiResponse";
 import { getTableOfContents, getPrevNext } from "@/lib/navigation-utils";
 import MobileNav from "@/components/docs/MobileNav";
 import CTA from "@/components/home/CTA";
+import { MediaViewer } from "@/components/ui/MediaViewer";
 
 type Params = any;
 
@@ -122,6 +123,7 @@ export default async function DocPage({ params }: { params: Params }) {
               Accordion,
               ApiRequest,
               ApiResponse,
+              MediaViewer
             },
           })}
           <CTA

@@ -1,6 +1,7 @@
 import { heading } from "@/schema/Heading.markdoc";
 import { inline } from "@markdoc/markdoc/dist/src/schema";
 import { Tag } from "@markdoc/markdoc";
+import { MediaViewer } from "@/components/ui/MediaViewer";
 
 export const variables = {
   api: {
@@ -61,6 +62,34 @@ export const nodes = {
 };
 
 export const tags = {
+  
+  media: {
+    render: 'MediaViewer',
+    attributes: {
+      src: { type: String, required: true },
+      type: { type: String },
+      alt: { type: String },
+      caption: { type: String },
+      lightbox: { type: Boolean, default: true },
+      autoPlay: { type: Boolean, default: false },
+      muted: { type: Boolean, default: true },
+      loop: { type: Boolean, default: false },
+      controls: { type: Boolean, default: true },
+      className: { type: String },
+      width: { type: String },
+      height: { type: String },
+      poster: { type: String },
+      // iframe-specific
+      title: { type: String },
+      loading: { type: String, default: 'lazy' },
+      allow: { type: String },
+      allowfullscreen: { type: Boolean, default: false },
+      aspectRatio: { type: Number, default: 2.03 },
+      maxHeight: { type: String, default: '80vh' },
+      padding: { type: String, default: '40px 0' },
+    },
+  },
+
   "section": {
     render: "DocSection",
     attributes: {

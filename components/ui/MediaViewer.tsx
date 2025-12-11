@@ -1,4 +1,4 @@
-
+"use client";
 import React, { useState, useRef, useCallback } from 'react';
 import { X, Play, Pause, Maximize2, Volume2, VolumeX } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -7,7 +7,7 @@ interface MediaViewerProps {
   src: string;
   alt?: string;
   caption?: string;
-  type?: 'image' | 'video';
+  type?: 'image' | 'video' | 'iframe';
   lightbox?: boolean;
   autoPlay?: boolean;
   muted?: boolean;
@@ -17,6 +17,14 @@ interface MediaViewerProps {
   width?: string | number;
   height?: string | number;
   poster?: string;
+  // iframe-specific props
+  title?: string;
+  loading?: 'lazy' | 'eager';
+  allow?: string;
+  allowfullscreen?: boolean;
+  aspectRatio?: number;
+  maxHeight?: string;
+  padding?: string;
 }
 
 export function MediaViewer({
@@ -32,7 +40,14 @@ export function MediaViewer({
   className,
   width,
   height,
-  poster
+  poster,
+  title = '',
+  loading = 'lazy',
+  allow = '',
+  allowfullscreen = false,
+  aspectRatio = 2.03,
+  maxHeight = '80vh',
+  padding = '40px 0'
 }: MediaViewerProps) {
   // Auto-detect media type if not provided
   const detectedType = type || (src.match(/\.(mp4|webm|ogg|mov|avi)$/i) ? 'video' : 'image');
@@ -44,7 +59,7 @@ export function MediaViewer({
   const lightboxVideoRef = useRef<HTMLVideoElement>(null);
 
   const openLightbox = useCallback(() => {
-    if (lightbox) {
+    if (lightbox && detectedType !== 'iframe') {
       setIsLightboxOpen(true);
       // Pause main video when opening lightbox
       if (detectedType === 'video' && videoRef.current) {
@@ -138,13 +153,44 @@ export function MediaViewer({
     const commonClasses = cn(
       "rounded-lg transition-all duration-300",
       {
-        "cursor-pointer hover:opacity-90 hover:scale-[1.02]": lightbox && !isLightboxVersion,
-        "shadow-sm border": !isLightboxVersion,
+        "cursor-pointer hover:opacity-90 hover:scale-[1.02]": lightbox && !isLightboxVersion && detectedType !== 'iframe',
+        "shadow-sm border": !isLightboxVersion && detectedType !== 'iframe',
         "max-w-[90vw] max-h-[90vh] shadow-2xl": isLightboxVersion
       }
     );
     
     console.log("MediaViewer rendering:", { src, detectedType, isLightboxVersion });
+    
+    if (detectedType === 'iframe') {
+      return (
+        <div
+          style={{
+            position: 'relative',
+            boxSizing: 'content-box',
+            width: '100%',
+            aspectRatio: aspectRatio,
+            maxHeight: maxHeight,
+            padding: padding,
+          }}
+        >
+          <iframe
+            src={src}
+            title={title}
+            loading={loading}
+            allow={allow}
+            allowFullScreen={allowfullscreen}
+            className={cn("rounded-lg", className)}
+            style={{
+              position: 'absolute',
+              inset: 0,
+              width: '100%',
+              height: '100%',
+              border: 0,
+            }}
+          />
+        </div>
+      );
+    }
     
     if (detectedType === 'image') {
       return (

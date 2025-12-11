@@ -42,5 +42,14 @@ Once a channel is enabled, the chatbot functions exactly as it does on your web 
 | **Social E-commerce Brand** | **Enabled:** Instagram, Messenger, WhatsApp ｜ **Disabled:** Slack ｜ **Why:** Meets customers where they are shopping, offering instant answers on shipping/products. |
 | **Professional Services** | **Enabled:** WhatsApp, Messenger ｜ **Why:** Provides a direct line for potential clients to book appointments or ask preliminary questions. |
 
+{% media
+  type="iframe"
+  src="https://sevendemo.lovable.app/demo/walumedu"
+  title="Build and Train Knowledge Sources for AI Agents"
+  allowfullscreen=true
+  allow="clipboard-write
+  maxHeight="80vh"
+  caption="Interactive demo showing agent training using URLs"
+%}
 
 {% /section %}
