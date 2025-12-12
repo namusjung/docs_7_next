@@ -50,7 +50,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <link rel="icon" type="image/x-icon" href="/img/logo.ico" media="(prefers-color-scheme: dark)"/>
         <link rel="icon" type="image/x-icon" href="/img/logo-black.ico" media="(prefers-color-scheme: light)"/>
       </head>
-      <body className="min-h-screen">
+      <body className="min-h-screen" suppressHydrationWarning>
         <Providers>
           <MobileNavProvider>
             <SiteHeader />

@@ -14,7 +14,7 @@ next:
   href: "/docs/integrations/zendesk"
 ---
 # How to connect Freshdesk to 7en Platform
-{% image src="/img/banner-freshdesk.png" alt="7en ai x Freshdesk" lightbox=false /%}
+{% image src="/img/banner-freshdesk.png" alt="7en ai x Freshdesk" lightbox=true /%}
 
 {% section id="introduction" title="Introduction to Freshdesk Integration" %}
 
