@@ -94,14 +94,14 @@ export const Callout: React.FC<CalloutBoxProps> = ({
   }
 
   return (
-    <div className={`${getCalloutStyles(type)} ${className}`}>
+    <div className={`${getCalloutStyles(type)} ${className} !p-2 !pl-3`}>
       <div className="flex gap-3">
         {getIcon(type)}
         <div className="flex-1">
           {title && (
-            <h4 className="!font-semibold mb-2 !text-sm !text-gray-500 dark:!text-gray-100">{title}</h4>
+            <h4 className="!font-semibold !mb-1 !text-sm !text-gray-500 dark:!text-gray-100">{title}</h4>
           )}
-          <div className="leading-relaxed">
+          <div className="leading-relaxed callout-content">
             {children}
           </div>
         </div>

@@ -37,8 +37,8 @@ You have two methods to upload your documents
 - **Browse**: Click the Choose Files button to open your system's file picker and select documents manually.
 {% /section %}
 
-{% callout type="info" title="Allowed file formats" %}
-Please be informed that only PDF, TXT, XLSX and DOCX type are allowed to upload.
+{% callout type="info" %}
+Please be informed that only `PDF`, `TXT`, `XLSX` and `DOCX` type are allowed to upload.
 {% /callout %}
 
 {% section id="file-management" title="File Management" %}

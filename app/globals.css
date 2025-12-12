@@ -242,4 +242,7 @@ body {
 .collapsible-callout code{
 @apply bg-black/10 border-black/5 text-black/60 dark:bg-white/10 dark:border-white/5 dark:text-white/60
 }
+.callout-content p{
+  @apply text-[13px] leading-5;
+}
 
