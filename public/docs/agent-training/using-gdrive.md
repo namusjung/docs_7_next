@@ -1,7 +1,7 @@
 ---
 type: docs
 title: Using Google Drive
-order: 4
+order: 6
 next: 
   href: /docs/integrations
   title: "Integrations"

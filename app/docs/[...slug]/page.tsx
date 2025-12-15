@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import React from "react";
 import Link from "next/link";
 import * as Markdoc from "@markdoc/markdoc";
-import { getDocsNav, parseFrontmatter, readMarkdownFile, getDocsGroupedNav } from "@/lib/docs-utils";
+import { getDocsNav, getDocsNavFlat, parseFrontmatter, readMarkdownFile } from "@/lib/docs-utils";
 import { config } from "@/lib/markdoc.config";
 import Callout from "@/components/docs/Callout";
 import DocSection from "@/components/docs/DocSection";
@@ -72,16 +72,17 @@ export default async function DocPage({ params }: { params: Params }) {
           }))
           .filter((item: { name: string }) => item.name)
       : []) as { name: string; href?: string }[];
-    const navItems = getDocsNav();
+    const groupedNav = getDocsNav();
+    const navItems = getDocsNavFlat(groupedNav);
     const { prev, next } = getPrevNext(navItems, params.slug);
 
     return (
       <>
-        <MobileNav groupedNav={getDocsGroupedNav()} currentSlug={params.slug} basePath="/docs" />
+        <MobileNav groupedNav={groupedNav} currentSlug={params.slug} basePath="/docs" />
         <div className="container grid grid-cols-1 lg:grid-cols-[240px_minmax(0,1fr)_200px] gap-8 py-10">
           <aside className="hidden lg:block">
           <nav className="sticky top-24 space-y-4">
-            {getDocsGroupedNav().map((group) => (
+            {groupedNav.map((group) => (
               <div key={group.section}>
                 <p className="text-xs uppercase tracking-wide !text-gray-600/40 dark:!text-gray-600/70 mb-1">{group.section.replace(/-/g, " ")}</p>
                 <div className="space-y-1">

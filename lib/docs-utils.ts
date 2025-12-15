@@ -9,6 +9,7 @@ export type DocPage = {
   content: string;
   frontmatter: Frontmatter;
 };
+type FolderInfo = { slug: string; order: number; title?: string };
 
 export type NavItem = { slug: string[]; frontmatter: Frontmatter };
 
@@ -64,6 +65,28 @@ export function getAllSlugs(baseDir: string): string[][] {
   return results;
 }
 
+export function getOrderedFolders(root: string): FolderInfo[] {
+  return fs
+    .readdirSync(root, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => {
+      const metaPath = path.join(root, entry.name, "_meta.json");
+      let order = Number.POSITIVE_INFINITY;
+      let title: string | undefined;
+
+      if (fs.existsSync(metaPath)) {
+        const meta = JSON.parse(fs.readFileSync(metaPath, "utf8"));
+        if (Number.isFinite(meta.order)) order = meta.order;
+        if (typeof meta.title === "string" && meta.title.trim()) {
+          title = meta.title.trim();
+        }
+      }
+
+      return { slug: entry.name, order, title };
+    })
+    .sort((a, b) => a.order - b.order);
+}
+
 function buildNavItems(baseDir: string, slugs: string[][]): NavItem[] {
   return slugs.map((slug) => {
     const raw = readMarkdownFile(baseDir, slug);
@@ -83,11 +106,28 @@ function sortNavItems(items: NavItem[]) {
   });
 }
 
-export function getDocsNav(): NavItem[] {
-  const slugs = getAllSlugs(DOCS_DIR);
-  const items = buildNavItems(DOCS_DIR, slugs);
-  sortNavItems(items);
-  return items;
+export function getDocsNav(): GroupedNav {
+  const folders = getOrderedFolders(DOCS_DIR);
+  const groups: GroupedNav = [];
+
+  for (const folder of folders) {
+    const folderPath = path.join(DOCS_DIR, folder.slug);
+    const slugs = getAllSlugs(folderPath).map((slug) => [folder.slug, ...slug]);
+    const items = buildNavItems(DOCS_DIR, slugs);
+    sortNavItems(items);
+
+    groups.push({
+      section: folder.title ?? folder.slug.replace(/-/g, " "),
+      items,
+    });
+  }
+
+  return groups;
+}
+
+export function getDocsNavFlat(groups?: GroupedNav): NavItem[] {
+  const source = groups ?? getDocsNav();
+  return source.flatMap((group) => group.items);
 }
 
 export function getApiNav(): NavItem[] {
@@ -112,10 +152,6 @@ function groupByTopFolder(items: NavItem[]): GroupedNav {
   });
   groups.sort((a, b) => a.section.localeCompare(b.section));
   return groups;
-}
-
-export function getDocsGroupedNav(): GroupedNav {
-  return groupByTopFolder(getDocsNav());
 }
 
 export function getApiGroupedNav(): GroupedNav {

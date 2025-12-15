@@ -1,7 +1,7 @@
 ---
 type: docs
 title: Using Plain Text
-order: 3
+order: 6
 next: 
   href: /docs/integrations
   title: "Integrations"

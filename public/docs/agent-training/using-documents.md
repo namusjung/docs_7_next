@@ -1,7 +1,7 @@
 ---
 type: docs
 title: Using Documents
-order: 1
+order: 6
 next: 
   href: /docs/integrations
   title: "Integrations"

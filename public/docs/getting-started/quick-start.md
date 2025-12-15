@@ -1,7 +1,7 @@
 ---
 title: "Quick Start Guide"
 type: "docs" 
-order: 2
+order: 1
 ---
 
 # Quick Start Guide
