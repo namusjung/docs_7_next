@@ -16,7 +16,7 @@ prev:
 
 {% media
   type="iframe"
-  src="https://sevendemo.lovable.app/demo/a4ee2d27-f110-4d37-a0bb-060b64015854"
+  src="https://app.supademo.com/embed/cmizu79pc0zmi14g4mhncppke?embed_v=2&utm_source=embed"
   title="Build and Train Knowledge Sources for AI Agents"
   allowfullscreen=true
   allow="clipboard-write"
