@@ -18,9 +18,6 @@ prev:
   type="iframe"
   src="https://sevendemo.lovable.app/demo/a4ee2d27-f110-4d37-a0bb-060b64015854"
   title="Build and Train Knowledge Sources for AI Agents"
-  allowfullscreen=true
-  allow="clipboard-write"
-  maxHeight="80vh"
   caption="Interactive demo showing agent training using URLs"
 /%}
 

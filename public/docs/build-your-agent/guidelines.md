@@ -52,7 +52,7 @@ _Example interaction starter:_
 
 | Use Case | Configuration Details |
 |----------|-----------------------|
-| **E-commerce Bot (Sales Agent)** | **Do's:** • Recommend related products • Offer discounts when available /n **Don'ts:** • Never disclose internal pricing strategy |
+| **E-commerce Bot (Sales Agent)** | **Do's:** • Recommend related products • Offer discounts when available  **Don'ts:** • Never disclose internal pricing strategy |
 | **Health Bot (General Assistant)** | **Do's:** • Provide links to trusted resources — **Don'ts:** • Never provide diagnosis or prescriptions |
 | **Travel Bot (Travel Agent)** | **Do's:** • Suggest attractions, flights, hotels — **Don'ts:** • Avoid making financial commitments |
 

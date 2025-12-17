@@ -19,7 +19,7 @@ The Escalation section defines the fail-safe mechanisms for your chatbot. This i
 | Field | Description | Example |
 |-------|-------------|---------|
 | **Human Handoff** | A master toggle that determines if the bot should seek external help when it cannot answer a user query. | `Enabled` (Toggle On) |
-| **Handoff Method** | Selects the channel for the handoff. Options include:<ul><li>**Create Ticket:** Integrates with support tools.</li><li>**Send Email:** Sends the chat transcript directly to an admin.</li></ul> | `Create Ticket` (via Freshdesk) |
+| **Handoff Method** | Selects the channel for the handoff. Options include:**Create Ticket:** Integrates with support tools. **Send Email:** Sends the chat transcript directly to an admin. | `Create Ticket` (via Freshdesk) |
 | **Auto Ticket Reply** | *(Add-on)* An advanced feature that allows the AI to not only create a ticket but also send a reply within the ticketing tool automatically. | `Checked` |
 | **AI Agent Transfer** | Enables the current bot to route specific queries to other specialized departmental bots (e.g., Support Bot routing to Sales Bot). | `Enabled` (Toggle On) |
 
@@ -36,9 +36,9 @@ When the LLM encounters a query it cannot answer with high confidence, it trigge
 
 | Category | Best Practice |
 |----------|---------------|
-| **Choose the Right Method** | <ul><li>Use **Email** if you are a solo founder or small business handling low volume.</li><li>Use **Ticketing** if you have a dedicated support team and need to track metrics.</li></ul> |
-| **Leverage Agent Transfer** | <ul><li>Don't try to make one bot do everything.</li><li>Create specialized bots (Sales, Tech Support, HR) and enable transfers to keep prompts focused.</li></ul> |
-| **Optimize with Auto Reply** | <ul><li>Enable this add-on to reduce "First Response Time" metrics.</li><li>*Note:* Monitor early auto-replies to ensure they align with your support tone.</li></ul> |
+| **Choose the Right Method** | Use **Email** if you are a solo founder or small business handling low volume. Use **Ticketing** if you have a dedicated support team and need to track metrics. |
+| **Leverage Agent Transfer** | Don't try to make one bot do everything. Create specialized bots (Sales, Tech Support, HR) and enable transfers to keep prompts focused. |
+| **Optimize with Auto Reply** | Enable this add-on to reduce "First Response Time" metrics. *Note:* Monitor early auto-replies to ensure they align with your support tone. |
 
 {% /callout %}
 
@@ -46,9 +46,9 @@ When the LLM encounters a query it cannot answer with high confidence, it trigge
 
 | Use Case | Configuration Details |
 |----------|-----------------------|
-| **Startup / Small Business** | <ul><li>**Human Handoff:** Enabled</li><li>**Method:** Send Email</li><li>**Why:** Ensures the founder sees every unanswered question immediately without managing a complex helpdesk.</li></ul> |
-| **Enterprise SaaS** | <ul><li>**Human Handoff:** Enabled</li><li>**Method:** Create Ticket (Zendesk)</li><li>**Auto Reply:** Enabled</li><li>**Why:** Seamless integration into existing support queues to speed up resolution.</li></ul> |
-| **Multi-Department Org** | <ul><li>**AI Agent Transfer:** Enabled</li><li>**Scenario:** User asks "Tech Support Bot" for a refund.</li><li>**Outcome:** Chat transfers to "Billing Bot" rather than creating a generic ticket.</li></ul> |
+| **Startup / Small Business** | **Human Handoff:** Enabled  **Method:** Send Email **Why:** Ensures the founder sees every unanswered question immediately without managing a complex helpdesk. |
+| **Enterprise SaaS** | **Human Handoff:** Enabled **Method:** Create Ticket (Zendesk) **Auto Reply:** Enabled **Why:** Seamless integration into existing support queues to speed up resolution. |
+| **Multi-Department Org** | **AI Agent Transfer:** Enabled **Scenario:** User asks "Tech Support Bot" for a refund. **Outcome:** Chat transfers to "Billing Bot" rather than creating a generic ticket. |
 
 {% /section %}
 
