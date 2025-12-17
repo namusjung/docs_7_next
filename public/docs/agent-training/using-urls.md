@@ -24,6 +24,8 @@ prev:
   caption="Interactive demo showing agent training using URLs"
 /%}
 
+{% section id="input-configure" title="Input Configuration" %}
+
 The Website import feature in the "Add Knowledge Sources" modal enables you to train your AI agent using content directly from live web pages. Whether you need to import an entire site structure or just a few specific landing pages, this interface gives you granular control over the data ingestion process.
 
 **Source Name** \
@@ -45,7 +47,7 @@ Select the method that fits your needs:
 
 Automatically crawl the website If **Import all pages** is selected, the system discovers content for you. You can then refine the results:
 
-- **Found URLs** – Review the list of detected pages. You can manually check/uncheck specific URLs or use the Select All / Deselect All buttons to manage bulk selection.
+- **Found URLs** – Review the list of detected pages. You can manually *check/uncheck* specific URLs or use the *Select All / Deselect All* buttons to manage bulk selection.
 - **Search URL** – Quickly filter the list to locate specific pages within the crawl results.
 - **Exclude URLs** – Define specific URL patterns (e.g., `/blog/*`) to prevent irrelevant sections of the site from being imported.
 {% /section %}
@@ -53,7 +55,7 @@ Automatically crawl the website If **Import all pages** is selected, the system 
 {% image src="/img/train-agent/import-all.png" alt="Import all URLs from the link" lightbox=true /%}
 
 
-{% section id="manual-entry" title="Inputs URLs manually" %}
+{% section id="manual-entry" title="Add URLs manually" %}
 
 When **Individual pages** is selected, you have direct control over exact inputs:
 
@@ -67,8 +69,8 @@ When **Individual pages** is selected, you have direct control over exact inputs
 
 {% section id="train-the-agent" title="Train the agent" %}
 
-Once you have completed the steps mentioned above, click the 'Create Source' button at the bottom right of the modal to save the entry.
+Once you have completed the steps mentioned above, click the *Create Source* button at the bottom right of the modal to save the entry.
 
-**Important:** Simply creating a source does not immediately train the agent. After adding all your desired sources (websites, documents, or text), you must click the Train Agent button on the builder page. This triggers the system to process the new data and apply it to your agent's active knowledge base.
+**Important:** Simply creating a source does not immediately train the agent. After adding all your desired sources (websites, documents, or text), you must click the *Train Agent* button on the builder page. This triggers the system to process the new data and apply it to your agent's active knowledge base.
 
 {% /section %}

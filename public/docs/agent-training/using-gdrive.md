@@ -16,43 +16,47 @@ prev:
 
 {% media
   type="iframe"
-  src="https://sevendemo.lovable.app/demo/a4ee2d27-f110-4d37-a0bb-060b64015854"
+  src="https://sevendemo.lovable.app/demo/e278ebff-2f80-40b1-bb11-c30425001be5"
   title="Build and Train Knowledge Sources for AI Agents"
   allowfullscreen=true
   allow="clipboard-write"
   maxHeight="80vh"
-  caption="Interactive demo showing agent training using URLs"
+  caption="Interactive demo showing agent training using Google Drive files"
 /%}
 
-The "Plain Text" tab in the "Add Knowledge Sources" modal provides a direct way to paste raw information into your agent's brain. This is the fastest method for adding specific snippets, FAQs, or structured data that doesn't exist in a standalone file or public URL.
+The "Integrations" tab streamlines data ingestion by connecting directly to your cloud storage, eliminating the need to download files locally before uploading them to the chatbot.
 
-Input Configuration To begin training:
+{% callout type="info" %}
+You must connect your Google drive first.  [How to connect?](https://docs.7en.ai//docs/integrations/gdrive)
+{% /callout %}
+
+{% section id="input-configure" title="Input Configuration" %}
 
 **Source Name** \
-Assign a clear, descriptive name (e.g., "Q4 Marketing FAQs") to categorize this text block within your knowledge base.
+Assign a unique name to this file so you can easily identify it in your knowledge base later.
 
 **Source** \
-Choose "Plain Text" option from the available source options in the tab menu.
+Choose "Integrations" option from the available source options in the tab menu.
 
-**Text Editor** \
-A large input field where you can type or paste your content directly.
+**Choose Provider** \
+Click the *Google Drive* card to initiate the connection. This authorizes the agent to access your cloud documents for training purposes.
 {% /section %}
 
-{% section id="supported-formats" title="Supported Formats" %}
+{% section id="file-selection" title="File Selection" %}
 
-The plain text input is versatile and supports various text-based structures to suit your data needs:
+**File Selection Interface** Once connected, your Google Drive files appear in a browseable list below the integration card. You can select specific documents to import without leaving the dashboard:
 
-- **Simple Text** – Standard paragraphs and prose (e.g., brand stories or simple instructions).
-- **Markdown** – formatted text with headers, lists, and emphasis for structured reading.
-- **JSON** – Structured data objects, perfect for feeding the agent technical specifications or product catalogs in a machine-readable format.
+- **Search & Filter**: Use the *Search files...* bar to find documents by name, or use the All Types dropdown to filter by file format (e.g., Google Docs, PDFs, or Text files).
+- **Select Files**: Check the box next to each file you wish to include in the knowledge base. The list displays the file name (e.g., test-file.txt) and its type for easy identification.
+- **Navigation**: If you have many files, use the pagination arrows (< >) or the refresh button to fetch your new uploads.
 {% /section %}
 
-{% image src="/img/train-agent/sample-markdown.png" alt="Sample Markdown Input" lightbox=true /%}
+{% image src="/img/train-agent/gdrive.png" alt="Google Drive Files" lightbox=true /%}
 
 {% section id="train-the-agent" title="Train the agent" %}
 
-Once you have completed the steps mentioned above, click the 'Create Source' button at the bottom right of the modal to save the entry.
+Once you have completed the steps mentioned above, click the *Create Source* button at the bottom right of the modal to save the entry.
 
-**Important:** Simply creating a source does not immediately train the agent. After adding all your desired sources (websites, documents, or text), you must click the Train Agent button on the builder page. This triggers the system to process the new data and apply it to your agent's active knowledge base.
+**Important:** Simply creating a source does not immediately train the agent. After adding all your desired sources (websites, documents, or text), you must click the *Train Agent* button on the builder page. This triggers the system to process the new data and apply it to your agent's active knowledge base.
 
 {% /section %}

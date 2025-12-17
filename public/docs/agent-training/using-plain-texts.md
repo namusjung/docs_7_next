@@ -16,17 +16,18 @@ prev:
 
 {% media
   type="iframe"
-  src="https://app.supademo.com/embed/cmizu79pc0zmi14g4mhncppke?embed_v=2&utm_source=embed"
+  src="https://sevendemo.lovable.app/demo/7f3b155a-e837-4f12-a5b5-f740b9ca4796"
   title="Build and Train Knowledge Sources for AI Agents"
   allowfullscreen=true
   allow="clipboard-write"
   maxHeight="80vh"
-  caption="Interactive demo showing agent training using URLs"
+  caption="Interactive demo showing agent training using plain text"
 /%}
+
 
 The "Plain Text" tab in the "Add Knowledge Sources" modal provides a direct way to paste raw information into your agent's brain. This is the fastest method for adding specific snippets, FAQs, or structured data that doesn't exist in a standalone file or public URL.
 
-Input Configuration To begin training:
+{% section id="input-configure" title="Input Configuration" %}
 
 **Source Name** \
 Assign a clear, descriptive name (e.g., "Q4 Marketing FAQs") to categorize this text block within your knowledge base.
@@ -36,15 +37,6 @@ Choose "Plain Text" option from the available source options in the tab menu.
 
 **Text Editor** \
 A large input field where you can type or paste your content directly.
-{% /section %}
-
-{% section id="supported-formats" title="Supported Formats" %}
-
-The plain text input is versatile and supports various text-based structures to suit your data needs:
-
-- **Simple Text** – Standard paragraphs and prose (e.g., brand stories or simple instructions).
-- **Markdown** – formatted text with headers, lists, and emphasis for structured reading.
-- **JSON** – Structured data objects, perfect for feeding the agent technical specifications or product catalogs in a machine-readable format.
 {% /section %}
 
 {% image src="/img/train-agent/sample-markdown.png" alt="Sample Markdown Input" lightbox=true /%}
