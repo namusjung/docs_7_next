@@ -43,8 +43,8 @@ A large input field where you can type or paste your content directly.
 
 {% section id="train-the-agent" title="Train the agent" %}
 
-Once you have completed the steps mentioned above, click the 'Create Source' button at the bottom right of the modal to save the entry.
+Once you have completed the steps mentioned above, click the *Create Source* button at the bottom right of the modal to save the entry.
 
-**Important:** Simply creating a source does not immediately train the agent. After adding all your desired sources (websites, documents, or text), you must click the Train Agent button on the builder page. This triggers the system to process the new data and apply it to your agent's active knowledge base.
+**Important:** Simply creating a source does not immediately train the agent. After adding all your desired sources (websites, documents, or text), you must click the *Train Agent* button on the builder page. This triggers the system to process the new data and apply it to your agent's active knowledge base.
 
 {% /section %}
