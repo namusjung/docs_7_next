@@ -26,3 +26,4 @@ public/docs-manifest.json
 *.sw?
 out*
 restart*
+*deploy*
