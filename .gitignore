@@ -24,3 +24,5 @@ public/docs-manifest.json
 *.njsproj
 *.sln
 *.sw?
+out*
+restart*

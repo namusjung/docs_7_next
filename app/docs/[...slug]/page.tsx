@@ -22,6 +22,11 @@ import { MediaViewer } from "@/components/ui/MediaViewer";
 
 type Params = any;
 
+export function generateStaticParams() {
+  const navItems = getDocsNavFlat();
+  return navItems.map((n) => ({ slug: n.slug }));
+}
+
 export async function generateMetadata({ params }: { params: Params }) {
   try {
     const { slug } = await params;
