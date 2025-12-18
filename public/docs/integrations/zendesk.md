@@ -1,11 +1,11 @@
 ---
 type: docs
-title: Zendesk Integration
+title: Zendesk
 breadcrumb_chain:
   - { label: "Home", href: "/" }
   - { label: "Docs", href: "/docs/intro" }
   - { label: "Integrations", href: "" }
-  - { label: "Zendesk Integration" }
+  - { label: "Zendesk" }
 ---
 
 {% image src="/img/banner-zendesk.png" alt="7en ai x Zendesk" lightbox=false /%}

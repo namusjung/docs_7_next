@@ -1,11 +1,11 @@
 ---
 type: docs
-title: Zapier Integration
+title: Zapier
 breadcrumb_chain:
   - { label: "Home", href: "/" }
   - { label: "Docs", href: "/docs/intro" }
   - { label: "Integrations", href: "" }
-  - { label: "Zapier Integration" }
+  - { label: "Zapier" }
 ---
 # How to connect Zapier to 7en Platform
 

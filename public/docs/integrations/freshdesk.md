@@ -1,11 +1,11 @@
 ---
 type: docs
-title: Freshdesk Integration
+title: Freshdesk
 breadcrumb_chain:
   - { label: "Home", href: "/" }
   - { label: "Docs", href: "/docs/intro" }
   - { label: "Integrations", href: "" }
-  - { label: "Freshdesk Integration" }
+  - { label: "Freshdesk" }
 prev:
   title: "Demo"
   href: "/docs/getting-started/demo"
@@ -30,9 +30,9 @@ Ensure you have active accounts for both 7en.ai and Freshdesk, with administrati
 
 Linking Freshdesk with 7en.ai empowers your AI agents to:
 
-- **Automate Ticketing**: Create and update tickets directly from agent interactions.
-- **Enhance Support**: Provide real-time responses using Freshdesk's data.
-- **Centralize Operations**: Manage customer queries within a unified platform.
+- **Automate Ticketing**: Create tickets directly from agent interactions.
+- **Auto Ticket Reply**: Answer customer's query instantly using Agent's data.
+- **Centralize Operations**: Resolve customer queries within a unified platform.
 
 This integration bridges your AI capabilities with robust support tools, saving time and improving efficiency.
 
@@ -44,10 +44,10 @@ Follow these steps to connect Freshdesk to 7en.ai, complete with visual referenc
 
 ### Step 1: Navigate to Integrations
 1. Log in to your 7en.ai account.
-2. Go to the **Integrations** page via the dashboard or directly at [https://staging.7en.ai/integrations](https://staging.7en.ai/integrations).
-3. Locate the Freshdesk integration and click **Configure Integration**.
+2. Go to the [Integrations](https://staging.7en.ai/integrations) page.
+3. Locate the Freshdesk integration and click *Configure* button.
 
-{% image src="/img/freshdesk/step-1.jpeg" alt="Screenshot of 7en.ai Integrations page with Freshdesk option" caption="Selecting Freshdesk integration in 7en.ai" /%}
+{% image src="/img/freshdesk/step-1.png" alt="Screenshot of 7en.ai Integrations page with Freshdesk option" caption="Selecting Freshdesk integration in 7en.ai" /%}
 
 ### Step 2: Access Freshdesk API Key
 1. Open a new browser tab and log in to your Freshdesk account.
