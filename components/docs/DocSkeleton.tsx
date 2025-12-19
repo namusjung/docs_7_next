@@ -5,18 +5,18 @@ export default function DocSkeleton() {
       <aside className="hidden lg:block">
         <nav className="sticky top-24 space-y-4">
           <div className="space-y-3">
-            <div className="h-3 w-20 bg-muted rounded"></div>
+            <div className="h-3 w-20 bg-muted dark:bg-muted/20 rounded"></div>
             <div className="space-y-2">
               {[1, 2, 3, 4].map((i) => (
-                <div key={i} className="h-6 bg-muted rounded"></div>
+                <div key={i} className="h-6 bg-muted dark:bg-muted/20 rounded"></div>
               ))}
             </div>
           </div>
           <div className="space-y-3 mt-6">
-            <div className="h-3 w-24 bg-muted rounded"></div>
+            <div className="h-3 w-24 bg-muted dark:bg-muted/20 rounded"></div>
             <div className="space-y-2">
               {[1, 2, 3].map((i) => (
-                <div key={i} className="h-6 bg-muted rounded"></div>
+                <div key={i} className="h-6 bg-muted dark:bg-muted/20 rounded"></div>
               ))}
             </div>
           </div>
@@ -26,44 +26,44 @@ export default function DocSkeleton() {
       {/* Main content skeleton */}
       <article className="prose prose-slate dark:prose-invert max-w-none pt-14">
         {/* Breadcrumb skeleton */}
-        <div className="h-5 w-48 bg-muted rounded mb-6"></div>
+        <div className="h-5 w-48 bg-muted dark:bg-muted/20 rounded mb-6"></div>
         
         {/* Title skeleton */}
-        <div className="h-10 w-3/4 bg-muted rounded mb-8"></div>
+        <div className="h-10 w-3/4 bg-muted dark:bg-muted/20 rounded mb-8"></div>
         
         {/* Content lines skeleton */}
         <div className="space-y-4">
-          <div className="h-4 w-full bg-muted rounded"></div>
-          <div className="h-4 w-5/6 bg-muted rounded"></div>
-          <div className="h-4 w-full bg-muted rounded"></div>
-          <div className="h-4 w-4/6 bg-muted rounded"></div>
-          <div className="h-4 w-full bg-muted rounded"></div>
-          <div className="h-4 w-5/6 bg-muted rounded"></div>
+          <div className="h-4 w-full bg-muted dark:bg-muted/20 rounded"></div>
+          <div className="h-4 w-5/6 bg-muted dark:bg-muted/20 rounded"></div>
+          <div className="h-4 w-full bg-muted dark:bg-muted/20 rounded"></div>
+          <div className="h-4 w-4/6 bg-muted dark:bg-muted/20 rounded"></div>
+          <div className="h-4 w-full bg-muted dark:bg-muted/20 rounded"></div>
+          <div className="h-4 w-5/6 bg-muted dark:bg-muted/20 rounded"></div>
         </div>
         
         {/* Section skeleton */}
         <div className="mt-8 space-y-4">
-          <div className="h-8 w-64 bg-muted rounded"></div>
-          <div className="h-4 w-full bg-muted rounded"></div>
-          <div className="h-4 w-full bg-muted rounded"></div>
-          <div className="h-4 w-3/4 bg-muted rounded"></div>
+          <div className="h-8 w-64 bg-muted dark:bg-muted/20 rounded"></div>
+          <div className="h-4 w-full bg-muted dark:bg-muted/20 rounded"></div>
+          <div className="h-4 w-full bg-muted dark:bg-muted/20 rounded"></div>
+          <div className="h-4 w-3/4 bg-muted dark:bg-muted/20 rounded"></div>
         </div>
 
         {/* Navigation skeleton */}
         <div className="mt-12 flex items-center justify-between border-t border-border pt-6">
-          <div className="h-5 w-32 bg-muted rounded"></div>
-          <div className="h-5 w-32 bg-muted rounded"></div>
+          <div className="h-5 w-32 bg-muted dark:bg-muted/20 rounded"></div>
+          <div className="h-5 w-32 bg-muted dark:bg-muted/20 rounded"></div>
         </div>
       </article>
 
       {/* Right sidebar skeleton */}
       <aside className="hidden lg:block">
-        <div className="sticky top-24 text-sm">
-          <div className="h-5 w-24 bg-muted rounded mb-4"></div>
+        <div className="sticky top-24 text-xs">
+          <div className="h-5 w-24 bg-muted dark:bg-muted/20 rounded mb-4"></div>
           <ul className="space-y-2">
             {[1, 2, 3, 4, 5].map((i) => (
               <li key={i}>
-                <div className="h-4 bg-muted rounded" style={{ width: `${60 + Math.random() * 40}%` }}></div>
+                <div className="h-4 bg-muted dark:bg-muted/20 rounded" style={{ width: `${60 + Math.random() * 40}%` }}></div>
               </li>
             ))}
           </ul>

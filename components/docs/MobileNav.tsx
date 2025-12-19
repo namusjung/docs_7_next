@@ -65,7 +65,7 @@ export default function MobileNav({ groupedNav, currentSlug, basePath }: MobileN
       {/* Flyout Menu */}
       <aside
         className={cn(
-          "fixed top-0 left-0 h-full w-64 bg-background border-r border-border z-50 transform transition-transform duration-300 ease-in-out overflow-y-auto lg:hidden",
+          "fixed top-0 left-0 h-full w-64 bg-background dark:bg-[#0e0e10] border-r border-border z-50 transform transition-transform duration-300 ease-in-out overflow-y-auto lg:hidden",
           isOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >
@@ -86,7 +86,7 @@ export default function MobileNav({ groupedNav, currentSlug, basePath }: MobileN
         <nav className="p-4 space-y-6">
           {groupedNav.map((group) => (
             <div key={group.section}>
-              <p className="text-xs uppercase tracking-wide !text-gray-600/40 dark:!text-gray-600/70 mb-3">
+              <p className="text-xs uppercase tracking-wide !text-gray-600/40 dark:!text-gray-200 mb-3">
                 {group.section.replace(/-/g, " ")}
               </p>
               <div className="space-y-1">
@@ -103,8 +103,8 @@ export default function MobileNav({ groupedNav, currentSlug, basePath }: MobileN
                       className={cn(
                         "block text-[13px] px-4 py-2 rounded-lg transition-colors",
                         isActive
-                          ? "!bg-muted !text-black dark:!text-white font-medium"
-                          : "hover:bg-muted hover:!text-black dark:hover:!text-white text-foreground/70"
+                          ? "!bg-muted/20 dark:bg-muted !text-black dark:!text-white font-medium"
+                          : "hover:bg-muted/10 hover:!text-black dark:hover:!text-white text-foreground/70"
                       )}
                     >
                       {item.frontmatter.title || item.slug[item.slug.length - 1]}

@@ -144,10 +144,10 @@ export default async function ApiDocPage({ params }: { params: Promise<Params> }
           <nav className="sticky top-24 space-y-4">
             {getApiGroupedNav().map((group) => (
               <div key={group.section}>
-                <p className="text-xs uppercase tracking-wide !text-gray-600/40 dark:!text-gray-600/70 mb-1">{group.section.replace(/-/g, " ")}</p>
+                <p className="text-xs uppercase tracking-wide !text-gray-600/40 dark:!text-gray-200 mb-1">{group.section.replace(/-/g, " ")}</p>
                 <div className="space-y-1">
                   {group.items.map((item) => (
-                    <Link key={item.slug.join("/")} href={`/api/${item.slug.join("/")}`} className={`block text-[13px]  px-4 py-1.5 pl-2 hover:bg-muted hover:!text-black dark:hover:!text-white rounded-lg ${slug.join("/") === item.slug.join("/") ? "!bg-muted !text-black dark:!text-white" : ""}`}>
+                    <Link key={item.slug.join("/")} href={`/api/${item.slug.join("/")}`} className={`block text-sm  px-4 py-1.5 pl-2 hover:bg-gray-100 dark:hover:bg-muted/10 hover:!text-black dark:hover:!text-white rounded-lg ${slug.join("/") === item.slug.join("/") ? "dark:!bg-muted/20 bg-gray-200 !text-black dark:!text-white" : ""}`}>
                       {item.frontmatter.title || item.slug[item.slug.length - 1]}
                     </Link>
                   ))}
@@ -197,7 +197,7 @@ export default async function ApiDocPage({ params }: { params: Promise<Params> }
         </article>
         {hasApiContent && (
           <aside className="hidden lg:block">
-            <div className="sticky top-24 text-sm space-y-4">
+            <div className="sticky top-24 text-xs space-y-4">
               {endpointData && (
                 <ApiEndpoint method={endpointData.method} url={endpointData.url} />
               )}

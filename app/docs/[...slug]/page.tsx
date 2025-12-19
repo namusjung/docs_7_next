@@ -89,10 +89,10 @@ export default async function DocPage({ params }: { params: Params }) {
           <nav className="sticky top-24 space-y-4">
             {groupedNav.map((group) => (
               <div key={group.section}>
-                <p className="text-xs uppercase tracking-wide !text-gray-600/40 dark:!text-gray-600/70 mb-1">{group.section.replace(/-/g, " ")}</p>
+                <p className="text-xs uppercase tracking-wide !text-gray-600/40 dark:!text-gray-200 mb-1">{group.section.replace(/-/g, " ")}</p>
                 <div className="space-y-1">
                   {group.items.map((item) => (
-                    <Link key={item.slug.join("/")} href={`/docs/${item.slug.join("/")}`} className={`block text-[13px]  px-4 py-1.5 pl-2 hover:bg-muted hover:!text-black dark:hover:!text-white rounded-lg ${params.slug.join("/") === item.slug.join("/") ? "!bg-muted !text-black dark:!text-white" : ""}`}>
+                    <Link key={item.slug.join("/")} href={`/docs/${item.slug.join("/")}`} className={`block text-sm  px-4 py-1.5 pl-2 dark:hover:bg-muted/10 hover:bg-gray-100 hover:!text-black dark:hover:!text-white rounded-lg ${params.slug.join("/") === item.slug.join("/") ? "dark:!bg-muted/20 bg-gray-200 !text-black dark:!text-white" : ""}`}>
                       {item.frontmatter.title || item.slug[item.slug.length - 1]}
                     </Link>
                   ))}
@@ -156,12 +156,12 @@ export default async function DocPage({ params }: { params: Params }) {
           </div>
         </article>
         <aside className="hidden lg:block">
-          <div className="sticky top-24 text-sm">
+          <div className="sticky top-24 text-xs">
             <p className="font-medium mb-2">On this page</p>
-            <ul className="space-y-1">
+            <ul className="space-y-2">
               {toc.map((i) => (
                 <li key={i.id} className={i.level === 3 ? "ml-3" : ""}>
-                  <a href={`#${i.id}`} className="text-foreground/70 hover:text-foreground hover:underline text-[12px]">
+                  <a href={`#${i.id}`} className="text-foreground/70 hover:text-foreground hover:underline text-sm">
                     {i.title}
                   </a>
                 </li>

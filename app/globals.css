@@ -13,7 +13,7 @@
 .dark {
   --primary: 210 40% 98%;
   --secondary: 217.2 32.6% 17.5%;
-  --muted: 217.2 32.6% 17.5%;
+  --muted: 240 5% 96%;
   --border: 217.2 32.6% 17.5%;
 }
 
@@ -24,7 +24,7 @@ body,
 }
 
 body {
-  @apply bg-neutral-50 dark:bg-neutral-800/60 text-foreground antialiased;
+  @apply bg-neutral-50 dark:bg-[#0e0e10] text-foreground antialiased;
   font-feature-settings: "rlig" 1, "calt" 1;
 }
 
@@ -104,7 +104,7 @@ body {
   }
   
   .prose p {
-    @apply text-foreground leading-relaxed mb-6 text-sm;
+    @apply text-foreground leading-relaxed mb-6 text-base;
   }
   
   .prose a {
@@ -120,7 +120,7 @@ body {
   }
   
   .prose code {
-    @apply bg-muted text-foreground px-2 py-[1px] rounded-md text-[11px] font-mono border;
+    @apply bg-muted dark:bg-muted/10 text-foreground px-2 py-[1px] rounded-md text-[11px] font-mono border;
   }
   
   .prose pre {
