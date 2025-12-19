@@ -12,9 +12,9 @@
 
 .dark {
   --primary: 210 40% 98%;
-  --secondary: 217.2 32.6% 17.5%;
+  --secondary: 240 7% 6%;
   --muted: 240 5% 96%;
-  --border: 217.2 32.6% 17.5%;
+  --border: 217 2% 14%;
 }
 
 html,
@@ -184,7 +184,7 @@ body {
   }
   
   .prose tr:hover {
-    @apply bg-muted/25;
+    @apply bg-muted/30 dark:bg-muted/10;
   }
   
   .markdoc-content {
@@ -236,13 +236,13 @@ body {
 }
 
 .collapsible-callout table th{
-@apply bg-slate-600 text-gray-100 dark:bg-gray-100 dark:text-gray-600;
+@apply bg-neutral-300 text-gray-800 dark:bg-gray-400/20 dark:text-gray-200;
 }
 
 .collapsible-callout code{
 @apply bg-black/10 border-black/5 text-black/60 dark:bg-white/10 dark:border-white/5 dark:text-white/60
 }
 .callout-content p{
-  @apply text-[13px] leading-5;
+  @apply text-sm leading-5;
 }
 

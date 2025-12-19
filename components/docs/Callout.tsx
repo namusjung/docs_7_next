@@ -25,15 +25,15 @@ export const Callout: React.FC<CalloutBoxProps> = ({
     
     switch (type) {
       case 'info':
-        return `${baseStyles} bg-blue-50 border-blue-100 dark:border-blue-900 dark:bg-blue-900/50 text-blue-800`;
+        return `${baseStyles} border-sky-500/20 bg-sky-50/50 dark:border-sky-500/30 dark:bg-sky-500/10 text-sky-800`;
       case 'warning':
-        return `${baseStyles} bg-amber-50 border-amber-100 dark:border-amber-900 dark:bg-amber-900/50  text-amber-800`;
+        return `${baseStyles} border-amber-500/50 bg-amber-50/50 dark:border-amber-500/60 dark:bg-amber-500/10 text-amber-800`;
       case 'success':
-        return `${baseStyles} bg-green-50 border-green-100 dark:border-green-900 dark:bg-green-900/50  text-green-800`;
+        return `${baseStyles} border-emerald-500/20 bg-emerald-50/50 dark:border-emerald-500/30 dark:bg-emerald-500/10 text-emerald-800`;
       case 'error':
         return `${baseStyles} bg-red-50 border-red-100 dark:border-red-900 dark:bg-red-900/50  text-red-800`;
       case 'tip':
-        return `${baseStyles} bg-purple-50 border-purple-100 dark:border-purple-900 dark:bg-purple-900/50  text-purple-800`;
+        return `${baseStyles} border-[#bc543a] dark:bg-neutral-500/10 bg-neutral-300/10 text-[#bc543a]`;
       default:
         return `${baseStyles} bg-gray-50 border-gray-100 dark:border-gray-900 dark:bg-gray-900/50  text-gray-800`;
     }
@@ -44,11 +44,11 @@ export const Callout: React.FC<CalloutBoxProps> = ({
     
     switch (type) {
       case 'info':
-        return <Info {...iconProps} className={`${iconProps.className} text-blue-600`} />;
+        return <Info {...iconProps} className={`${iconProps.className} text-sky-600`} />;
       case 'warning':
         return <AlertTriangle {...iconProps} className={`${iconProps.className} text-amber-600`} />;
       case 'success':
-        return <CheckCircle {...iconProps} className={`${iconProps.className} text-green-600`} />;
+        return <CheckCircle {...iconProps} className={`${iconProps.className} text-emerald-600`} />;
       case 'error':
         return <XCircle {...iconProps} className={`${iconProps.className} text-red-600`} />;
       case 'tip':
@@ -67,10 +67,10 @@ export const Callout: React.FC<CalloutBoxProps> = ({
               <div className="flex-1">
                 {title && (
                   <div className="flex items-center gap-4">
-                    <span className={`flex gap-1 px-4 py-2 rounded-lg text-sm font-bold uppercase tracking-wide shadow-lg bg-gradient-to-r from-purple-500 to-purple-600 text-white shadow-purple-500/25`}>
+                    <span className={`flex gap-1 px-4 py-2 rounded-lg text-sm font-bold uppercase tracking-wide shadow-lg bg-gradient-to-r from-[#bc543a] to-[#27221e] text-white`}>
                      {getIcon('tip')} Tips
                     </span>
-                    <h4 className="!font-semibold !mb-0 !text-sm !text-purple-500 dark:!text-gray-100">{title}</h4>
+                    <h4 className="!font-semibold !mb-0 !text-base !text-black-500 dark:!text-gray-100">{title}</h4>
                   </div>
                   
                 )}

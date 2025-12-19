@@ -25,7 +25,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ theme, type = "", title, desc
   return (
     <section className="bg-background border-b border-border/50 py-0 relative overflow-hidden">
       <div className="max-w-6xl mx-auto px-6 md:px-0 relative z-10">
-        <div className={`grid grid-cols-1 lg:grid-cols-2 gap-0 md:gap-12 items-center min-h-[350px]`}>
+        <div className={`grid grid-cols-1 lg:grid-cols-2 gap-0 md:gap-12 items-center min-h-[400px]`}>
           {/* Left Column - Content */}
           <div className="max-w-xl order-1 md:order-[-1] py-7 md:py-0">
             {/* Logo/Icon */}

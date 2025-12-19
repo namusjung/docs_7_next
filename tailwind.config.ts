@@ -40,7 +40,7 @@ const config: Config = {
         },
       },
       fontFamily: {
-				primary: ['Pavanam', 'sans-serif'],
+				primary: ['Google Sans ', 'sans-serif'],
 				secondary: ['Mona Sans', 'sans-serif']
 			},
       keyframes: {

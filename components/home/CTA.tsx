@@ -10,15 +10,15 @@ interface CTAProps {
 
 export function CTA({button1,button2,button1Link = "#",button2Link = "#"}:CTAProps) {
 return (
-    <section className='max-w-5xl mx-auto px-4 md:px-0 py-2'>
+    <section className='max-w-5xl mx-auto px-4 md:px-0 py-2 rounded-2xl' style={{backgroundImage: "url('/img/cta-bg.png')", backgroundSize: 'cover', backgroundPosition: 'center'}}>
         <div className='text-center mb-12'>
-            <h2 className='text-2xl font-semibold text-foreground mb-4'>
+            <h2 className='text-2xl font-semibold dark:text-foreground !text-white mb-4'>
                 Ready to transform your business?
             </h2>
-            <p className='text-muted-foreground max-w-2xl mx-auto text-sm'>
-                Start building intelligent AI agents today and revolutionize how you engage with customers.
+            <p className='!text-white/60 dark:!text-white/60 max-w-xl mx-auto text-sm !font-primary'>
+                Start building intelligent AI agents to engage with customers.
             </p>
-            <div className='flex flex-col justify-center items-center md:flex-row gap-4 mt-12'>
+            <div className='flex flex-col justify-center items-center md:flex-row gap-4 mt-8'>
                 {
                     button1 && (
                         <ModernButton variant='primary' className='w-full md:w-auto' onClick={() => window.open(button1Link, '_blank')}>
@@ -28,7 +28,7 @@ return (
                 }
                 {
                     button2 && (
-                        <ModernButton variant='outline' className='w-full md:w-auto' onClick={() => window.open(button2Link, '_blank')}>
+                        <ModernButton variant='outline' className='w-full md:w-auto !text-neutral-200 hover:!text-neutral-700 dark:!border-neutral-200 dark:hover:!bg-neutral-200' onClick={() => window.open(button2Link, '_blank')}>
                             {button2}
                         </ModernButton>
                     )
