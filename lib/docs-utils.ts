@@ -131,31 +131,34 @@ export function getDocsNavFlat(groups?: GroupedNav): NavItem[] {
 }
 
 export function getApiNav(): NavItem[] {
-  const slugs = getAllSlugs(API_DIR);
-  const items = buildNavItems(API_DIR, slugs);
-  sortNavItems(items);
-  return items;
+  const folders = getOrderedFolders(API_DIR);
+  const allItems: NavItem[] = [];
+  for (const folder of folders) {
+    const folderPath = path.join(API_DIR, folder.slug);
+    const slugs = getAllSlugs(folderPath).map((slug) => [folder.slug, ...slug]);
+    const items = buildNavItems(API_DIR, slugs);
+    items.sort((a, b) => (a.frontmatter.order ?? 999) - (b.frontmatter.order ?? 999));
+    allItems.push(...items);
+  }
+  return allItems;
 }
 
 export type GroupedNav = { section: string; items: NavItem[] }[];
 
-function groupByTopFolder(items: NavItem[]): GroupedNav {
-  const map = new Map<string, NavItem[]>();
-  for (const it of items) {
-    const section = it.slug[0] || "general";
-    if (!map.has(section)) map.set(section, []);
-    map.get(section)!.push(it);
-  }
-  const groups: GroupedNav = Array.from(map.entries()).map(([section, entries]) => {
-    entries.sort((a, b) => (a.frontmatter.order ?? 999) - (b.frontmatter.order ?? 999));
-    return { section, items: entries };
-  });
-  groups.sort((a, b) => a.section.localeCompare(b.section));
-  return groups;
-}
-
 export function getApiGroupedNav(): GroupedNav {
-  return groupByTopFolder(getApiNav());
+  const folders = getOrderedFolders(API_DIR);
+  const groups: GroupedNav = [];
+  for (const folder of folders) {
+    const folderPath = path.join(API_DIR, folder.slug);
+    const slugs = getAllSlugs(folderPath).map((slug) => [folder.slug, ...slug]);
+    const items = buildNavItems(API_DIR, slugs);
+    items.sort((a, b) => (a.frontmatter.order ?? 999) - (b.frontmatter.order ?? 999));
+    groups.push({
+      section: folder.title ?? folder.slug.replace(/-/g, " "),
+      items,
+    });
+  }
+  return groups;
 }
 
 export type BreadcrumbItem = { name: string; href?: string };

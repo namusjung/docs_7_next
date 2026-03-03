@@ -2,12 +2,7 @@
 type: api
 title: Delete Agent
 endpoint: DELETE /$api.version/agents/{id}
-next: 
-  href: /api/api-reference/agent/list-all-agents
-  title: "List All Agents"
-prev: 
-  href: /api/api-reference/agent/update-agent
-  title: "Update Agent"
+order: 5
 ---
 
 # Delete Agent
@@ -19,6 +14,18 @@ Delete an existing AI agent by its ID.
 The Delete Agent endpoint allows you to remove an AI agent from your account. This action is irreversible, so ensure the agent is no longer needed before deleting.
 
 ## Parameters
+
+{% parameter-list title="Path Parameters" %}
+```
+[
+  {
+    "name": "id",
+    "type": "UUID",
+    "description": "Unique identifier of the agent to delete. Example: \"b5f7c8d9-e0a1-4b2c-9d3e-fedcba987654\""
+  }
+]
+```
+{% /parameter-list %}
 
 {% parameter-list title="Request Header" %}
 ```
@@ -37,11 +44,11 @@ The Delete Agent endpoint allows you to remove an AI agent from your account. Th
 [
   {
     "language": "curl",
-    "code": "curl -X DELETE 'https://{% $api.base_url %}v1/agents/11' -H 'Authorization: {% $api.key %}' -H 'Content-Type: application/json'"
+    "code": "curl -X DELETE 'https://{% $api.base_url %}v1/agents/b5f7c8d9-e0a1-4b2c-9d3e-fedcba987654' -H 'Authorization: {% $api.key %}' -H 'Content-Type: application/json'"
   },
   {
     "language": "javascript",
-    "code": "fetch('https://{% $api.base_url %}v1/agents/11', {\n  method: 'DELETE',\n  headers: {\n    'Authorization': '{% $api.key %}',\n    'Content-Type': 'application/json'\n  })"
+    "code": "fetch('https://{% $api.base_url %}v1/agents/b5f7c8d9-e0a1-4b2c-9d3e-fedcba987654', {\n  method: 'DELETE',\n  headers: {\n    'Authorization': '{% $api.key %}',\n    'Content-Type': 'application/json'\n  }\n})"
   }
 ]
 ```
@@ -51,15 +58,14 @@ The Delete Agent endpoint allows you to remove an AI agent from your account. Th
 ```json
 {
   "status": "success",
-  "message": "Agent with ID 11 deleted successfully."
+  "message": "Agent deleted successfully."
 }
 ```
 {% /response %}
 
 ## Error Responses
-Base url: {% $api.base_url %}
 
-##### 401 unauthorized
+##### 401 Unauthorized
 ```json
 {
   "error": {
@@ -71,13 +77,12 @@ Base url: {% $api.base_url %}
 }
 ```
 
-
-##### 404 not found
+##### 404 Not Found
 ```json
 {
   "error": {
     "code": "NOT_FOUND",
-    "message": "Agent with ID 11 not found.",
+    "message": "Agent not found.",
     "status": 404,
     "fields": []
   }
@@ -88,7 +93,6 @@ Base url: {% $api.base_url %}
 
 - **Confirmation**: Always verify the agent ID before deletion to avoid accidental removal.
 - **Backup**: Consider backing up critical agent configurations before deletion.
-- **Rate Limits**: Be aware of rate limits when performing multiple delete operations.
 
 ## Rate Limits
 
