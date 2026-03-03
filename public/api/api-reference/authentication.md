@@ -66,33 +66,10 @@ The API enforces rate limits per API key. Limits vary by plan:
 | Pro | 1,000 requests / minute |
 | Enterprise | 10,000 requests / minute |
 
-Every response includes rate limit headers so you can track your usage:
-
-| Header | Description |
-|---|---|
-| `X-RateLimit-Limit` | Maximum requests allowed in the current window |
-| `X-RateLimit-Remaining` | Requests remaining in the current window |
-| `X-RateLimit-Reset` | Unix timestamp (ms) when the window resets |
-| `Retry-After` | Seconds to wait before retrying (only on `429` responses) |
 
 ### Handling rate limit errors
 
-When you exceed the limit, the API returns `429 Too Many Requests`. Use the `Retry-After` header to determine how long to wait before retrying:
-
-{% request title="Retry after rate limit" %}
-```json
-[
-  {
-    "language": "javascript",
-    "code": "async function fetchWithRetry(url, options, retries = 3) {\n  const res = await fetch(url, options);\n\n  if (res.status === 429 && retries > 0) {\n    const retryAfter = parseInt(res.headers.get('Retry-After') || '1', 10);\n    await new Promise(r => setTimeout(r, retryAfter * 1000));\n    return fetchWithRetry(url, options, retries - 1);\n  }\n\n  return res;\n}"
-  },
-  {
-    "language": "python",
-    "code": "import time\nimport requests\n\ndef fetch_with_retry(url, headers, retries=3):\n    for attempt in range(retries):\n        response = requests.get(url, headers=headers)\n        if response.status_code == 429:\n            retry_after = int(response.headers.get('Retry-After', 1))\n            time.sleep(retry_after)\n            continue\n        return response\n    return response"
-  }
-]
-```
-{% /request %}
+When you exceed the limit, the API returns `429 Too Many Requests`.
 
 ---
 
@@ -146,22 +123,8 @@ When you exceed the limit, the API returns `429 Too Many Requests`. Use the `Ret
 }
 ```
 
----
-
-## Debugging
-
-Every API response includes an `x-request-id` header with a unique identifier for that request. Include this value when contacting support to help diagnose issues quickly.
-
-```
-x-request-id: req_a1b2c3d4e5f6
-```
-
----
-
 ## Security Best Practices
 
 - **Never hardcode keys** in source code. Use environment variables or a secrets manager.
 - **Rotate keys regularly** — especially after any suspected exposure.
 - **Use separate keys** per environment (development, staging, production) so you can revoke one without affecting others.
-- **Restrict key scope** where possible — create read-only keys for services that only need to read data.
-- **Monitor usage** in the dashboard for unexpected spikes that may indicate a compromised key.

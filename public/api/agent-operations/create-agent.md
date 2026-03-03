@@ -224,20 +224,6 @@ Create a new AI agent with custom configuration. Agents can be set up as chatbot
 ```
 {% /request %}
 
-{% request title="Full request" %}
-```json
-[
-  {
-    "language": "curl",
-    "code": "curl -X POST 'https://{% $api.base_url %}v1/agents/' \\\n  -H 'Authorization: {% $api.key %}' \\\n  -H 'Content-Type: application/json' \\\n  -d '{\n    \"name\": \"Support Bot\",\n    \"agentType\": \"chatbot\",\n    \"agent_category\": \"chatbot\",\n    \"description\": \"Handles tier-1 customer support\",\n    \"systemPrompt\": \"You are a helpful support agent for Acme Corp.\",\n    \"model\": { \"response_model\": \"gpt-4o\", \"temperature\": 0.5 },\n    \"appearance\": { \"primaryColor\": \"#2563eb\", \"chatbotName\": \"Acme Support\" },\n    \"behavior\": { \"expertHandoff\": true, \"suggestions\": [\"How do I reset my password?\"] }\n  }'"
-  },
-  {
-    "language": "javascript",
-    "code": "const res = await fetch('https://{% $api.base_url %}v1/agents/', {\n  method: 'POST',\n  headers: {\n    'Authorization': '{% $api.key %}',\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n    name: 'Support Bot',\n    agentType: 'chatbot',\n    agent_category: 'chatbot',\n    description: 'Handles tier-1 customer support',\n    systemPrompt: 'You are a helpful support agent for Acme Corp.',\n    model: { response_model: 'gpt-4o', temperature: 0.5 },\n    appearance: { primaryColor: '#2563eb', chatbotName: 'Acme Support' },\n    behavior: { expertHandoff: true, suggestions: ['How do I reset my password?'] }\n  })\n});\nconst { data } = await res.json();"
-  }
-]
-```
-{% /request %}
 
 {% response status="201" hasDropdown="false" title="Response" %}
 ```json
