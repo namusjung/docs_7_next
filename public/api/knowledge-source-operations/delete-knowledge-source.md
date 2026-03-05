@@ -1,7 +1,7 @@
 ---
 type: api
 title: Delete Knowledge Source
-endpoint: DELETE /api/knowledgesource/{id}
+endpoint: DELETE /api/v1/knowledge-source/{{id}}/
 order: 7
 ---
 
@@ -44,11 +44,11 @@ Performs a **soft delete** — the knowledge source is marked as `Deleted` but i
 [
   {
     "language": "curl",
-    "code": "curl -X DELETE 'https://{% $api.base_url %}knowledgesource/101/' -H 'Authorization: {% $api.key %}' -H 'Content-Type: application/json'"
+    "code": "curl -X DELETE 'https://{% $api.base_url %}/v1/knowledge-source/{{id}}/' -H 'Authorization: {% $api.key %}' -H 'Content-Type: application/json'"
   },
   {
     "language": "javascript",
-    "code": "fetch('https://{% $api.base_url %}knowledgesource/101/', {\n  method: 'DELETE',\n  headers: {\n    'Authorization': '{% $api.key %}',\n    'Content-Type': 'application/json'\n  }\n})"
+    "code": "fetch('https://{% $api.base_url %}/v1/knowledge-source/{{id}}/', {\n  method: 'DELETE',\n  headers: {\n    'Authorization': '{% $api.key %}',\n    'Content-Type': 'application/json'\n  }\n})"
   }
 ]
 ```
@@ -56,23 +56,60 @@ Performs a **soft delete** — the knowledge source is marked as `Deleted` but i
 
 {% response status="204" hasDropdown="false" title="Response" %}
 ```json
-{}
+{
+    "message": "Knowledge source deleted successfully.",
+    "subscription": {
+        "planName": "EU Sovereign",
+        "planId": "36",
+        "started_at": "2026-02-18T08:16:03+00:00",
+        "ended_at": "2026-03-18T08:16:03+00:00",
+        "cancelled_at": null,
+        "failed_at": null
+    },
+    "status": "success",
+    "permissions": [
+        "MANAGE_AGENTS",
+        "MANAGE_ADMIN",
+        "MANAGE_INTEGRATIONS",
+        "VIEW_INTEGRATIONS",
+        "MANAGE_API_KEY",
+        "MANAGE_BILLING",
+        "MANAGE_KNOWLEDGE",
+        "VIEW_BILLING",
+        "MANAGE_SETTINGS",
+        "VIEW_AGENTS",
+        "MANAGE_CHAT",
+        "CONFIGURE_BUSINESS",
+        "VIEW_USERS",
+        "VIEW_ANALYTICS",
+        "TRAIN_AGENT",
+        "MANAGE_USERS",
+        "VIEW_CHAT",
+        "VIEW_KNOWLEDGE",
+        "SEND_INVITE",
+        "VIEW_SETTINGS"
+    ]
+}
 ```
 {% /response %}
 
 ## Error Responses
 
-##### 404 Not Found
+##### 404
 ```json
 {
-  "error": {
-    "code": "resource_not_found",
     "message": "Knowledge source not found.",
-    "status": 404,
-    "fields": {
-      "general": ["Knowledge source not found"]
+    "status": "error",
+    "error": {
+        "code": "knowledge_source_not_found",
+        "message": "Knowledge source not found.",
+        "status": 404,
+        "fields": {
+            "general": [
+                "Knowledge source not found."
+            ]
+        }
     }
-  }
 }
 ```
 
@@ -80,9 +117,3 @@ Performs a **soft delete** — the knowledge source is marked as `Deleted` but i
 
 - **Retrain after deletion**: The agent will continue using a deleted source until retrained. Call [Retrain Agent](/api/agent-training/retrain-agent) after deleting sources.
 - **Bulk delete**: To delete multiple sources at once, use [Bulk Delete Knowledge Sources](/api/knowledge-source-operations/bulk-delete-knowledge-sources).
-
-## Rate Limits
-
-- 100 requests per minute for free tier
-- 1000 requests per minute for pro tier
-- 10000 requests per minute for enterprise tier

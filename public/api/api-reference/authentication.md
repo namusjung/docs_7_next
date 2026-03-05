@@ -54,72 +54,24 @@ Authorization: Api-Key YOUR_API_KEY
 ```
 {% /request %}
 
----
-
-## Rate Limiting
-
-The API enforces rate limits per API key. Limits vary by plan:
-
-| Plan | Limit |
-|---|---|
-| Free | 100 requests / minute |
-| Pro | 1,000 requests / minute |
-| Enterprise | 10,000 requests / minute |
-
-
-### Handling rate limit errors
-
-When you exceed the limit, the API returns `429 Too Many Requests`.
-
----
 
 ## Error Responses
 
-##### 401 Unauthorized — Missing or invalid API key
+##### 403 Unauthorized — Missing or invalid or expired API key
 ```json
 {
-  "error": {
-    "code": "authentication_failed",
-    "message": "Authentication failed.",
-    "status": 401,
-    "fields": []
-  }
-}
-```
-
-##### 401 Unauthorized — Expired or revoked key
-```json
-{
-  "error": {
-    "code": "invalid_api_key",
-    "message": "The provided API key is invalid or has been revoked.",
-    "status": 401,
-    "fields": []
-  }
-}
-```
-
-##### 403 Forbidden — Plan restriction
-```json
-{
-  "error": {
-    "code": "plan_restriction",
-    "message": "Your current plan does not have access to this resource.",
-    "status": 403,
-    "fields": []
-  }
-}
-```
-
-##### 429 Too Many Requests
-```json
-{
-  "error": {
-    "code": "rate_limit_exceeded",
-    "message": "Too many requests. Please wait before retrying.",
-    "status": 429,
-    "fields": []
-  }
+    "message": "Invalid or inactive API key.",
+    "status": "error",
+    "error": {
+        "code": "error",
+        "message": "Invalid or inactive API key.",
+        "status": 403,
+        "fields": {
+            "general": [
+                "Invalid or inactive API key."
+            ]
+        }
+    }
 }
 ```
 

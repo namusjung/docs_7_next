@@ -20,8 +20,8 @@ The Get Agent Details endpoint returns the full configuration object for a speci
 [
   {
     "name": "id",
-    "type": "UUID",
-    "description": "Unique identifier of the agent to retrieve. Example: \"b5f7c8d9-e0a1-4b2c-9d3e-fedcba987654\""
+    "type": "int",
+    "description": "Unique identifier of the agent to retrieve. Example: \"34\""
   }
 ]
 ```
@@ -44,11 +44,11 @@ The Get Agent Details endpoint returns the full configuration object for a speci
 [
   {
     "language": "curl",
-    "code": "curl -X GET 'https://{% $api.base_url %}v1/agents/b5f7c8d9-e0a1-4b2c-9d3e-fedcba987654' -H 'Authorization: {% $api.key %}' -H 'Content-Type: application/json'"
+    "code": "curl -X GET 'https://{% $api.base_url %}v1/agents/{id}' -H 'Authorization: {% $api.key %}' -H 'Content-Type: application/json'"
   },
   {
     "language": "javascript",
-    "code": "fetch('https://{% $api.base_url %}v1/agents/b5f7c8d9-e0a1-4b2c-9d3e-fedcba987654', {\n  method: 'GET',\n  headers: {\n    'Authorization': '{% $api.key %}',\n    'Content-Type': 'application/json'\n  }\n})"
+    "code": "fetch('https://{% $api.base_url %}v1/agents/{id}', {\n  method: 'GET',\n  headers: {\n    'Authorization': '{% $api.key %}',\n    'Content-Type': 'application/json'\n  }\n})"
   }
 ]
 ```
@@ -57,61 +57,118 @@ The Get Agent Details endpoint returns the full configuration object for a speci
 {% response status="200" hasDropdown="false" title="Response" %}
 ```json
 {
-  "message": "Resource retrieved successfully",
-  "data": {
-    "id": "b5f7c8d9-e0a1-4b2c-9d3e-fedcba987654",
-    "name": "Support Bot",
-    "description": "Handles tier-1 customer support queries for Acme Corp",
-    "status": "Active",
-    "agentType": "Chatbot",
-    "agent_category": "Chatbot",
-    "model": "gpt-4o",
-    "display_model": "GPT-4o",
-    "systemPrompt": "You are a helpful support agent for Acme Corp...",
-    "owner": "sarah@acme.com",
-    "knowledge_sources": [
-      {
-        "id": 101,
-        "title": "Help Center",
-        "type": "url",
-        "status": "Trained",
-        "urls": ["https://help.acme.com/"]
-      }
-    ],
-    "conversations": 347,
-    "created_at": "2025-11-15T10:30:00Z",
-    "updated_at": "2026-01-20T14:22:00Z"
-  },
-  "status_code": 200
+    "message": "Resource retrieved successfully",
+    "data": {
+        "id": 671,
+        "owner": 193,
+        "name": "Support Bot",
+        "description": null,
+        "status": "Idle",
+        "appearance": {},
+        "behavior": {},
+        "model": {
+            "display_model": null
+        },
+        "agentType": "General Assistant",
+        "agent_category": null,
+        "systemPrompt": "",
+        "knowledge_sources": [],
+        "created_at": "2026-03-04T07:27:06.264485Z",
+        "updated_at": "2026-03-04T07:27:06.264500Z",
+        "conversations": 0,
+        "ticketing_providers": [],
+        "default_ticketing_provider": null,
+        "is_slack_enabled": false,
+        "privacy_url": null,
+        "gdpr_settings": {
+            "data_retention_days": null,
+            "data_retention_message": null,
+            "gdpr_message_display": false
+        },
+        "is_white_label": false,
+        "total_training_usage_bytes": 0,
+        "max_training_usage_bytes": 51200000,
+        "character_limit": 200000
+    },
+    "subscription": {
+        "planName": "EU Sovereign",
+        "planId": "36",
+        "started_at": "2026-02-18T08:16:03+00:00",
+        "ended_at": "2026-03-18T08:16:03+00:00",
+        "cancelled_at": null,
+        "failed_at": null
+    },
+    "features": {
+        "WHITE_LABELING": false,
+        "PREMIUM_MODELS": false,
+        "AUTO_TICKET_RESPONSE": true,
+        "ADD_ON_AGENT": false,
+        "EMAIL_HANDOFF": true,
+        "AGENT_HANDOFF": true,
+        "INTEGRATION_HANDOFF": true
+    },
+    "status": "success",
+    "permissions": [
+        "VIEW_ANALYTICS",
+        "MANAGE_INTEGRATIONS",
+        "SEND_INVITE",
+        "MANAGE_AGENTS",
+        "CONFIGURE_BUSINESS",
+        "MANAGE_BILLING",
+        "VIEW_CHAT",
+        "MANAGE_SETTINGS",
+        "VIEW_SETTINGS",
+        "MANAGE_USERS",
+        "VIEW_KNOWLEDGE",
+        "VIEW_BILLING",
+        "MANAGE_CHAT",
+        "VIEW_INTEGRATIONS",
+        "VIEW_AGENTS",
+        "MANAGE_KNOWLEDGE",
+        "MANAGE_ADMIN",
+        "VIEW_USERS",
+        "TRAIN_AGENT",
+        "MANAGE_API_KEY"
+    ]
 }
 ```
 {% /response %}
 
 ## Error Responses
 
-##### 401 Unauthorized
+##### 403
 ```json
 {
-  "error": {
-    "code": "authentication_failed",
-    "message": "Authentication failed.",
-    "status": 401,
-    "fields": []
-  }
+    "message": "Invalid or inactive API key.",
+    "status": "error",
+    "error": {
+        "code": "error",
+        "message": "Invalid or inactive API key.",
+        "status": 403,
+        "fields": {
+            "general": [
+                "Invalid or inactive API key."
+            ]
+        }
+    }
 }
 ```
 
-##### 404 Not Found
+##### 404
 ```json
 {
-  "error": {
-    "code": "resource_not_found",
-    "message": "Agent not found.",
-    "status": 404,
-    "fields": {
-      "general": ["Agent not found"]
-    }
-  }
+    "message": "Agent not found.",
+    "status": "error",
+    "error": {
+        "code": "agent_not_found",
+        "message": "Agent not found.",
+        "status": 404,
+        "fields": {
+            "general": [
+                "Agent not found."
+            ]
+        }
+    }
 }
 ```
 
@@ -120,8 +177,3 @@ The Get Agent Details endpoint returns the full configuration object for a speci
 - **Access Control**: Only agents belonging to the authenticated user's team are returned. A `404` is returned for inaccessible agents to prevent enumeration.
 - **Caching**: Cache retrieved agent configurations client-side where appropriate to reduce API calls.
 
-## Rate Limits
-
-- 100 requests per minute for free tier
-- 1000 requests per minute for pro tier
-- 10000 requests per minute for enterprise tier

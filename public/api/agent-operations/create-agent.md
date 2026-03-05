@@ -18,11 +18,6 @@ Create a new AI agent with custom configuration. Agents can be set up as chatbot
     "description": "Display name of the agent. Example: \"Support Bot\""
   },
   {
-    "name": "agentType",
-    "type": "string",
-    "description": "Type of agent. Accepted values: \"chatbot\", \"assistant\""
-  },
-  {
     "name": "agent_category",
     "type": "string",
     "description": "Category of the agent. Accepted values: \"chatbot\", \"assistant\""
@@ -34,6 +29,11 @@ Create a new AI agent with custom configuration. Agents can be set up as chatbot
 {% parameter-list title="Optional Fields" %}
 ```
 [
+  {
+    "name": "agentType",
+    "type": "string",
+    "description": "Type of agent. Accepted values: \"General Assistant\", \"Tech Expert\""
+  },
   {
     "name": "description",
     "type": "string",
@@ -214,11 +214,11 @@ Create a new AI agent with custom configuration. Agents can be set up as chatbot
 [
   {
     "language": "curl",
-    "code": "curl -X POST 'https://{% $api.base_url %}v1/agents/' \\\n  -H 'Authorization: {% $api.key %}' \\\n  -H 'Content-Type: application/json' \\\n  -d '{\n    \"name\": \"Support Bot\",\n    \"agentType\": \"chatbot\",\n    \"agent_category\": \"chatbot\"\n  }'"
+    "code": "curl -X POST 'https://{% $api.base_url %}v1/agents/' \\\n  -H 'Authorization: {% $api.key %}' \\\n  -H 'Content-Type: application/json' \\\n  -d '{\n    \"name\": \"Support Bot\" \n \"agent_category\": \"chatbot\" \n }'"
   },
   {
     "language": "javascript",
-    "code": "const res = await fetch('https://{% $api.base_url %}v1/agents/', {\n  method: 'POST',\n  headers: {\n    'Authorization': '{% $api.key %}',\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n    name: 'Support Bot',\n    agentType: 'chatbot',\n    agent_category: 'chatbot'\n  })\n});\nconst { data } = await res.json();"
+    "code": "const res = await fetch('https://{% $api.base_url %}v1/agents/', {\n  method: 'POST',\n  headers: {\n    'Authorization': '{% $api.key %}',\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n    name: 'Support Bot' \n agent_category: \"chatbot\" \n  })\n});\nconst { data } = await res.json();"
   }
 ]
 ```
@@ -228,45 +228,79 @@ Create a new AI agent with custom configuration. Agents can be set up as chatbot
 {% response status="201" hasDropdown="false" title="Response" %}
 ```json
 {
-  "status": "success",
-  "data": {
-    "id": "b5f7c8d9-e0a1-4b2c-9d3e-fedcba987654",
-    "owner": 21,
-    "name": "Support Bot",
-    "description": "Handles tier-1 customer support",
-    "status": "Active",
-    "agentType": "chatbot",
-    "agent_category": "chatbot",
-    "systemPrompt": "You are a helpful support agent for Acme Corp.",
-    "model": {
-      "temperature": 0.5,
-      "token_length": 16000,
-      "response_model": "gpt-4o"
+    "message": "Resource created successfully",
+    "data": {
+        "id": 671,
+        "owner": 193,
+        "name": "Support Bot",
+        "description": null,
+        "status": "Idle",
+        "appearance": {},
+        "behavior": {},
+        "model": {
+            "display_model": null
+        },
+        "agentType": "General Assistant",
+        "agent_category": "chatbot",
+        "systemPrompt": "",
+        "knowledge_sources": [],
+        "created_at": "2026-03-04T07:27:06.264485Z",
+        "updated_at": "2026-03-04T07:27:06.264500Z",
+        "conversations": 0,
+        "ticketing_providers": [],
+        "default_ticketing_provider": null,
+        "is_slack_enabled": false,
+        "privacy_url": null,
+        "gdpr_settings": {
+            "data_retention_days": null,
+            "data_retention_message": null,
+            "gdpr_message_display": false
+        },
+        "is_white_label": false,
+        "total_training_usage_bytes": 0,
+        "max_training_usage_bytes": 51200000,
+        "character_limit": 200000
     },
-    "appearance": {
-      "avatar": { "src": "", "type": "default" },
-      "position": "bottom-right",
-      "chatbotName": "Acme Support",
-      "primaryColor": "#2563eb",
-      "secondaryColor": "#ffffff",
-      "welcomeMessage": "",
-      "fontFamily": "Inter",
-      "buttonText": ""
+    "subscription": {
+        "planName": "EU Sovereign",
+        "planId": "36",
+        "started_at": "2026-02-18T08:16:03+00:00",
+        "ended_at": "2026-03-18T08:16:03+00:00",
+        "cancelled_at": null,
+        "failed_at": null
     },
-    "behavior": {
-      "expertHandoff": true,
-      "aiToAiHandoff": false,
-      "suggestions": ["How do I reset my password?"],
-      "showOnMobile": true,
-      "autoShowAfter": 30,
-      "conversationMemory": false,
-      "multilingualSupport": false,
-      "guidelines": { "dos": [], "donts": [] }
+    "features": {
+        "WHITE_LABELING": false,
+        "PREMIUM_MODELS": false,
+        "AUTO_TICKET_RESPONSE": true,
+        "ADD_ON_AGENT": false,
+        "EMAIL_HANDOFF": true,
+        "AGENT_HANDOFF": true,
+        "INTEGRATION_HANDOFF": true
     },
-    "knowledge_sources": [],
-    "created_at": "2025-08-04T11:18:38.934851Z",
-    "updated_at": "2025-08-04T11:18:38.934851Z"
-  }
+    "status": "success",
+    "permissions": [
+        "VIEW_ANALYTICS",
+        "MANAGE_USERS",
+        "MANAGE_ADMIN",
+        "MANAGE_API_KEY",
+        "CONFIGURE_BUSINESS",
+        "VIEW_SETTINGS",
+        "MANAGE_CHAT",
+        "SEND_INVITE",
+        "MANAGE_AGENTS",
+        "VIEW_KNOWLEDGE",
+        "MANAGE_KNOWLEDGE",
+        "VIEW_INTEGRATIONS",
+        "MANAGE_INTEGRATIONS",
+        "MANAGE_BILLING",
+        "VIEW_CHAT",
+        "VIEW_USERS",
+        "MANAGE_SETTINGS",
+        "VIEW_AGENTS",
+        "TRAIN_AGENT",
+        "VIEW_BILLING"
+    ]
 }
 ```
 {% /response %}
@@ -281,42 +315,57 @@ Create a new AI agent with custom configuration. Agents can be set up as chatbot
 
 ## Error Responses
 
-##### 400 Validation Error
+##### 400
 ```json
 {
-  "error": {
-    "code": "validation_error",
-    "message": "Validation error",
-    "status": 400,
-    "fields": {
-      "name": ["This field is required."],
-      "agentType": ["This field is required."]
-    }
-  }
+    "message": "Validation error",
+    "status": "error",
+    "error": {
+        "code": "api_error",
+        "message": "Validation error",
+        "status": 400,
+        "fields": {
+            "name": [
+                "This field is required."
+            ]
+        }
+    }
 }
 ```
 
-##### 401 Unauthorized
+##### 403
 ```json
 {
-  "error": {
-    "code": "authentication_failed",
-    "message": "Authentication failed.",
-    "status": 401,
-    "fields": []
-  }
+    "message": "Invalid or inactive API key.",
+    "status": "error",
+    "error": {
+        "code": "error",
+        "message": "Invalid or inactive API key.",
+        "status": 403,
+        "fields": {
+            "general": [
+                "Invalid or inactive API key."
+            ]
+        }
+    }
 }
+
 ```
 
-##### 403 Forbidden
+##### 400
 ```json
 {
-  "error": {
-    "code": "agent_limit_reached",
-    "message": "You have reached the maximum number of agents for your plan.",
-    "status": 403,
-    "fields": []
-  }
+    "message": "Agent limit reached. Upgrade your plan or add seats.",
+    "error": {
+        "code": "agent_limit_reached",
+        "message": "Agent limit reached. Upgrade your plan or add seats.",
+        "status": 400,
+        "fields": {
+            "general": [
+                "Agent limit reached. Upgrade your plan or add seats."
+            ]
+        }
+    }
 }
 ```
 

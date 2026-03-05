@@ -19,11 +19,11 @@ Call [List Knowledge Sources for Agent](/api/knowledge-source-operations/list-kn
 [
   {
     "language": "curl",
-    "code": "curl -X GET 'https://{% $api.base_url %}v1/agents/b5f7c8d9-e0a1-4b2c-9d3e-fedcba987654/knowledge-folder' -H 'Authorization: {% $api.key %}' -H 'Content-Type: application/json'"
+    "code": "curl -X GET 'https://{% $api.base_url %}v1/agents/{id}/knowledge-folder' -H 'Authorization: {% $api.key %}' -H 'Content-Type: application/json'"
   },
   {
     "language": "javascript",
-    "code": "const res = await fetch('https://{% $api.base_url %}v1/agents/b5f7c8d9-e0a1-4b2c-9d3e-fedcba987654/knowledge-folder', {\n  method: 'GET',\n  headers: {\n    'Authorization': '{% $api.key %}',\n    'Content-Type': 'application/json'\n  }\n});\nconst { data } = await res.json();\nconst allTrained = data.knowledge_sources.every(s => s.training_status === 'Success');"
+    "code": "const res = await fetch('https://{% $api.base_url %}v1/agents/{id}/knowledge-folder', {\n  method: 'GET',\n  headers: {\n    'Authorization': '{% $api.key %}',\n    'Content-Type': 'application/json'\n  }\n});\nconst { data } = await res.json();\nconst allTrained = data.knowledge_sources.every(s => s.training_status === 'Success');"
   }
 ]
 ```
@@ -35,7 +35,7 @@ Call [List Knowledge Sources for Agent](/api/knowledge-source-operations/list-kn
   "message": "Resource retrieved successfully",
   "data": {
     "id": 42,
-    "agent": "b5f7c8d9-e0a1-4b2c-9d3e-fedcba987654",
+    "agent": "{id}",
     "name": "Support Bot Knowledge",
     "knowledge_sources": [
       {

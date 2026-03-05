@@ -34,7 +34,7 @@ Call [Create Agent](/api/agent-operations/create-agent) to provision a new agent
 {
   "status": "success",
   "data": {
-    "id": "b5f7c8d9-e0a1-4b2c-9d3e-fedcba987654",
+    "id": "{id}",
     "name": "Support Bot",
     "description": "Handles tier-1 customer queries",
     "status": "Active"

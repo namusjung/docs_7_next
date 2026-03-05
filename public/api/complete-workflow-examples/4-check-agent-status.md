@@ -19,11 +19,11 @@ Call [Get Agent Details](/api/agent-operations/get-agent-details) and check the 
 [
   {
     "language": "curl",
-    "code": "curl -X GET 'https://{% $api.base_url %}v1/agents/b5f7c8d9-e0a1-4b2c-9d3e-fedcba987654' -H 'Authorization: {% $api.key %}' -H 'Content-Type: application/json'"
+    "code": "curl -X GET 'https://{% $api.base_url %}v1/agents/{id}' -H 'Authorization: {% $api.key %}' -H 'Content-Type: application/json'"
   },
   {
     "language": "javascript",
-    "code": "const res = await fetch('https://{% $api.base_url %}v1/agents/b5f7c8d9-e0a1-4b2c-9d3e-fedcba987654', {\n  method: 'GET',\n  headers: {\n    'Authorization': '{% $api.key %}',\n    'Content-Type': 'application/json'\n  }\n});\nconst { data } = await res.json();\nconsole.log(data.status); // 'Training' or 'Active'"
+    "code": "const res = await fetch('https://{% $api.base_url %}v1/agents/{id}', {\n  method: 'GET',\n  headers: {\n    'Authorization': '{% $api.key %}',\n    'Content-Type': 'application/json'\n  }\n});\nconst { data } = await res.json();\nconsole.log(data.status); // 'Training' or 'Active'"
   }
 ]
 ```
@@ -34,7 +34,7 @@ Call [Get Agent Details](/api/agent-operations/get-agent-details) and check the 
 {
   "message": "Resource retrieved successfully",
   "data": {
-    "id": "b5f7c8d9-e0a1-4b2c-9d3e-fedcba987654",
+    "id": "{id}",
     "name": "Support Bot",
     "status": "Active",
     "updated_at": "2026-01-20T14:22:00Z"

@@ -520,7 +520,7 @@ Returns the authenticated user's full profile.
 
 | Parameter | Type | Description |
 |---|---|---|
-| `id` | UUID | User ID |
+| `id` | int | User ID |
 
 **Response `200 OK`:**
 ```json
@@ -710,7 +710,7 @@ Invites a new member to the team via email.
   "email": "james@acme.com",
   "role": "Support Agent",
   "agent_ids": [
-    "b5f7c8d9-e0a1-4b2c-9d3e-fedcba987654",
+    "{id}",
     "c6g8d9e0-f1b2-5c3d-ae4f-0123456789ab"
   ]
 }
@@ -720,7 +720,7 @@ Invites a new member to the team via email.
 |---|---|---|---|
 | `email` | string | Yes | Invitee email |
 | `role` | string | Yes | Role name from `CustomTeamRole` |
-| `agent_ids` | array of UUID | No | Agents to pre-assign to this member |
+| `agent_ids` | array of int | No | Agents to pre-assign to this member |
 
 **Response `201 Created`:**
 ```json
@@ -816,7 +816,7 @@ GET /api/users/team-members/
       "is_active": true,
       "avatar": "https://api.7en.ai/media/avatars/sarah.jpg",
       "assigned_agents": [
-        { "id": "b5f7c8d9-e0a1-4b2c-9d3e-fedcba987654", "name": "Support Bot" }
+        { "id": "{id}", "name": "Support Bot" }
       ]
     },
     {
@@ -847,7 +847,7 @@ POST /api/users/assign-agents/
 ```json
 {
   "user_id": "d7h9e0f1-g2c3-6d4e-bf5g-1234567890cd",
-  "agent_ids": ["b5f7c8d9-e0a1-4b2c-9d3e-fedcba987654"]
+  "agent_ids": ["{id}"]
 }
 ```
 
@@ -964,7 +964,7 @@ Returns all agents accessible to the authenticated user, filtered by team member
     "previous": null,
     "results": [
       {
-        "id": "b5f7c8d9-e0a1-4b2c-9d3e-fedcba987654",
+        "id": "{id}",
         "name": "Support Bot",
         "description": "Handles tier-1 customer support queries for Acme Corp",
         "status": "Active",
@@ -1092,7 +1092,7 @@ GET /api/agents/{id}/
 
 | Parameter | Type | Description |
 |---|---|---|
-| `id` | UUID | Agent ID |
+| `id` | int | Agent ID |
 
 **Response `200 OK`:** Full agent object (same structure as list results above).
 
@@ -1153,7 +1153,7 @@ GET /api/agents/{id}/knowledge-folder/
   "message": "Resource retrieved successfully",
   "data": {
     "id": 42,
-    "agent": "b5f7c8d9-e0a1-4b2c-9d3e-fedcba987654",
+    "agent": "{id}",
     "name": "Support Bot Knowledge",
     "knowledge_sources": [
       {
@@ -1238,7 +1238,7 @@ Triggers a background Celery task to re-ingest all knowledge sources and rebuild
 {
   "message": "Agent retraining started.",
   "data": {
-    "agent_id": "b5f7c8d9-e0a1-4b2c-9d3e-fedcba987654",
+    "agent_id": "{id}",
     "status": "Training"
   },
   "status_code": 200
@@ -1278,7 +1278,7 @@ GET /api/knowledgesource/
 | Parameter | Type | Required | Description |
 |---|---|---|---|
 | `agent_knowledge_folder` | integer | No | Filter by folder ID |
-| `agent_id` | UUID | No | Filter by agent ID |
+| `agent_id` | int | No | Filter by agent ID |
 | `status` | string | No | `Pending`, `Training`, `Trained`, `Failed`, `Deleted` |
 
 **Response `200 OK`:**
@@ -1622,7 +1622,7 @@ Queues a full knowledge ingestion and Weaviate indexing job.
 **Request Body:**
 ```json
 {
-  "agent_id": "b5f7c8d9-e0a1-4b2c-9d3e-fedcba987654"
+  "agent_id": "{id}"
 }
 ```
 
@@ -1631,7 +1631,7 @@ Queues a full knowledge ingestion and Weaviate indexing job.
 {
   "message": "Training started.",
   "data": {
-    "agent_id": "b5f7c8d9-e0a1-4b2c-9d3e-fedcba987654",
+    "agent_id": "{id}",
     "task_id": "celery-task-a1b2c3d4-e5f6-7890-abcd-ef1234567890",
     "status": "Training"
   },
@@ -1658,7 +1658,7 @@ Server-Sent Events stream that pushes training progress updates. Close the conne
 
 | Parameter | Type | Description |
 |---|---|---|
-| `agent_id` | UUID | Agent being trained |
+| `agent_id` | int | Agent being trained |
 
 **Event Stream Format:**
 
@@ -1686,7 +1686,7 @@ Single-shot training status check (for clients that cannot consume SSE).
 ```json
 {
   "data": {
-    "agent_id": "b5f7c8d9-e0a1-4b2c-9d3e-fedcba987654",
+    "agent_id": "{id}",
     "status": "Training",
     "progress": 0.42,
     "completed_sources": 5,
@@ -1712,7 +1712,7 @@ GET /api/ai/v1/agents/training-status-all/
 {
   "data": [
     {
-      "agent_id": "b5f7c8d9-e0a1-4b2c-9d3e-fedcba987654",
+      "agent_id": "{id}",
       "name": "Support Bot",
       "status": "Active"
     },
@@ -1771,7 +1771,7 @@ GET /api/chatsessions/
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
-| `agent` | UUID | No | Filter by agent ID |
+| `agent` | int | No | Filter by agent ID |
 | `status` | string | No | `open`, `resolved`, `pending` |
 | `source` | string | No | `website`, `whatsapp`, `slack`, `api` |
 | `limit` | integer | No | Default 20 |
@@ -1796,7 +1796,7 @@ GET /api/chatsessions/
         "lastMessage": "What is your refund policy?",
         "time": "2026-02-25T14:37:00Z",
         "agent": {
-          "id": "b5f7c8d9-e0a1-4b2c-9d3e-fedcba987654",
+          "id": "{id}",
           "name": "Support Bot"
         },
         "satisfaction": 4.5,
@@ -1831,7 +1831,7 @@ POST /api/chatsessions/
   "full_name": "Marcus Johnson",
   "email": "marcus@example.com",
   "phone": "+14155559876",
-  "agents": ["b5f7c8d9-e0a1-4b2c-9d3e-fedcba987654"],
+  "agents": ["{id}"],
   "source": "website",
   "priority": "normal"
 }
@@ -1842,7 +1842,7 @@ POST /api/chatsessions/
 | `full_name` | string | No | Customer name |
 | `email` | string | No | Valid email |
 | `phone` | string | No | E.164 format |
-| `agents` | array of UUID | Yes | At least one agent |
+| `agents` | array of int | Yes | At least one agent |
 | `source` | string | No | `website`, `whatsapp`, `slack`, `api`; default `website` |
 | `priority` | string | No | `low`, `normal`, `high`, `urgent`; default `normal` |
 
@@ -1856,8 +1856,8 @@ POST /api/chatsessions/
     "status": "open",
     "source": "website",
     "start_time": "2026-02-26T09:15:00Z",
-    "agents": ["b5f7c8d9-e0a1-4b2c-9d3e-fedcba987654"],
-    "current_participant": "b5f7c8d9-e0a1-4b2c-9d3e-fedcba987654"
+    "agents": ["{id}"],
+    "current_participant": "{id}"
   },
   "status_code": 201
 }
@@ -1911,7 +1911,7 @@ GET /api/chat/admin/conversations/export/
 | Parameter | Type | Required | Description |
 |---|---|---|---|
 | `format` | string | Yes | `pdf`, `docx`, `json`, `csv` |
-| `agent` | UUID | No | Filter by agent |
+| `agent` | int | No | Filter by agent |
 | `from_date` | date | No | ISO 8601 e.g. `2026-01-01` |
 | `to_date` | date | No | ISO 8601 |
 
@@ -2024,7 +2024,7 @@ GET /api/chatmessages/?session={session_id}
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
-| `session` | UUID | Yes | Chat session ID |
+| `session` | int | Yes | Chat session ID |
 | `limit` | integer | No | Default 50 |
 | `offset` | integer | No | — |
 
@@ -2052,7 +2052,7 @@ GET /api/chatmessages/?session={session_id}
         "message_by": "agent",
         "timestamp": "2026-02-25T14:32:05Z",
         "agent": {
-          "id": "b5f7c8d9-e0a1-4b2c-9d3e-fedcba987654",
+          "id": "{id}",
           "name": "Support Bot"
         },
         "llm_name": "gpt-4o-mini",
@@ -3580,7 +3580,7 @@ GET /api/admin/logs/
 | Parameter | Type | Description |
 |---|---|---|
 | `event_type` | string | e.g. `agent.created`, `user.login`, `api_key.create` |
-| `user_id` | UUID | Filter by acting user |
+| `user_id` | int | Filter by acting user |
 | `from_date` | date | ISO 8601 start date |
 | `to_date` | date | ISO 8601 end date |
 
@@ -3596,7 +3596,7 @@ GET /api/admin/logs/
         "event_type": "agent.created",
         "user": "sarah@acme.com",
         "details": {
-          "agent_id": "b5f7c8d9-e0a1-4b2c-9d3e-fedcba987654",
+          "agent_id": "{id}",
           "agent_name": "Support Bot"
         },
         "ip_address": "203.0.113.45"
@@ -3736,7 +3736,7 @@ Returns the public configuration for the embedded `agent.js` chat widget. Called
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
-| `agentId` | UUID | Yes | Agent ID to configure widget for |
+| `agentId` | int | Yes | Agent ID to configure widget for |
 
 **Request Headers for domain validation:**
 
@@ -3746,7 +3746,7 @@ The endpoint reads `HTTP_ORIGIN` or `HTTP_REFERER` to validate against the agent
 ```json
 {
   "message": "Details found",
-  "agentId": "b5f7c8d9-e0a1-4b2c-9d3e-fedcba987654",
+  "agentId": "{id}",
   "primaryColor": "#2563EB",
   "secondaryColor": "#DBEAFE",
   "fontFamily": "Inter",
@@ -3803,7 +3803,7 @@ The primary endpoint used by the embedded `agent.js` widget for real-time custom
 
 | Parameter | Type | Description |
 |---|---|---|
-| `agent_id` | UUID | Agent to handle the conversation |
+| `agent_id` | int | Agent to handle the conversation |
 
 **Client → Server:**
 

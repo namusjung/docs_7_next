@@ -1,7 +1,7 @@
 ---
 type: api
 title: Bulk Delete Knowledge Sources
-endpoint: DELETE /api/knowledgesource/bulk-delete
+endpoint: DELETE /api/v1/knowledge-source/bulk-delete/
 order: 8
 ---
 
@@ -44,11 +44,11 @@ Use the Bulk Delete endpoint to remove several knowledge sources at once, avoidi
 [
   {
     "language": "curl",
-    "code": "curl -X DELETE 'https://{% $api.base_url %}knowledgesource/bulk-delete/' -H 'Authorization: {% $api.key %}' -H 'Content-Type: application/json' -d '{\"ids\": [101, 102, 103]}'"
+    "code": "curl -X DELETE 'https://{% $api.base_url %}/v1/knowledge-source/bulk-delete/' -H 'Authorization: {% $api.key %}' -H 'Content-Type: application/json' -d '{\"ids\": [101, 102]}'"
   },
   {
     "language": "javascript",
-    "code": "fetch('https://{% $api.base_url %}knowledgesource/bulk-delete/', {\n  method: 'DELETE',\n  headers: {\n    'Authorization': '{% $api.key %}',\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({ ids: [101, 102, 103] })\n})"
+    "code": "fetch('https://{% $api.base_url %}/v1/knowledge-source/bulk-delete/', {\n  method: 'DELETE',\n  headers: {\n    'Authorization': '{% $api.key %}',\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({ ids: [101, 102] })\n})"
   }
 ]
 ```
@@ -57,8 +57,38 @@ Use the Bulk Delete endpoint to remove several knowledge sources at once, avoidi
 {% response status="200" hasDropdown="false" title="Response" %}
 ```json
 {
-  "message": "3 knowledge sources deleted.",
-  "status_code": 200
+    "message": "2 knowledge source(s) deleted successfully.",
+    "subscription": {
+        "planName": "EU Sovereign",
+        "planId": "36",
+        "started_at": "2026-02-18T08:16:03+00:00",
+        "ended_at": "2026-03-18T08:16:03+00:00",
+        "cancelled_at": null,
+        "failed_at": null
+    },
+    "status": "success",
+    "permissions": [
+        "CONFIGURE_BUSINESS",
+        "MANAGE_CHAT",
+        "VIEW_AGENTS",
+        "MANAGE_USERS",
+        "VIEW_KNOWLEDGE",
+        "MANAGE_AGENTS",
+        "VIEW_SETTINGS",
+        "VIEW_ANALYTICS",
+        "SEND_INVITE",
+        "MANAGE_ADMIN",
+        "MANAGE_API_KEY",
+        "VIEW_CHAT",
+        "MANAGE_BILLING",
+        "MANAGE_SETTINGS",
+        "MANAGE_KNOWLEDGE",
+        "VIEW_INTEGRATIONS",
+        "MANAGE_INTEGRATIONS",
+        "VIEW_USERS",
+        "TRAIN_AGENT",
+        "VIEW_BILLING"
+    ]
 }
 ```
 {% /response %}
@@ -68,14 +98,16 @@ Use the Bulk Delete endpoint to remove several knowledge sources at once, avoidi
 ##### 400 Bad Request
 ```json
 {
-  "error": {
-    "code": "validation_error",
-    "message": "Validation error",
-    "status": 400,
-    "fields": {
-      "ids": ["This field is required."]
-    }
-  }
+    "message": "No IDs provided for bulk deletion.",
+    "subscription": {
+        "planName": "EU Sovereign",
+        "planId": "36",
+        "started_at": "2026-02-18T08:16:03+00:00",
+        "ended_at": "2026-03-18T08:16:03+00:00",
+        "cancelled_at": null,
+        "failed_at": null
+    },
+    "status": "error",
 }
 ```
 

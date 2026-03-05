@@ -187,6 +187,9 @@ export const tags = {
 export const apiTags = {
   request: {
     render: "ApiRequest",
+    attributes: {
+      title: { type: String, default: "Request" }
+    },
   },
   response: {
     render: "ApiResponse",

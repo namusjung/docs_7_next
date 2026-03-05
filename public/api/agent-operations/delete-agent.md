@@ -20,8 +20,8 @@ The Delete Agent endpoint allows you to remove an AI agent from your account. Th
 [
   {
     "name": "id",
-    "type": "UUID",
-    "description": "Unique identifier of the agent to delete. Example: \"b5f7c8d9-e0a1-4b2c-9d3e-fedcba987654\""
+    "type": "int",
+    "description": "Unique identifier of the agent to delete. Example: \"{id}\""
   }
 ]
 ```
@@ -44,11 +44,11 @@ The Delete Agent endpoint allows you to remove an AI agent from your account. Th
 [
   {
     "language": "curl",
-    "code": "curl -X DELETE 'https://{% $api.base_url %}v1/agents/b5f7c8d9-e0a1-4b2c-9d3e-fedcba987654' -H 'Authorization: {% $api.key %}' -H 'Content-Type: application/json'"
+    "code": "curl -X DELETE 'https://{% $api.base_url %}v1/agents/{id}' -H 'Authorization: {% $api.key %}' -H 'Content-Type: application/json'"
   },
   {
     "language": "javascript",
-    "code": "fetch('https://{% $api.base_url %}v1/agents/b5f7c8d9-e0a1-4b2c-9d3e-fedcba987654', {\n  method: 'DELETE',\n  headers: {\n    'Authorization': '{% $api.key %}',\n    'Content-Type': 'application/json'\n  }\n})"
+    "code": "fetch('https://{% $api.base_url %}v1/agents/{id}', {\n  method: 'DELETE',\n  headers: {\n    'Authorization': '{% $api.key %}',\n    'Content-Type': 'application/json'\n  }\n})"
   }
 ]
 ```
@@ -57,35 +57,86 @@ The Delete Agent endpoint allows you to remove an AI agent from your account. Th
 {% response status="200" hasDropdown="false" title="Response" %}
 ```json
 {
-  "status": "success",
-  "message": "Agent deleted successfully."
+    "message": "Agent and its knowledge folder deleted successfully",
+    "subscription": {
+        "planName": "EU Sovereign",
+        "planId": "36",
+        "started_at": "2026-02-18T08:16:03+00:00",
+        "ended_at": "2026-03-18T08:16:03+00:00",
+        "cancelled_at": null,
+        "failed_at": null
+    },
+    "features": {
+        "WHITE_LABELING": false,
+        "PREMIUM_MODELS": false,
+        "AUTO_TICKET_RESPONSE": true,
+        "ADD_ON_AGENT": false,
+        "EMAIL_HANDOFF": true,
+        "AGENT_HANDOFF": true,
+        "INTEGRATION_HANDOFF": true
+    },
+    "status": "success",
+    "permissions": [
+        "MANAGE_ADMIN",
+        "MANAGE_SETTINGS",
+        "VIEW_AGENTS",
+        "MANAGE_API_KEY",
+        "MANAGE_INTEGRATIONS",
+        "VIEW_KNOWLEDGE",
+        "MANAGE_AGENTS",
+        "VIEW_SETTINGS",
+        "MANAGE_BILLING",
+        "TRAIN_AGENT",
+        "CONFIGURE_BUSINESS",
+        "MANAGE_USERS",
+        "SEND_INVITE",
+        "VIEW_USERS",
+        "VIEW_ANALYTICS",
+        "VIEW_CHAT",
+        "VIEW_BILLING",
+        "MANAGE_KNOWLEDGE",
+        "MANAGE_CHAT",
+        "VIEW_INTEGRATIONS"
+    ]
 }
 ```
 {% /response %}
 
 ## Error Responses
 
-##### 401 Unauthorized
+##### 401
 ```json
 {
-  "error": {
-    "code": "authentication_required",
-    "message": "Authentication failed.",
-    "status": 401,
-    "fields": []
-  }
+    "message": "Invalid or inactive API key.",
+    "status": "error",
+    "error": {
+        "code": "error",
+        "message": "Invalid or inactive API key.",
+        "status": 403,
+        "fields": {
+            "general": [
+                "Invalid or inactive API key."
+            ]
+        }
+    }
 }
 ```
 
-##### 404 Not Found
+##### 404
 ```json
 {
-  "error": {
-    "code": "NOT_FOUND",
-    "message": "Agent not found.",
-    "status": 404,
-    "fields": []
-  }
+    "message": "Agent not found.",
+    "status": "error",
+    "error": {
+        "code": "agent_not_found",
+        "message": "Agent not found.",
+        "status": 404,
+        "fields": {
+            "general": [
+                "Agent not found."
+            ]
+        }
+    }
 }
 ```
 

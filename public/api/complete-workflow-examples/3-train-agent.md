@@ -19,11 +19,11 @@ Call [Retrain Agent](/api/agent-training/retrain-agent) with the agent `id`. Thi
 [
   {
     "language": "curl",
-    "code": "curl -X POST 'https://{% $api.base_url %}v1/agents/b5f7c8d9-e0a1-4b2c-9d3e-fedcba987654/retrain' -H 'Authorization: {% $api.key %}' -H 'Content-Type: application/json'"
+    "code": "curl -X POST 'https://{% $api.base_url %}v1/agents/{id}/retrain' -H 'Authorization: {% $api.key %}' -H 'Content-Type: application/json'"
   },
   {
     "language": "javascript",
-    "code": "await fetch('https://{% $api.base_url %}v1/agents/b5f7c8d9-e0a1-4b2c-9d3e-fedcba987654/retrain', {\n  method: 'POST',\n  headers: {\n    'Authorization': '{% $api.key %}',\n    'Content-Type': 'application/json'\n  }\n});"
+    "code": "await fetch('https://{% $api.base_url %}v1/agents/{id}/retrain', {\n  method: 'POST',\n  headers: {\n    'Authorization': '{% $api.key %}',\n    'Content-Type': 'application/json'\n  }\n});"
   }
 ]
 ```
@@ -34,7 +34,7 @@ Call [Retrain Agent](/api/agent-training/retrain-agent) with the agent `id`. Thi
 {
   "message": "Agent retraining started.",
   "data": {
-    "agent_id": "b5f7c8d9-e0a1-4b2c-9d3e-fedcba987654",
+    "agent_id": "{id}",
     "task_id": "celery-task-a1b2c3d4-e5f6-7890-abcd-ef1234567890",
     "status": "Training"
   },

@@ -57,7 +57,7 @@ Build custom chat experiences, automate customer interactions, and manage your A
 
 1. Open the [7en Dashboard](https://app.7en.ai) and select your agent
 2. Go to **Settings** → **General**
-3. Copy the **Agent ID** (UUID format)
+3. Copy the **Agent ID** (int format)
 
 ### 3. Connect via WebSocket
 
