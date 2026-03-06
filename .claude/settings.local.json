@@ -3,7 +3,8 @@
     "allow": [
       "Bash(xargs grep -l \"Agent Operations\\\\|Agent Training\\\\|Knowledge Source Operations\")",
       "Bash(xargs grep -l \"sidebar\\\\|navigation\\\\|nav\")",
-      "WebFetch(domain:www.chatbase.co)"
+      "WebFetch(domain:www.chatbase.co)",
+      "WebFetch(domain:docs.ada.cx)"
     ]
   }
 }

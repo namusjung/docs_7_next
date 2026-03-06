@@ -10,73 +10,151 @@ breadcrumb_chain:
 
 # Authentication
 
-All 7en API endpoints require authentication via an API key. Requests without a valid key are rejected with a `401 Unauthorized` response.
+The 7en API uses API key authentication. Keys grant read and write access across all available APIs in your workspace. You can create and maintain multiple active keys simultaneously to support seamless rotation.
 
 ---
 
-## Obtaining an API Key
+{% section id="api-key" title="Generate an API Key" %}
 
 1. Log in to the [7en Dashboard](https://app.7en.ai)
 2. Navigate to **Settings** → **API Keys**
+![API Keys](/img/quick-start/api-key.png)
 3. Click **Create API Key**
-4. Copy and store the key securely — it will not be shown again
+![Create API Key](/img/quick-start/create-api-key.png)
+4. Then copy and store it securely
+![Save API Key](/img/quick-start/save-api-key.png)
 
-> **Keep your API key secret.** It grants full access to your workspace. Never expose it in client-side code, browser requests, public repositories, or `.env` files committed to version control.
+{% /section %}
+
+{% callout type="warning" title="Attention" %}
+Your API key is displayed once at creation. If you lose access to it, you will need to create a new one. Keep your key secret — it grants full access to your workspace.
+{% /callout %}
+
 
 ---
 
-## Using Your API Key
+{% section id="refresh-api-key" title="Refresh an API Key" %}
 
-Include your API key in the `Authorization` header of every request:
+If your API key is compromised or you need to rotate it, you can refresh it. A new key will be generated and the old key will be invalidated.
 
-```
-Authorization: Api-Key YOUR_API_KEY
-```
+1. Click refresh button in the **Actions** column. 
+![Refresh button](/img/quick-start/refresh-button.png)
+2. Set expiration and refresh the API Key
+![Refresh API Key](/img/quick-start/refresh-api-key.png)
 
-### Example
+{% /section %}
 
-{% request title="Authenticated request" %}
+---
+
+{% section id="delete-api-key" title="Delete an API Key" %}
+
+If your API key is compromised or you need to revoke it, you can delete it. A new key will be generated and the old key will be invalidated.
+
+1. Click delete button in the **Actions** column. 
+![Delete button](/img/quick-start/refresh-button.png)
+2. Confirm deletion
+![Delete API Key](/img/quick-start/delete-key.png)
+
+{% /section %}
+
+---
+
+{% section id="authenticate" title="Authenticate your requests" %}
+
+To authenticate your requests, you have to send your API key in the `Authorization` header in all requests to the API. Without it, your requests will fail.
+
+### Example of request
+
 ```json
-[
-  {
-    "language": "curl",
-    "code": "curl -X GET 'https://{% $api.base_url %}v1/agents/' \\\n  -H 'Authorization: {% $api.key %}' \\\n  -H 'Content-Type: application/json'"
-  },
-  {
-    "language": "javascript",
-    "code": "const res = await fetch('https://{% $api.base_url %}v1/agents/', {\n  method: 'GET',\n  headers: {\n    'Authorization': '{% $api.key %}',\n    'Content-Type': 'application/json'\n  }\n});"
-  },
-  {
-    "language": "python",
-    "code": "import requests\n\nresponse = requests.get(\n    'https://{% $api.base_url %}v1/agents/',\n    headers={\n        'Authorization': '{% $api.key %}',\n        'Content-Type': 'application/json'\n    }\n)"
-  }
-]
+
+curl --location '{base_url}/api/v1/agents/' \
+--header 'Authorization: Api-Key {YOUR_API_TOKEN}'
+
 ```
-{% /request %}
+
+### Error Responses
+
+| Status | Description |
+|--------|-------------|
+| `401` | Invalid or missing Authorization header |
+| `429` | API key expired |
+| `403` | Missing, invalid, or revoked API key |
+| `500` | Rate limit exceeded |
 
 
-## Error Responses
 
-##### 403 Unauthorized — Missing or invalid or expired API key
+
 ```json
+//If the authorization header is missing
 {
-    "message": "Invalid or inactive API key.",
+    "message": "No or missing Authorization header.",
+    "status": "error",
+    "error": {
+        "code": "missing_authorization_header",
+        "message": "No or missing Authorization header.",
+        "status": 401,
+        "fields": {
+            "general": [
+                "No or missing Authorization header."
+            ]
+        }
+    }
+}
+
+//If the API key is expired
+{
+    "message": "API key expired.",
+    "status": "error",
+    "error": {
+        "code": "api_key_expired",
+        "message": "API key expired.",
+        "status": 429,
+        "fields": {
+            "api_key": [
+                "This API key has expired."
+            ]
+        }
+    }
+}
+
+//If the API key is invalid or inactive
+{
+    "message": "Invalid or inactive API key.",
+    "status": "error",
+    "error": {
+        "code": "invalid_or_inactive_api_key",
+        "message": "Invalid or inactive API key.",
+        "status": 403,
+        "fields": {
+            "general": [
+                "Invalid or inactive API key."
+            ]
+        }
+    }
+}
+
+//If the API rate limit is exceeded
+{
+    "message": "An unexpected error occurred",
     "status": "error",
     "error": {
-        "code": "error",
-        "message": "Invalid or inactive API key.",
-        "status": 403,
+        "code": "server_error",
+        "message": "An unexpected error occurred",
+        "status": 500,
         "fields": {
             "general": [
-                "Invalid or inactive API key."
+                "Rate limit exceeded: 500 requests per day."
             ]
         }
     }
 }
 ```
+{% /section %}
+---
 
 ## Security Best Practices
 
 - **Never hardcode keys** in source code. Use environment variables or a secrets manager.
 - **Rotate keys regularly** — especially after any suspected exposure.
-- **Use separate keys** per environment (development, staging, production) so you can revoke one without affecting others.
+- **Limit key scope** — use separate keys per environment (development, staging, production) so you can revoke one without affecting others.
+- **Never expose keys client-side** — do not include API keys in browser requests, public repositories, or `.env` files committed to version control.

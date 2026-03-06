@@ -1,11 +1,11 @@
 ---
 type: api
-title: List Knowledge Sources for Agent
+title: List Knowledge Sources
 endpoint: GET api/v1/knowledge-source/?agent_id={agent ID}
 order: 3
 ---
 
-# List Knowledge Sources for Agent
+# List Knowledge Sources
 
 Retrieve the knowledge folder and all associated knowledge sources for a specific agent.
 

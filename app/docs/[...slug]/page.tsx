@@ -84,7 +84,7 @@ export default async function DocPage({ params }: { params: Params }) {
     return (
       <>
         <MobileNav groupedNav={groupedNav} currentSlug={params.slug} basePath="/docs" />
-        <div className="container grid grid-cols-1 lg:grid-cols-[240px_minmax(0,1fr)_200px] gap-8 py-10">
+        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[280px_minmax(0,1fr)_200px] gap-8 py-10">
           <aside className="hidden lg:block">
           <nav className="sticky top-24 space-y-4">
             {groupedNav.map((group) => (

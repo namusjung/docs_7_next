@@ -11,7 +11,7 @@ export default function SiteHeader() {
   const { theme, setTheme } = useTheme();
   return (
     <header className="fixed top-0 left-0 right-0 z-40 border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container h-14 flex items-center justify-between">
+      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
         <div className="flex items-center gap-6">
           <Link href="/" className="font-heading font-semibold">
           <Image 
