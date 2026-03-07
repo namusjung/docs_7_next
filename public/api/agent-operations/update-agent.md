@@ -1,21 +1,47 @@
 ---
 type: api
 title: Update Agent
+endpoint: PATCH api/$api.version/agents/{id}
 order: 4
+breadcrumb_chain:
+  - { label: "Home", href: "/" }
+  - { label: "Agent Operations", href: "/api/agent-operations/create-agent" }
+  - { label: "Update Agent" }
 ---
 
 # Update Agent
 
-Update an existing agent's configuration. Two methods are supported depending on whether you want to replace the full configuration or change only specific fields.
+## Overview
 
-| Method | Endpoint | Behaviour |
-|---|---|---|
-| `PUT` | `/$api.version/agents/{id}` | Full replacement — omitted fields reset to defaults |
-| `PATCH` | `/$api.version/agents/{id}` | Partial update — only provided fields are changed |
+Update an existing agent's configuration. 
 
----
+{% parameter-list title="Request Header" %}
+```
+[
+  {
+    "name": "Authorization",
+    "type": "api key",
+    "description": "Your 7en API key. Example: Api-Key 43NKLN3LKN4nlkn"
+  }
+]
+```
+{% /parameter-list %}
 
-## PUT/PATCH — Update
+## Path Parameters
+
+{% parameter-list title="Parameter" %}
+```
+[
+  {
+    "name": "id",
+    "type": "int",
+    "description": "Unique identifier of the agent to retrieve. Example: \"34\""
+  }
+]
+```
+{% /parameter-list %}
+
+## Request
 
 {% parameter-list title="Request Body" %}
 ```
@@ -57,19 +83,7 @@ Update an existing agent's configuration. Two methods are supported depending on
 ```
 {% /parameter-list %}
 
-{% parameter-list title="Request Header" %}
-```
-[
-  {
-    "name": "Authorization",
-    "type": "api key",
-    "description": "Your 7en API key. Example: Api-Key 43NKLN3LKN4nlkn"
-  }
-]
-```
-{% /parameter-list %}
-
-{% request title="PUT — Full Update" %}
+{% request title="Request" %}
 ```json
 [
   {
@@ -197,11 +211,6 @@ Update an existing agent's configuration. Two methods are supported depending on
 ```
 {% /response %}
 
----
-
-
-
----
 
 ## Error Responses
 
@@ -242,10 +251,4 @@ Update an existing agent's configuration. Two methods are supported depending on
 }
 
 ```
-
-## Best Practices
-
-- **Use PATCH for most updates** — it is safer since only fields you provide are touched.
-- **Use PUT when replacing entirely** — include all required fields to avoid unintentional resets.
-- **Test after updating** — verify the agent behaves as expected, especially after changing `systemPrompt` or `model`.
 

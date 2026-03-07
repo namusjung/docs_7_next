@@ -4,6 +4,7 @@ import Providers from "@/components/Providers";
 import { Viewport } from "next";
 import SiteHeader from "@/components/ui/SiteHeader";
 import { MobileNavProvider } from "@/components/docs/MobileNavContext";
+import { getSearchIndex } from "@/lib/docs-utils";
 
 
 export const metadata = {
@@ -43,17 +44,19 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
+  const searchIndex = getSearchIndex();
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link href="https://fonts.googleapis.com/css2?family=Fugaz+One&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"/>
-        <link rel="icon" type="image/x-icon" href="/img/logo.ico" media="(prefers-color-scheme: dark)"/>
-        <link rel="icon" type="image/x-icon" href="/img/logo-black.ico" media="(prefers-color-scheme: light)"/>
+        <link href="https://fonts.googleapis.com/css2?family=Fugaz+One&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+        <link rel="icon" type="image/x-icon" href="/img/logo.ico" media="(prefers-color-scheme: dark)" />
+        <link rel="icon" type="image/x-icon" href="/img/logo-black.ico" media="(prefers-color-scheme: light)" />
       </head>
       <body className="min-h-screen" suppressHydrationWarning>
         <Providers>
           <MobileNavProvider>
-            <SiteHeader />
+            <SiteHeader searchItems={searchIndex} />
             {children}
           </MobileNavProvider>
         </Providers>
@@ -61,5 +64,3 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     </html>
   );
 }
-
-

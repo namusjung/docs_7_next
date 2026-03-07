@@ -1,17 +1,30 @@
 ---
 type: api
 title: Delete Agent
-endpoint: DELETE /$api.version/agents/{id}
+endpoint: DELETE api/$api.version/agents/{id}
 order: 5
+breadcrumb_chain:
+  - { label: "Home", href: "/" }
+  - { label: "Agent Operations", href: "/api/agent-operations/create-agent" }
+  - { label: "Delete Agent" }
 ---
-
 # Delete Agent
-
-Delete an existing AI agent by its ID.
 
 ## Overview
 
 The Delete Agent endpoint allows you to remove an AI agent from your account. This action is irreversible, so ensure the agent is no longer needed before deleting.
+
+{% parameter-list title="Request Header" %}
+```
+[
+  {
+    "name": "Authorization",
+    "type": "api key",
+    "description": "Your 7en API key. Example: Api-Key 43NKLN3LKN4nlkn"
+  }
+]
+```
+{% /parameter-list %}
 
 ## Parameters
 
@@ -27,28 +40,16 @@ The Delete Agent endpoint allows you to remove an AI agent from your account. Th
 ```
 {% /parameter-list %}
 
-{% parameter-list title="Request Header" %}
-```
-[
-  {
-    "name": "Authorization",
-    "type": "api key",
-    "description": "Api key generated from 7en.i platform. Example: Api-Key 43NKLN3LKN4nlkn"
-  }
-]
-```
-{% /parameter-list %}
-
 {% request title="Delete Agent" %}
 ```json
 [
   {
     "language": "curl",
-    "code": "curl -X DELETE 'https://{% $api.base_url %}v1/agents/{id}' -H 'Authorization: {% $api.key %}' -H 'Content-Type: application/json'"
+    "code": "curl -X DELETE 'https://{% $api.base_url %}/api/v1/agents/{id}' -H 'Authorization: {% $api.key %}' -H 'Content-Type: application/json'"
   },
   {
     "language": "javascript",
-    "code": "fetch('https://{% $api.base_url %}v1/agents/{id}', {\n  method: 'DELETE',\n  headers: {\n    'Authorization': '{% $api.key %}',\n    'Content-Type': 'application/json'\n  }\n})"
+    "code": "fetch('https://{% $api.base_url %}/api/v1/agents/{id}', {\n  method: 'DELETE',\n  headers: {\n    'Authorization': '{% $api.key %}',\n    'Content-Type': 'application/json'\n  }\n})"
   }
 ]
 ```

@@ -3,6 +3,7 @@ import path from "node:path";
 import * as Markdoc from "@markdoc/markdoc";
 import { config, Frontmatter } from "@/lib/markdoc.config";
 import yaml from 'js-yaml';
+import { cache } from "react";
 
 export type DocPage = {
   slug: string[];
@@ -106,7 +107,14 @@ function sortNavItems(items: NavItem[]) {
   });
 }
 
-export function getDocsNav(): GroupedNav {
+// Cache for the entire process lifetime (or until restart)
+let docsNavCache: GroupedNav | null = null;
+let apiNavCache: NavItem[] | null = null;
+let apiGroupedNavCache: GroupedNav | null = null;
+
+export const getDocsNav = cache((): GroupedNav => {
+  if (docsNavCache) return docsNavCache;
+
   const folders = getOrderedFolders(DOCS_DIR);
   const groups: GroupedNav = [];
 
@@ -122,15 +130,18 @@ export function getDocsNav(): GroupedNav {
     });
   }
 
+  docsNavCache = groups;
   return groups;
-}
+});
 
 export function getDocsNavFlat(groups?: GroupedNav): NavItem[] {
   const source = groups ?? getDocsNav();
   return source.flatMap((group) => group.items);
 }
 
-export function getApiNav(): NavItem[] {
+export const getApiNav = cache((): NavItem[] => {
+  if (apiNavCache) return apiNavCache;
+
   const folders = getOrderedFolders(API_DIR);
   const allItems: NavItem[] = [];
   for (const folder of folders) {
@@ -140,12 +151,16 @@ export function getApiNav(): NavItem[] {
     items.sort((a, b) => (a.frontmatter.order ?? 999) - (b.frontmatter.order ?? 999));
     allItems.push(...items);
   }
+
+  apiNavCache = allItems;
   return allItems;
-}
+});
 
 export type GroupedNav = { section: string; items: NavItem[] }[];
 
-export function getApiGroupedNav(): GroupedNav {
+export const getApiGroupedNav = cache((): GroupedNav => {
+  if (apiGroupedNavCache) return apiGroupedNavCache;
+
   const folders = getOrderedFolders(API_DIR);
   const groups: GroupedNav = [];
   for (const folder of folders) {
@@ -158,8 +173,37 @@ export function getApiGroupedNav(): GroupedNav {
       items,
     });
   }
+  apiGroupedNavCache = groups;
   return groups;
-}
+});
+
+export type SearchItem = { title: string; href: string; section: string; category: 'docs' | 'api' };
+
+export const getSearchIndex = cache((): SearchItem[] => {
+  const docsNav = getDocsNav();
+  const apiNav = getApiGroupedNav();
+
+  const docsItems: SearchItem[] = docsNav.flatMap(group =>
+    group.items.map(item => ({
+      title: item.frontmatter.title || item.slug[item.slug.length - 1],
+      href: `/docs/${item.slug.join("/")}`,
+      section: group.section,
+      category: 'docs' as const
+    }))
+  );
+
+  const apiItems: SearchItem[] = apiNav.flatMap(group =>
+    group.items.map(item => ({
+      title: item.frontmatter.title || item.slug[item.slug.length - 1],
+      href: `/api/${item.slug.join("/")}`,
+      section: group.section,
+      category: 'api' as const
+    }))
+  );
+
+  return [...docsItems, ...apiItems];
+});
+
 
 export type BreadcrumbItem = { name: string; href?: string };
 

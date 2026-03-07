@@ -3,19 +3,34 @@ type: api
 title: List Knowledge Sources
 endpoint: GET api/v1/knowledge-source/?agent_id={agent ID}
 order: 3
+breadcrumb_chain:
+  - { label: "Home", href: "/" }
+  - { label: "Knowledge Sources", href: "/api/knowledge-source-operations/create-knowledge-source" }
+  - { label: "List Knowledge Sources" }
 ---
 
 # List Knowledge Sources
-
-Retrieve the knowledge folder and all associated knowledge sources for a specific agent.
 
 ## Overview
 
 Every agent is automatically assigned a knowledge folder when created. This endpoint returns the folder details along with a list of all knowledge sources linked to the agent. Use this to inspect what data the agent has been trained on.
 
-## Parameters
 
-{% parameter-list title="Query Parameters" %}
+{% parameter-list title="Request Header" %}
+```
+[
+  {
+    "name": "Authorization",
+    "type": "api key",
+    "description": "Your 7en API key. Example: Api-Key 43NKLN3LKN4nlkn"
+  }
+]
+```
+{% /parameter-list %}
+
+## Query Parameters
+
+{% parameter-list title="Parameter" %}
 ```
 [
   {
@@ -27,19 +42,7 @@ Every agent is automatically assigned a knowledge folder when created. This endp
 ```
 {% /parameter-list %}
 
-{% parameter-list title="Request Header" %}
-```
-[
-  {
-    "name": "Authorization",
-    "type": "api key",
-    "description": "Api key generated from 7en.i platform. Example: Api-Key 43NKLN3LKN4nlkn"
-  }
-]
-```
-{% /parameter-list %}
-
-{% request title="List Knowledge Sources for Agent" %}
+{% request title="Request" %}
 ```json
 [
   {
@@ -230,5 +233,5 @@ Every agent is automatically assigned a knowledge folder when created. This endp
 ## Best Practices
 
 - **Training Status**: Check `training_status` on each knowledge source to confirm it is `"Success"` before relying on the agent's responses.
-- **Storage Limits**: Compare `total_training_usage_bytes` against `max_training_usage_bytes` to monitor storage usage.
+- **Training Size Limits**: Compare `total_training_usage_bytes` against `max_training_usage_bytes` to monitor remaining training size.
 

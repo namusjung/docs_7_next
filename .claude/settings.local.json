@@ -4,7 +4,18 @@
       "Bash(xargs grep -l \"Agent Operations\\\\|Agent Training\\\\|Knowledge Source Operations\")",
       "Bash(xargs grep -l \"sidebar\\\\|navigation\\\\|nav\")",
       "WebFetch(domain:www.chatbase.co)",
-      "WebFetch(domain:docs.ada.cx)"
+      "WebFetch(domain:docs.ada.cx)",
+      "Bash(grep -l \"breadcrumb_chain\" d:/7en/Web/docs_7_next/public/api/**/*.md d:/7en/Web/docs_7_next/public/api/*.md)",
+      "Bash(for f in \"d:/7en/Web/docs_7_next/public/api/agent-operations/create-agent.md\" \"d:/7en/Web/docs_7_next/public/api/agent-operations/delete-agent.md\" \"d:/7en/Web/docs_7_next/public/api/agent-operations/get-agent-details.md\" \"d:/7en/Web/docs_7_next/public/api/agent-operations/list-all-agents.md\" \"d:/7en/Web/docs_7_next/public/api/agent-operations/update-agent.md\" \"d:/7en/Web/docs_7_next/public/api/agent-training/train-agent.md\" \"d:/7en/Web/docs_7_next/public/api/agent-training/training-progress.md\" \"d:/7en/Web/docs_7_next/public/api/chat/connect-socket.md\" \"d:/7en/Web/docs_7_next/public/api/knowledge-source-operations/bulk-delete-knowledge-sources.md\" \"d:/7en/Web/docs_7_next/public/api/knowledge-source-operations/create-knowledge-source.md\" \"d:/7en/Web/docs_7_next/public/api/knowledge-source-operations/delete-knowledge-source.md\" \"d:/7en/Web/docs_7_next/public/api/knowledge-source-operations/get-knowledge-source-details.md\" \"d:/7en/Web/docs_7_next/public/api/knowledge-source-operations/list-knowledge-sources.md\")",
+      "Bash(do)",
+      "Bash(echo \"=== $f ===\")",
+      "Read(//d/7en/Web/docs_7_next/**)",
+      "Bash(done)",
+      "Bash(node --version)",
+      "Bash(while read f)",
+      "Bash(if ! grep -q \"breadcrumb_chain\" \"$f\")",
+      "Bash(then echo \"MISSING: $f\")",
+      "Bash(fi)"
     ]
   }
 }

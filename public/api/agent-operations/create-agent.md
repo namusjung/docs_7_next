@@ -1,25 +1,52 @@
 ---
 type: api
 title: Create Agent
-endpoint: POST /$api.version/agents/
+endpoint: POST api/$api.version/agents/
 order: 1
+breadcrumb_chain:
+  - { label: "Home", href: "/" }
+  - { label: "Agent Operations", href: "/api/agent-operations/create-agent" }
+  - { label: "Create Agent" }
 ---
+
+# Create Agent
+
+## Overview
 
 Create a new AI agent with custom configuration. Agents can be set up as chatbots or assistants with tailored prompts, models, and appearance settings.
 
-## Parameters
+{% parameter-list title="Request Header" %}
+```
+[
+  {
+    "name": "Authorization",
+    "type": "api key",
+    "description": "Your 7en API key. Example: Api-Key 43NKLN3LKN4nlkn"
+  },
+  {
+    "name": "Content-Type",
+    "type": "string",
+    "description": "Must be application/json"
+  }
+]
+```
+{% /parameter-list %}
 
-{% parameter-list title="Required Fields" %}
+## Request
+
+{% parameter-list title="Request Body" %}
 ```
 [
   {
     "name": "name",
     "type": "string",
+    "required": true,
     "description": "Display name of the agent. Example: \"Support Bot\""
   },
   {
     "name": "agent_category",
     "type": "string",
+    "required": true,
     "description": "Category of the agent. Accepted values: \"chatbot\", \"assistant\""
   }
 ]
@@ -190,26 +217,8 @@ Create a new AI agent with custom configuration. Agents can be set up as chatbot
 ```
 {% /parameter-list %}
 
-{% parameter-list title="Request Header" %}
-```
-[
-  {
-    "name": "Authorization",
-    "type": "api key",
-    "required": true,
-    "description": "Your 7en API key. Example: Api-Key 43NKLN3LKN4nlkn"
-  },
-  {
-    "name": "Content-Type",
-    "type": "string",
-    "required": true,
-    "description": "Must be application/json"
-  }
-]
-```
-{% /parameter-list %}
 
-{% request title="Minimal request" %}
+{% request title="Request" %}
 ```json
 [
   {
@@ -373,11 +382,6 @@ Create a new AI agent with custom configuration. Agents can be set up as chatbot
 
 - **System prompts**: Be specific and concise. A well-scoped system prompt produces more consistent agent behavior.
 - **Temperature**: Use `0.1–0.3` for factual/support agents, `0.7–1.0` for creative tasks.
-- **Required fields first**: Always include `name`, `agentType`, and `agent_category` — omitting any returns a `400` error.
-- **Retrain after adding knowledge**: Creating an agent does not trigger training. Add knowledge sources and call [Retrain Agent](/api/agent-training/retrain-agent) to activate them.
+- **Required fields first**: Always include `name` and `agent_category` — omitting any returns a `400` error.
+- **Retrain after adding knowledge**: Creating an agent does not trigger training. Add knowledge sources and call [Train Agent](/api/agent-training/train-agent) to activate them.
 
-## Rate Limits
-
-- 100 requests per minute for free tier
-- 1,000 requests per minute for pro tier
-- 10,000 requests per minute for enterprise tier

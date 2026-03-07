@@ -1,21 +1,35 @@
 ---
 type: api
 title: Get Agent Details
-endpoint: GET /$api.version/agents/{id}
+endpoint: GET api/$api.version/agents/{id}
 order: 3
+breadcrumb_chain:
+  - { label: "Home", href: "/" }
+  - { label: "Agent Operations", href: "/api/agent-operations/create-agent" }
+  - { label: "Get Agent Details" }
 ---
 
 # Get Agent Details
-
-Fetch complete details of a single AI agent by its ID.
 
 ## Overview
 
 The Get Agent Details endpoint returns the full configuration object for a specific agent accessible to the authenticated user. This includes appearance settings, behavior configuration, model settings, and associated knowledge sources.
 
-## Parameters
+{% parameter-list title="Request Header" %}
+```
+[
+  {
+    "name": "Authorization",
+    "type": "api key",
+    "description": "Your 7en API key. Example: Api-Key 43NKLN3LKN4nlkn"
+  }
+]
+```
+{% /parameter-list %}
 
-{% parameter-list title="Path Parameters" %}
+## Path Parameters
+
+{% parameter-list title="Parameter" %}
 ```
 [
   {
@@ -27,28 +41,16 @@ The Get Agent Details endpoint returns the full configuration object for a speci
 ```
 {% /parameter-list %}
 
-{% parameter-list title="Request Header" %}
-```
-[
-  {
-    "name": "Authorization",
-    "type": "api key",
-    "description": "Api key generated from 7en.i platform. Example: Api-Key 43NKLN3LKN4nlkn"
-  }
-]
-```
-{% /parameter-list %}
-
-{% request title="Get Agent Details" %}
+{% request title="Request" %}
 ```json
 [
   {
     "language": "curl",
-    "code": "curl -X GET 'https://{% $api.base_url %}v1/agents/{id}' -H 'Authorization: {% $api.key %}' -H 'Content-Type: application/json'"
+    "code": "curl -X GET 'https://{% $api.base_url %}api/v1/agents/{id}' -H 'Authorization: {% $api.key %}' -H 'Content-Type: application/json'"
   },
   {
     "language": "javascript",
-    "code": "fetch('https://{% $api.base_url %}v1/agents/{id}', {\n  method: 'GET',\n  headers: {\n    'Authorization': '{% $api.key %}',\n    'Content-Type': 'application/json'\n  }\n})"
+    "code": "fetch('https://{% $api.base_url %}api/v1/agents/{id}', {\n  method: 'GET',\n  headers: {\n    'Authorization': '{% $api.key %}',\n    'Content-Type': 'application/json'\n  }\n})"
   }
 ]
 ```

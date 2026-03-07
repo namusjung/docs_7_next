@@ -1,21 +1,37 @@
 ---
 type: api
 title: Delete Knowledge Source
-endpoint: DELETE /api/v1/knowledge-source/{{id}}/
+endpoint: DELETE /api/v1/knowledge-source/{id}
 order: 7
+breadcrumb_chain:
+  - { label: "Home", href: "/" }
+  - { label: "Knowledge Sources", href: "/api/knowledge-source-operations/create-knowledge-source" }
+  - { label: "Delete Knowledge Source" }
 ---
 
 # Delete Knowledge Source
 
-Remove a knowledge source from an agent's knowledge folder.
-
 ## Overview
 
-Performs a **soft delete** — the knowledge source is marked as `Deleted` but is not permanently removed. After deletion, [retrain the agent](/api/agent-training/retrain-agent) to remove the deleted source from the vector index.
+Remove a knowledge source from an agent's knowledge folder.
+It only performs a **soft delete** — the knowledge source is marked as `Deleted` but is not permanently removed. After deletion, [train the agent](/api/agent-training/train-agent) to remove the deleted source from the vector database.
 
-## Parameters
 
-{% parameter-list title="Path Parameters" %}
+{% parameter-list title="Request Header" %}
+```
+[
+  {
+    "name": "Authorization",
+    "type": "api key",
+    "description": "Your 7en API key. Example: Api-Key 43NKLN3LKN4nlkn"
+  }
+]
+```
+{% /parameter-list %}
+
+## Path Parameters
+
+{% parameter-list title="Parameters" %}
 ```
 [
   {
@@ -27,19 +43,7 @@ Performs a **soft delete** — the knowledge source is marked as `Deleted` but i
 ```
 {% /parameter-list %}
 
-{% parameter-list title="Request Header" %}
-```
-[
-  {
-    "name": "Authorization",
-    "type": "api key",
-    "description": "Api key generated from 7en.i platform. Example: Api-Key 43NKLN3LKN4nlkn"
-  }
-]
-```
-{% /parameter-list %}
-
-{% request title="Delete Knowledge Source" %}
+{% request title="Request" %}
 ```json
 [
   {
@@ -115,5 +119,5 @@ Performs a **soft delete** — the knowledge source is marked as `Deleted` but i
 
 ## Best Practices
 
-- **Retrain after deletion**: The agent will continue using a deleted source until retrained. Call [Retrain Agent](/api/agent-training/retrain-agent) after deleting sources.
+- **Train after deletion**: The agent will continue using a deleted source until retrained. Call [Train Agent](/api/agent-training/train-agent) after deleting sources.
 - **Bulk delete**: To delete multiple sources at once, use [Bulk Delete Knowledge Sources](/api/knowledge-source-operations/bulk-delete-knowledge-sources).

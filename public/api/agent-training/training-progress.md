@@ -1,8 +1,12 @@
 ---
 type: api
 title: Training Progress
-endpoint: SSE /api/v1/agents/{{Agent ID}}/train-agent-sse/
+endpoint: SSE /api/v1/agents/{agent_id}/train-agent-sse/
 order: 1
+breadcrumb_chain:
+  - { label: "Home", href: "/" }
+  - { label: "Agent Training", href: "/api/agent-training/train-agent" }
+  - { label: "Training Progress" }
 ---
 
 ## Training Progress via SSE
@@ -14,7 +18,7 @@ Connect to the SSE endpoint with a long-lived `GET` request to receive push upda
 ### How to Subscribe
 
 1. Obtain an API key with permission to read the target agent.
-2. Replace `{{Agent ID}}` with the numeric ID from the training request.
+2. Replace `{agent_id}` with the numeric ID from the training request.
 3. Keep the HTTP connection open to continuously stream events until `training_completed` or `training_failed` is received.
 
 {% request title="Subscribe to Training Progress" %}

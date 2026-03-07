@@ -1,10 +1,18 @@
 ---
 type: api
 title: "Chat Socket"
-endpoint: WSS /ws/api/chat/{{agent_id}}/?api_key={{API Key}}
+endpoint: WSS /ws/api/chat/{agent_id}/?api_key={API Key}
 order: 1
+breadcrumb_chain:
+  - { label: "Home", href: "/" }
+  - { label: "Chat", href: "/api/chat/connect-socket" }
+  - { label: "Chat Socket" }
 ---
 # Chat Web Socket
+
+## Overview
+
+Connect to the 7en chat WebSocket to enable real-time messaging with your agent. This endpoint provides a persistent connection for sending user messages and receiving agent responses, including streaming text and structured events.
 
 ## Parameters
 
@@ -14,19 +22,19 @@ order: 1
   {
     "name": "api_key",
     "type": "string",
-    "description": "Your api key. Example: \"453jb45b3k5wm435\""
+    "description": "Your 7en API key. Example: Api-Key 43NKLN3LKN4nlkn"
   }
 ]
 ```
 {% /parameter-list %}
 
-{% parameter-list title="Path parameters" %}
+{% parameter-list title="Path Parameters" %}
 ```
 [
   {
     "name": "agent_id",
     "type": "string",
-    "description": "Your api key. Example: \"453\""
+    "description": "Unique identifier of the agent. Example: \"453\""
   }
 ]
 ```

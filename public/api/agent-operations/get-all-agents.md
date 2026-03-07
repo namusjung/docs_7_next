@@ -1,19 +1,19 @@
 ---
 type: api
-title: List All Agents
-endpoint: GET /$api.version/agents/
+title: Get All Agents
+endpoint: GET api/$api.version/agents/
 order: 2
+breadcrumb_chain:
+  - { label: "Home", href: "/" }
+  - { label: "Agent Operations", href: "/api/agent-operations/create-agent" }
+  - { label: "Get All Agents" }
 ---
 
-# List All Agents
-
-Retrieve a list of all AI agents associated with the authenticated user.
+# Get All Agents
 
 ## Overview
 
-The List All Agents endpoint allows you to fetch all agents created by the user, including their configurations and metadata. This is useful for managing and reviewing all agents in your account.
-
-## Parameters
+The Get All Agents endpoint allows you to fetch all agents created by the user, including their configurations and metadata. This is useful for managing and reviewing all agents in your account.
 
 {% parameter-list title="Request Header" %}
 ```
@@ -21,22 +21,22 @@ The List All Agents endpoint allows you to fetch all agents created by the user,
   {
     "name": "Authorization",
     "type": "api key",
-    "description": "Api key generated from 7en.i platform. Example: Api-Key 43NKLN3LKN4nlkn"
+    "description": "Your 7en API key. Example: Api-Key 43NKLN3LKN4nlkn"
   }
 ]
 ```
 {% /parameter-list %}
 
-{% request title="List Agents" %}
+{% request title="Request" %}
 ```json
 [
   {
     "language": "curl",
-    "code": "curl -X GET 'https://{% $api.base_url %}v1/agents/' -H 'Authorization: {% $api.key %}'\\ -H 'Content-Type: application/json'"
+    "code": "curl -X GET 'https://{% $api.base_url %}api/v1/agents/' -H 'Authorization: {% $api.key %}'\\ -H 'Content-Type: application/json'"
   },
   {
     "language": "javascript",
-    "code": "fetch('https://{% $api.base_url %}v1/agents/', {\n  method: 'GET',\n  headers: {\n    'Authorization': '{% $api.key %}',\n    'Content-Type': 'application/json'\n  },\n})"
+    "code": "fetch('https://{% $api.base_url %}api/v1/agents/', {\n  method: 'GET',\n  headers: {\n    'Authorization': '{% $api.key %}',\n    'Content-Type': 'application/json'\n  },\n})"
   }
 ]
 ```

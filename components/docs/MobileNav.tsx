@@ -84,6 +84,31 @@ export default function MobileNav({ groupedNav, currentSlug, basePath }: MobileN
         </div>
 
         <nav className="p-4 space-y-6">
+          {/* Top-level sections for mobile */}
+          <div className="space-y-1 mb-6 border-b border-border pb-6">
+            <Link
+              href="/"
+              onClick={handleLinkClick}
+              className="flex items-center gap-3 text-[13px] px-4 py-2 font-medium text-foreground/70 hover:bg-muted/10 rounded-lg transition-colors"
+            >
+              Home
+            </Link>
+            <Link
+              href="/docs/getting-started/introduction"
+              onClick={handleLinkClick}
+              className="flex items-center gap-3 text-[13px] px-4 py-2 font-medium text-foreground/70 hover:bg-muted/10 rounded-lg transition-colors"
+            >
+              Docs
+            </Link>
+            <Link
+              href="/api/api-reference/introduction"
+              onClick={handleLinkClick}
+              className="flex items-center gap-3 text-[13px] px-4 py-2 font-medium text-foreground/70 hover:bg-muted/10 rounded-lg transition-colors"
+            >
+              API Reference
+            </Link>
+          </div>
+
           {groupedNav.map((group) => (
             <div key={group.section}>
               <p className="text-xs uppercase tracking-wide !text-gray-600/40 dark:!text-gray-200 mb-3">

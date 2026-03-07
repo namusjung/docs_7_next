@@ -3,91 +3,18 @@ type: api
 title: Create Knowledge Source
 endpoint: POST /api/v1/knowledge-source/
 order: 1
+breadcrumb_chain:
+  - { label: "Home", href: "/" }
+  - { label: "Knowledge Sources", href: "/api/knowledge-source-operations/create-knowledge-source" }
+  - { label: "Create Knowledge Source" }
 ---
 
 # Create Knowledge Source
 
-Add a new knowledge source to an agent's knowledge folder.
-
 ## Overview
 
-The Create Knowledge Source endpoint ingests content into an agent's knowledge base. Exactly **one** of `urls`, `file`, `plain_text`, or `google_drive_file_id` must be provided per request. After creation, the source enters `Pending` status and is queued for ingestion.
+The Create Knowledge Source endpoint ingests content into an agent's knowledge base. Exactly **one** of `urls`, `file` or `plain_text` must be provided per request. After creation, the source enters `Pending` status and is queued for ingestion.
 
-## Source Types
-
-| Type | Field | Accepted Formats |
-|---|---|---|
-| URL scraping | `urls` | Array of HTTP/HTTPS URLs |
-| File upload | `file` | PDF, DOCX, TXT, CSV, XLSX — max 10 MB |
-| Plain text | `plain_text` | Free-form string |
-| Google Drive | `google_drive_file_id` | Google Drive file ID (requires linked account) |
-
-## Parameters
-{% parameter-list title="Request Body — Plain Text" %}
-```
-[
-  {
-    "name": "agent_id",
-    "type": "int",
-    "description": "ID of specific agent. example: `42`"
-  },
-  {
-    "name": "title",
-    "type": "string",
-    "description": "Title of knowledge source. example: `FAQ document`"
-  },
-  {
-    "name": "plain_text",
-    "type": "string",
-    "description": "Text content for knowledge source. example: `This is knowledge document`"
-  }
-]
-```
-{% /parameter-list %}
-
-{% parameter-list title="Request Body — URL Scraping" %}
-```
-[
-    {
-    "name": "agent_id",
-    "type": "int",
-    "description": "ID of specific agent. example: `42`"
-  },
-  {
-    "name": "urls",
-    "type": "array of string",
-    "description": "List of URLs to scrape and ingest. Example: [\"https://help.acme.com/\", \"https://help.acme.com/faq\"]"
-  },
-  {
-    "name": "title",
-    "type": "string",
-    "description": "Human-readable label for the knowledge source. Example: \"Help Center\""
-  }
-]
-```
-{% /parameter-list %}
-
-{% parameter-list title="Request Body — File Upload (multipart/form-data)" %}
-```
-[
-    {
-    "name": "agent_id",
-    "type": "int",
-    "description": "ID of specific agent. example: `42`"
-  },
-  {
-    "name": "file",
-    "type": "file",
-    "description": "Binary file to upload. Supported formats: PDF, DOCX, TXT, CSV, XLSX. Max size: 10 MB. per upload."
-  },
-  {
-    "name": "title",
-    "type": "string",
-    "description": "Human-readable label for the knowledge source. Example: \"Product Manual v3\""
-  }
-]
-```
-{% /parameter-list %}
 
 {% parameter-list title="Request Header" %}
 ```
@@ -95,7 +22,7 @@ The Create Knowledge Source endpoint ingests content into an agent's knowledge b
   {
     "name": "Authorization",
     "type": "api key",
-    "description": "Api key generated from 7en.i platform. Example: Api-Key 43NKLN3LKN4nlkn"
+    "description": "Your 7en API key. Example: Api-Key 43NKLN3LKN4nlkn"
   },
   {
     "name": "Content-Type",
@@ -106,7 +33,93 @@ The Create Knowledge Source endpoint ingests content into an agent's knowledge b
 ```
 {% /parameter-list %}
 
-{% request title="Create via URL" %}
+## Source Types
+
+| Type | Field | Accepted Formats |
+|---|---|---|
+| URL | `urls` | Array of HTTP/HTTPS URLs |
+| File upload | `file` | PDF, DOCX, TXT, CSV, XLSX |
+| Plain text | `plain_text` | Free-form string |
+
+## Request
+
+{% parameter-list title="Request Body — Plain Text" %}
+```
+[
+  {
+    "name": "agent_id",
+    "type": "int",
+    "required": true,
+    "description": "ID of specific agent. example: `42`"
+  },
+  {
+    "name": "title",
+    "type": "string",
+    "required": true,
+    "description": "Title of knowledge source. example: `FAQ document`"
+  },
+  {
+    "name": "plain_text",
+    "type": "string",
+    "required": true,
+    "description": "Text content for knowledge source. example: `This is knowledge document`"
+  }
+]
+```
+{% /parameter-list %}
+
+{% parameter-list title="Request Body — URL" %}
+```
+[
+    {
+    "name": "agent_id",
+    "type": "int",
+    "required": true,
+    "description": "ID of specific agent. example: `42`"
+  },
+  {
+    "name": "urls",
+    "type": "array of string",
+    "required": true,
+    "description": "List of URLs to scrape and ingest. Example: [\"https://help.acme.com/\", \"https://help.acme.com/faq\"]"
+  },
+  {
+    "name": "title",
+    "type": "string",
+    "required": true,
+    "description": "Human-readable label for the knowledge source. Example: \"Help Center\""
+  }
+]
+```
+{% /parameter-list %}
+
+{% parameter-list title="Request Body — File (multipart/form-data)" %}
+```
+[
+    {
+    "name": "agent_id",
+    "type": "int",
+    "required": true,
+    "description": "ID of specific agent. example: `42`"
+  },
+  {
+    "name": "file",
+    "type": "file",
+    "required": true,
+    "description": "Binary file to upload. Supported formats: PDF, DOCX, TXT, CSV, XLSX. Max size: 10 MB. per upload."
+  },
+  {
+    "name": "title",
+    "type": "string",
+    "required": true,
+    "description": "Human-readable label for the knowledge source. Example: \"Product Manual v3\""
+  }
+]
+```
+{% /parameter-list %}
+
+
+{% request title="Request" %}
 ```json
 [
   {

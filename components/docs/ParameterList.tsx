@@ -26,6 +26,8 @@ interface Parameter {
   name: string;
   type: string;
   description: string;
+  required?: boolean;
+  optional?: boolean;
   children?: Parameter[];
 }
 
@@ -65,6 +67,8 @@ function parseJSONParameters(content: string): Parameter[] {
         typeof param.name === 'string' &&
         typeof param.type === 'string' &&
         typeof param.description === 'string' &&
+        (param.required === undefined || typeof param.required === 'boolean') &&
+        (param.optional === undefined || typeof param.optional === 'boolean') &&
         (param.children === undefined || Array.isArray(param.children))
       );
     };
@@ -125,15 +129,15 @@ const NestedParameterItem: React.FC<NestedParameterItemProps> = ({ parameter, le
         {!hasChildren && <div className="w-8 mr-2 flex-shrink-0" />}
         
         <div className="flex-1 py-3 min-w-0">
-          <div className="flex items-center gap-2 mb-1">
+          <div className="flex items-center gap-2 mb-1 flex-wrap">
             <h4 className="!text-sm !m-0 !p-0 font-mono">
               <strong className={`font-semibold ${level === 0 ? 'text-foreground' : 'text-foreground/90'}`}>
                 {parameter.name}
               </strong>
             </h4>
             <code className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-mono bg-muted/60 border border-border/30 ${
-              parameter.type === 'object' 
-                ? 'text-purple-600 dark:text-purple-400' 
+              parameter.type === 'object'
+                ? 'text-purple-600 dark:text-purple-400'
                 : parameter.type === 'string'
                 ? 'text-blue-600 dark:text-blue-400'
                 : parameter.type === 'number' || parameter.type === 'integer'
@@ -144,6 +148,16 @@ const NestedParameterItem: React.FC<NestedParameterItemProps> = ({ parameter, le
             }`}>
               {parameter.type}
             </code>
+            {parameter.required && (
+              <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-mono bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-800/50 text-red-600 dark:text-red-400">
+                required
+              </span>
+            )}
+            {parameter.optional && (
+              <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-mono bg-muted/40 border border-border/30 text-muted-foreground">
+                optional
+              </span>
+            )}
           </div>
           <p className="text-sm text-muted-foreground leading-relaxed !m-0">
             {parameter.description}

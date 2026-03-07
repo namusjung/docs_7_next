@@ -3,17 +3,31 @@ type: api
 title: Bulk Delete Knowledge Sources
 endpoint: DELETE /api/v1/knowledge-source/bulk-delete/
 order: 8
+breadcrumb_chain:
+  - { label: "Home", href: "/" }
+  - { label: "Knowledge Sources", href: "/api/knowledge-source-operations/create-knowledge-source" }
+  - { label: "Bulk Delete Knowledge Sources" }
 ---
 
 # Bulk Delete Knowledge Sources
-
-Delete multiple knowledge sources in a single request.
 
 ## Overview
 
 Use the Bulk Delete endpoint to remove several knowledge sources at once, avoiding the need to make individual delete requests. Like single deletion, this performs a **soft delete** — sources are marked as `Deleted`. Retrain the agent afterwards to apply the changes.
 
-## Parameters
+{% parameter-list title="Request Header" %}
+```
+[
+  {
+    "name": "Authorization",
+    "type": "api key",
+    "description": "Your 7en API key. Example: Api-Key 43NKLN3LKN4nlkn"
+  }
+]
+```
+{% /parameter-list %}
+
+## Request
 
 {% parameter-list title="Request Body" %}
 ```
@@ -27,19 +41,7 @@ Use the Bulk Delete endpoint to remove several knowledge sources at once, avoidi
 ```
 {% /parameter-list %}
 
-{% parameter-list title="Request Header" %}
-```
-[
-  {
-    "name": "Authorization",
-    "type": "api key",
-    "description": "Api key generated from 7en.i platform. Example: Api-Key 43NKLN3LKN4nlkn"
-  }
-]
-```
-{% /parameter-list %}
-
-{% request title="Bulk Delete Knowledge Sources" %}
+{% request title="Request" %}
 ```json
 [
   {

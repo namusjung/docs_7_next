@@ -1,31 +1,19 @@
 ---
 type: api
 title: Train Agent
-endpoint: POST /api/v1/agents/{{id}}/train-agent/
+endpoint: POST /api/v1/agents/{id}/train-agent/
 order: 1
+breadcrumb_chain:
+  - { label: "Home", href: "/" }
+  - { label: "Agent Training", href: "/api/agent-training/train-agent" }
+  - { label: "Train Agent" }
 ---
 
 # Train Agent
 
-Trigger a full retraining of an agent to rebuild its knowledge vector index from all attached sources.
-
 ## Overview
 
-The Retrain Agent endpoint queues a background job that re-ingests all knowledge sources linked to the agent and rebuilds the vector index. This is required after adding or removing knowledge sources, or after updating source content, to ensure the agent's responses reflect the latest information.
-
-## Parameters
-
-{% parameter-list title="Path Parameters" %}
-```
-[
-  {
-    "name": "id",
-    "type": "int",
-    "description": "Unique identifier of the agent to retrain. Example: \"23\""
-  }
-]
-```
-{% /parameter-list %}
+The Train Agent endpoint queues a background job that re-ingests all knowledge sources linked to the agent and rebuilds the vector index. This is required after adding or removing knowledge sources, or after updating source content, to ensure the agent's responses reflect the latest information.
 
 {% parameter-list title="Request Header" %}
 ```
@@ -33,13 +21,27 @@ The Retrain Agent endpoint queues a background job that re-ingests all knowledge
   {
     "name": "Authorization",
     "type": "api key",
-    "description": "Api key generated from 7en.i platform. Example: Api-Key 43NKLN3LKN4nlkn"
+    "description": "Your 7en API key. Example: Api-Key 43NKLN3LKN4nlkn"
   }
 ]
 ```
 {% /parameter-list %}
 
-{% request title="Retrain Agent" %}
+## Path Parameters
+
+{% parameter-list title="Parameters" %}
+```
+[
+  {
+    "name": "id",
+    "type": "int",
+    "description": "Unique identifier of the agent to train. Example: \"23\""
+  }
+]
+```
+{% /parameter-list %}
+
+{% request title="Request" %}
 ```json
 [
   {

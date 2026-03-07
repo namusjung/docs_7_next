@@ -1,21 +1,36 @@
 ---
 type: api
 title: Get Knowledge Source Details
-endpoint: GET /api/v1/knowledge-source/{{id}}/
+endpoint: GET /api/v1/knowledge-source/{id}/
 order: 4
+breadcrumb_chain:
+  - { label: "Home", href: "/" }
+  - { label: "Knowledge Sources", href: "/api/knowledge-source-operations/create-knowledge-source" }
+  - { label: "Get Knowledge Source Details" }
 ---
 
 # Get Knowledge Source Details
 
-Retrieve complete details of a single knowledge source by its ID.
 
 ## Overview
 
 The Get Knowledge Source Details endpoint returns the full object for a specific knowledge source, including its type, training status, metadata, and storage usage.
 
-## Parameters
+{% parameter-list title="Request Header" %}
+```
+[
+  {
+    "name": "Authorization",
+    "type": "api key",
+    "description": "Your 7en API key. Example: Api-Key 43NKLN3LKN4nlkn"
+  }
+]
+```
+{% /parameter-list %}
 
-{% parameter-list title="Path Parameters" %}
+## Path Parameters
+
+{% parameter-list title="Parameter" %}
 ```
 [
   {
@@ -27,19 +42,9 @@ The Get Knowledge Source Details endpoint returns the full object for a specific
 ```
 {% /parameter-list %}
 
-{% parameter-list title="Request Header" %}
-```
-[
-  {
-    "name": "Authorization",
-    "type": "api key",
-    "description": "Api key generated from 7en.i platform. Example: Api-Key 43NKLN3LKN4nlkn"
-  }
-]
-```
-{% /parameter-list %}
 
-{% request title="Get Knowledge Source Details" %}
+
+{% request title="Request" %}
 ```json
 [
   {

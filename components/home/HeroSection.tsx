@@ -14,16 +14,16 @@ interface HeroSectionProps {
 }
 
 const HeroSection: React.FC<HeroSectionProps> = ({ theme, type = "", title, description }) => {
-    const router = useRouter();
-    
-    useEffect(() => {
-      theme = "dark";
-      // Prefetch the pages for instant navigation
-      router.prefetch('/docs/getting-started/introduction');
-      router.prefetch('/api/api-reference/introduction');
-    },[theme, router]);
+  const router = useRouter();
+
+  useEffect(() => {
+    theme = "dark";
+    // Prefetch the pages for instant navigation
+    router.prefetch('/docs/getting-started/introduction');
+    router.prefetch('/api/api-reference/introduction');
+  }, [theme, router]);
   return (
-    <section className="bg-background border-b border-border/50 py-0 relative overflow-hidden">
+    <section className="bg-background border-b border-border/50 py-0 relative pt-24 overflow-hidden">
       <div className="max-w-6xl mx-auto px-6 md:px-0 relative z-10">
         <div className={`grid grid-cols-1 lg:grid-cols-2 gap-0 md:gap-12 items-center min-h-[400px]`}>
           {/* Left Column - Content */}
@@ -31,20 +31,20 @@ const HeroSection: React.FC<HeroSectionProps> = ({ theme, type = "", title, desc
             {/* Logo/Icon */}
             <div className="flex items-center gap-3 mb-6">
               <div>
-                <h1 className="text-3xl font-bold text-foreground" style={{marginBottom: type === "other" ? "0px" : "auto"}}>{title}</h1>
+                <h1 className="text-3xl font-bold text-foreground" style={{ marginBottom: type === "other" ? "0px" : "auto" }}>{title}</h1>
               </div>
             </div>
-            
+
             {/* Description */}
             <p className="text-sm text-muted-foreground mb-8">
-             {description}
+              {description}
             </p>
-            
+
             {/* Action Buttons */}
             {
               type !== "other" && (
                 <div className="flex flex-wrap gap-4">
-                  <ModernButton 
+                  <ModernButton
                     variant="primary"
                     className="inline-flex items-center gap-2"
                     onClick={() => router.push('/docs/getting-started/introduction')}
@@ -52,7 +52,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ theme, type = "", title, desc
                     <ArrowRight className="h-4 w-4" />
                     Getting Started
                   </ModernButton>
-                  <ModernButton 
+                  <ModernButton
                     variant="outline"
                     className="inline-flex items-center gap-2"
                     onClick={() => router.push('/api/api-reference/introduction')}
@@ -80,15 +80,15 @@ const HeroSection: React.FC<HeroSectionProps> = ({ theme, type = "", title, desc
               color="hsl(var(--foreground))"
               maxOpacity={0.25}
             />
-            
+
             {/* Logo masked flickering grid */}
-            <div 
+            <div
               className="absolute inset-0 z-10 flex items-center justify-center"
               style={{
                 maskImage: `url('/img/logo-no-outline.svg')`,
                 WebkitMaskImage: `url('/img/logo-no-outline.svg')`,
-                maskSize: type === "other" ? '300px auto': '400px auto',
-                WebkitMaskSize: type === "other" ? '300px auto': '400px auto',
+                maskSize: type === "other" ? '300px auto' : '400px auto',
+                WebkitMaskSize: type === "other" ? '300px auto' : '400px auto',
                 maskPosition: 'center',
                 WebkitMaskPosition: 'center',
                 maskRepeat: 'no-repeat',

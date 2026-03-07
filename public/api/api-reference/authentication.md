@@ -63,6 +63,19 @@ If your API key is compromised or you need to revoke it, you can delete it. A ne
 
 To authenticate your requests, you have to send your API key in the `Authorization` header in all requests to the API. Without it, your requests will fail.
 
+{% parameter-list title="Request Header" %}
+```
+[
+  {
+    "name": "Authorization",
+    "type": "api key",
+    "required": true,
+    "description": "Your 7en API key. Example: Api-Key 43NKLN3LKN4nlkn"
+  }
+]
+```
+{% /parameter-list %}
+
 ### Example of request
 
 ```json
