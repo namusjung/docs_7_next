@@ -50,6 +50,14 @@ The Delete Agent endpoint allows you to remove an AI agent from your account. Th
   {
     "language": "javascript",
     "code": "fetch('https://{% $api.base_url %}/api/v1/agents/{id}', {\n  method: 'DELETE',\n  headers: {\n    'Authorization': '{% $api.key %}',\n    'Content-Type': 'application/json'\n  }\n})"
+  },
+  {
+    "language": "python",
+    "code": "import requests\n\nresponse = requests.delete(\n    'https://{% $api.base_url %}/api/v1/agents/{id}',\n    headers={'Authorization': '{% $api.key %}'}\n)\ndata = response.json()"
+  },
+  {
+    "language": "php",
+    "code": "$ch = curl_init('https://{% $api.base_url %}/api/v1/agents/{id}');\ncurl_setopt_array($ch, [\n    CURLOPT_RETURNTRANSFER => true,\n    CURLOPT_CUSTOMREQUEST => 'DELETE',\n    CURLOPT_HTTPHEADER => ['Authorization: {% $api.key %}']\n]);\n$data = json_decode(curl_exec($ch), true);\ncurl_close($ch);"
   }
 ]
 ```
@@ -58,87 +66,25 @@ The Delete Agent endpoint allows you to remove an AI agent from your account. Th
 {% response status="200" hasDropdown="false" title="Response" %}
 ```json
 {
-    "message": "Agent and its knowledge folder deleted successfully",
-    "subscription": {
-        "planName": "EU Sovereign",
-        "planId": "36",
-        "started_at": "2026-02-18T08:16:03+00:00",
-        "ended_at": "2026-03-18T08:16:03+00:00",
-        "cancelled_at": null,
-        "failed_at": null
-    },
-    "features": {
-        "WHITE_LABELING": false,
-        "PREMIUM_MODELS": false,
-        "AUTO_TICKET_RESPONSE": true,
-        "ADD_ON_AGENT": false,
-        "EMAIL_HANDOFF": true,
-        "AGENT_HANDOFF": true,
-        "INTEGRATION_HANDOFF": true
-    },
-    "status": "success",
-    "permissions": [
-        "MANAGE_ADMIN",
-        "MANAGE_SETTINGS",
-        "VIEW_AGENTS",
-        "MANAGE_API_KEY",
-        "MANAGE_INTEGRATIONS",
-        "VIEW_KNOWLEDGE",
-        "MANAGE_AGENTS",
-        "VIEW_SETTINGS",
-        "MANAGE_BILLING",
-        "TRAIN_AGENT",
-        "CONFIGURE_BUSINESS",
-        "MANAGE_USERS",
-        "SEND_INVITE",
-        "VIEW_USERS",
-        "VIEW_ANALYTICS",
-        "VIEW_CHAT",
-        "VIEW_BILLING",
-        "MANAGE_KNOWLEDGE",
-        "MANAGE_CHAT",
-        "VIEW_INTEGRATIONS"
-    ]
+    "message": "Agent and its knowledge folder deleted successfully",
+    "status": "success"
 }
+
 ```
 {% /response %}
 
-## Error Responses
-
-##### 401
-```json
-{
-    "message": "Invalid or inactive API key.",
-    "status": "error",
-    "error": {
-        "code": "error",
-        "message": "Invalid or inactive API key.",
-        "status": 403,
-        "fields": {
-            "general": [
-                "Invalid or inactive API key."
-            ]
-        }
-    }
-}
-```
+## Error Response
 
 ##### 404
 ```json
 {
-    "message": "Agent not found.",
-    "status": "error",
-    "error": {
-        "code": "agent_not_found",
-        "message": "Agent not found.",
-        "status": 404,
-        "fields": {
-            "general": [
-                "Agent not found."
-            ]
-        }
-    }
+    "error": {
+        "code": "agent_not_found",
+        "message": "Agent not found.",
+        "status": 404
+    }
 }
+
 ```
 
 ## Best Practices
@@ -146,8 +92,3 @@ The Delete Agent endpoint allows you to remove an AI agent from your account. Th
 - **Confirmation**: Always verify the agent ID before deletion to avoid accidental removal.
 - **Backup**: Consider backing up critical agent configurations before deletion.
 
-## Rate Limits
-
-- 100 requests per minute for free tier
-- 1000 requests per minute for pro tier
-- 10000 requests per minute for enterprise tier

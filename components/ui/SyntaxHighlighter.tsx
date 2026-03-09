@@ -79,14 +79,14 @@ export const SyntaxHighlighter: React.FC<SyntaxHighlighterProps> = ({
           )}
         </button>
       )}
-      
+
       <Highlight
         theme={prismTheme}
         code={cleanCode}
         language={language}
       >
         {({ className: highlightClassName, style, tokens, getLineProps, getTokenProps }) => (
-          <pre 
+          <pre
             className={`${highlightClassName} p-6 text-[13px] leading-relaxed overflow-y-auto whitespace-pre pr-0`}
             style={style}
           >

@@ -39,7 +39,7 @@ const FeatureGrid: React.FC = () => {
       ),
       title: "API Reference",
       description: "Comprehensive API documentation to harness 7en.ai's custom AI solutions.",
-      link: "/api/introduction"
+      link: "/api/api-reference/introduction"
     },
     {
       icon: (
@@ -50,7 +50,7 @@ const FeatureGrid: React.FC = () => {
       ),
       title: "FAQ & Support",
       description: "Quick answers and community support to unlock 7en.ai's full potential.",
-      link: "/docs/faq/"
+      link: "/faq/faq"
     }
   ];
 

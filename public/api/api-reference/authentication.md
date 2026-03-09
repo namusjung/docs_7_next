@@ -81,7 +81,7 @@ To authenticate your requests, you have to send your API key in the `Authorizati
 ```json
 
 curl --location '{base_url}/api/v1/agents/' \
---header 'Authorization: Api-Key {YOUR_API_TOKEN}'
+--header 'Authorization: Api-Key {YOUR_API_KEY}'
 
 ```
 
@@ -89,77 +89,65 @@ curl --location '{base_url}/api/v1/agents/' \
 
 | Status | Description |
 |--------|-------------|
-| `401` | Invalid or missing Authorization header |
-| `429` | API key expired |
-| `403` | Missing, invalid, or revoked API key |
-| `500` | Rate limit exceeded |
+| `401` | The API key is required |
+| `404` | API key expired |
+| `403` | Invalid, or revoked API key |
+| `429` | Rate limit exceeded |
+| `500` | Server error |
 
-
-
-
+##### 401
 ```json
-//If the authorization header is missing
 {
-    "message": "No or missing Authorization header.",
-    "status": "error",
     "error": {
-        "code": "missing_authorization_header",
-        "message": "No or missing Authorization header.",
-        "status": 401,
-        "fields": {
-            "general": [
-                "No or missing Authorization header."
-            ]
-        }
+        "code": "missing_api_key",
+        "message": "The API key is required.",
+        "status": 401
     }
 }
-
-//If the API key is expired
+```
+##### 404
+```json
 {
-    "message": "API key expired.",
-    "status": "error",
     "error": {
         "code": "api_key_expired",
         "message": "API key expired.",
-        "status": 429,
-        "fields": {
-            "api_key": [
-                "This API key has expired."
-            ]
-        }
+        "status": 404
     }
 }
 
-//If the API key is invalid or inactive
+```
+
+##### 403
+```json
 {
-    "message": "Invalid or inactive API key.",
-    "status": "error",
     "error": {
-        "code": "invalid_or_inactive_api_key",
-        "message": "Invalid or inactive API key.",
-        "status": 403,
-        "fields": {
-            "general": [
-                "Invalid or inactive API key."
-            ]
-        }
+        "code": "invalid_api_key",
+        "message": "The provided API key is invalid or has been revoked.",
+        "status": 403
     }
 }
 
-//If the API rate limit is exceeded
+```
+
+##### 429
+```json
 {
-    "message": "An unexpected error occurred",
-    "status": "error",
-    "error": {
-        "code": "server_error",
-        "message": "An unexpected error occurred",
-        "status": 500,
-        "fields": {
-            "general": [
-                "Rate limit exceeded: 500 requests per day."
-            ]
-        }
-    }
+    "error": {
+        "code": "rate_limit_exceeded",
+        "message": "Rate limit exceeded: 500 requests per day.",
+        "status": 429
+    }
+}
+```
+
+##### 500
+```json
+{
+    "error": {
+        "code": "server_error",
+        "message": "Server error during API key check.",
+        "status": 500
+    }
 }
 ```
 {% /section %}

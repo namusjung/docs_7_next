@@ -48,11 +48,19 @@ It only performs a **soft delete** — the knowledge source is marked as `Delete
 [
   {
     "language": "curl",
-    "code": "curl -X DELETE 'https://{% $api.base_url %}/v1/knowledge-source/{{id}}/' -H 'Authorization: {% $api.key %}' -H 'Content-Type: application/json'"
+    "code": "curl -X DELETE 'https://{% $api.base_url %}/api/v1/knowledge-source/{id}/' -H 'Authorization: {% $api.key %}'"
   },
   {
     "language": "javascript",
-    "code": "fetch('https://{% $api.base_url %}/v1/knowledge-source/{{id}}/', {\n  method: 'DELETE',\n  headers: {\n    'Authorization': '{% $api.key %}',\n    'Content-Type': 'application/json'\n  }\n})"
+    "code": "fetch('https://{% $api.base_url %}/api/v1/knowledge-source/{id}/', {\n  method: 'DELETE',\n  headers: {\n    'Authorization': '{% $api.key %}'\n  }\n})"
+  },
+  {
+    "language": "python",
+    "code": "import requests\n\nresponse = requests.delete(\n    'https://{% $api.base_url %}/api/v1/knowledge-source/{id}/',\n    headers={'Authorization': '{% $api.key %}'}\n)\ndata = response.json()"
+  },
+  {
+    "language": "php",
+    "code": "$ch = curl_init('https://{% $api.base_url %}/api/v1/knowledge-source/{id}/');\ncurl_setopt_array($ch, [\n    CURLOPT_RETURNTRANSFER => true,\n    CURLOPT_CUSTOMREQUEST => 'DELETE',\n    CURLOPT_HTTPHEADER => ['Authorization: {% $api.key %}']\n]);\n$data = json_decode(curl_exec($ch), true);\ncurl_close($ch);"
   }
 ]
 ```
@@ -62,38 +70,9 @@ It only performs a **soft delete** — the knowledge source is marked as `Delete
 ```json
 {
     "message": "Knowledge source deleted successfully.",
-    "subscription": {
-        "planName": "EU Sovereign",
-        "planId": "36",
-        "started_at": "2026-02-18T08:16:03+00:00",
-        "ended_at": "2026-03-18T08:16:03+00:00",
-        "cancelled_at": null,
-        "failed_at": null
-    },
-    "status": "success",
-    "permissions": [
-        "MANAGE_AGENTS",
-        "MANAGE_ADMIN",
-        "MANAGE_INTEGRATIONS",
-        "VIEW_INTEGRATIONS",
-        "MANAGE_API_KEY",
-        "MANAGE_BILLING",
-        "MANAGE_KNOWLEDGE",
-        "VIEW_BILLING",
-        "MANAGE_SETTINGS",
-        "VIEW_AGENTS",
-        "MANAGE_CHAT",
-        "CONFIGURE_BUSINESS",
-        "VIEW_USERS",
-        "VIEW_ANALYTICS",
-        "TRAIN_AGENT",
-        "MANAGE_USERS",
-        "VIEW_CHAT",
-        "VIEW_KNOWLEDGE",
-        "SEND_INVITE",
-        "VIEW_SETTINGS"
-    ]
+    "status": "success"
 }
+
 ```
 {% /response %}
 
@@ -102,19 +81,13 @@ It only performs a **soft delete** — the knowledge source is marked as `Delete
 ##### 404
 ```json
 {
-    "message": "Knowledge source not found.",
-    "status": "error",
     "error": {
         "code": "knowledge_source_not_found",
         "message": "Knowledge source not found.",
-        "status": 404,
-        "fields": {
-            "general": [
-                "Knowledge source not found."
-            ]
-        }
+        "status": 404
     }
 }
+
 ```
 
 ## Best Practices

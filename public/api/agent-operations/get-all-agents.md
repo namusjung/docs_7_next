@@ -32,11 +32,19 @@ The Get All Agents endpoint allows you to fetch all agents created by the user, 
 [
   {
     "language": "curl",
-    "code": "curl -X GET 'https://{% $api.base_url %}api/v1/agents/' -H 'Authorization: {% $api.key %}'\\ -H 'Content-Type: application/json'"
+    "code": "curl -X GET 'https://{% $api.base_url %}/api/v1/agents/' -H 'Authorization: {% $api.key %}'\\ -H 'Content-Type: application/json'"
   },
   {
     "language": "javascript",
-    "code": "fetch('https://{% $api.base_url %}api/v1/agents/', {\n  method: 'GET',\n  headers: {\n    'Authorization': '{% $api.key %}',\n    'Content-Type': 'application/json'\n  },\n})"
+    "code": "fetch('https://{% $api.base_url %}/api/v1/agents/', {\n  method: 'GET',\n  headers: {\n    'Authorization': '{% $api.key %}',\n    'Content-Type': 'application/json'\n  },\n})"
+  },
+  {
+    "language": "python",
+    "code": "import requests\n\nresponse = requests.get(\n    'https://{% $api.base_url %}/api/v1/agents/',\n    headers={'Authorization': '{% $api.key %}'}\n)\ndata = response.json()"
+  },
+  {
+    "language": "php",
+    "code": "$ch = curl_init('https://{% $api.base_url %}/api/v1/agents/');\ncurl_setopt_array($ch, [\n    CURLOPT_RETURNTRANSFER => true,\n    CURLOPT_HTTPHEADER => ['Authorization: {% $api.key %}']\n]);\n$data = json_decode(curl_exec($ch), true);\ncurl_close($ch);"
   }
 ]
 ```
@@ -47,135 +55,12 @@ The Get All Agents endpoint allows you to fetch all agents created by the user, 
 ```json
 {
     "message": "List retrieved successfully",
+    "status": "success",
     "data": [
         {
-            "id": 642,
-            "owner": 193,
-            "name": "New Chatbot 147",
-            "description": "A new AI chatbot ready to be configured.",
-            "status": "Active",
-            "appearance": {
-                "avatar": {
-                    "src": "",
-                    "type": "default"
-                },
-                "position": "bottom-right",
-                "buttonText": "",
-                "fontFamily": "Inter",
-                "chatbotName": "AI Assistant",
-                "primaryColor": "#0e1215",
-                "secondaryColor": "#ffffff",
-                "welcomeMessage": ""
-            },
-            "behavior": {
-                "email": null,
-                "guidelines": {
-                    "dos": [],
-                    "donts": []
-                },
-                "ticketType": "thirdparty",
-                "suggestions": [],
-                "aiToAiHandoff": false,
-                "expertHandoff": true,
-                "autoTicketReply": true,
-                "escalationPrompt": ""
-            },
-            "model": {
-                "temperature": 0.7,
-                "response_model": "gpt-5.2",
-                "display_model": "GPT 5.2"
-            },
-            "agentType": "General Assistant",
-            "agent_category": "Chatbot",
-            "systemPrompt": "You are a helpful AI assistant. Be friendly, professional, and provide accurate information.",
-            "knowledge_sources": [
-                {
-                    "id": 1134,
-                    "urls": [],
-                    "file": null,
-                    "plain_text": "TestPlainText",
-                    "google_drive_file_id": null,
-                    "title": "TestPlainText",
-                    "status": "Pending",
-                    "type": "plain_text",
-                    "agent_knowledge_folder": 562,
-                    "parent_knowledge_source": null,
-                    "metadata": {
-                        "format": "txt",
-                        "file_size": "13B",
-                        "no_of_rows": 1,
-                        "no_of_chars": 13,
-                        "no_of_pages": null,
-                        "upload_date": "2026-02-23T10:50:25.523809+00:00"
-                    },
-                    "owner": 193,
-                    "is_selected": true,
-                    "training_status": "Idle",
-                    "sub_urls": null,
-                    "total_training_usage_bytes": 0,
-                    "max_training_usage_bytes": 51200000,
-                    "character_limit": 200000
-                },
-                {
-                    "id": 1135,
-                    "urls": [
-                        "https://softwarica.edu.np/",
-                        "https://softwarica.edu.np/about-us/about-college",
-                        "https://softwarica.edu.np/about-us/coventry-university",
-                        "https://softwarica.edu.np/apply",
-                        "https://softwarica.edu.np/cdn-cgi/l/email-protection",
-                        "https://softwarica.edu.np/contact",
-                        "https://softwarica.edu.np/courses",
-                        "https://softwarica.edu.np/student-center/notices"
-                    ],
-                    "file": null,
-                    "plain_text": null,
-                    "google_drive_file_id": null,
-                    "title": "TestPlainURL",
-                    "status": "Pending",
-                    "type": "website",
-                    "agent_knowledge_folder": 562,
-                    "parent_knowledge_source": null,
-                    "metadata": {
-                        "format": "url",
-                        "file_size": null,
-                        "no_of_rows": null,
-                        "no_of_chars": null,
-                        "no_of_pages": 8,
-                        "upload_date": "2026-02-23T10:51:12.040120+00:00"
-                    },
-                    "owner": 193,
-                    "is_selected": true,
-                    "training_status": "Idle",
-                    "sub_urls": null,
-                    "total_training_usage_bytes": 0,
-                    "max_training_usage_bytes": 51200000,
-                    "character_limit": 200000
-                }
-            ],
-            "created_at": "2026-01-26T12:22:49.823976Z",
-            "updated_at": "2026-02-18T08:24:18.290211Z",
-            "conversations": 0,
-            "ticketing_providers": [
-                "freshdesk"
-            ],
-            "default_ticketing_provider": "freshdesk",
-            "is_slack_enabled": false,
-            "privacy_url": null,
-            "gdpr_settings": {
-                "data_retention_days": null,
-                "data_retention_message": null,
-                "gdpr_message_display": false
-            },
-            "is_white_label": false,
-            "total_training_usage_bytes": 13,
-            "max_training_usage_bytes": 51200000,
-            "character_limit": 200000
-        },
-        {
-            "id": 670,
-            "owner": 193,
-            "name": "Customer Support Agents",
+            "id": 685,
+            "owner": 2,
+            "name": "Customer Support Agent",
             "description": null,
             "status": "Idle",
             "appearance": {},
@@ -187,8 +72,47 @@ The Get All Agents endpoint allows you to fetch all agents created by the user, 
             "agent_category": null,
             "systemPrompt": "",
             "knowledge_sources": [],
-            "created_at": "2026-03-04T06:58:17.122359Z",
-            "updated_at": "2026-03-04T06:58:17.122385Z",
+            "created_at": "2026-03-08T05:48:37.616015Z",
+            "updated_at": "2026-03-08T05:48:37.616042Z",
+            "conversations": 0,
+            "ticketing_providers": [
+                "freshdesk"
+            ],
+            "default_ticketing_provider": null,
+            "is_slack_enabled": false,
+            "privacy_url": null,
+            "gdpr_settings": {
+                "data_retention_days": null,
+                "data_retention_message": null,
+                "gdpr_message_display": false
+            },
+            "is_white_label": true,
+            "total_training_usage_bytes": 0,
+            "max_training_usage_bytes": 51200000,
+            "character_limit": 200000
+        },
+        {
+            "id": 689,
+            "owner": 2,
+            "name": "Updated Customer Support Agent",
+            "description": "Enhanced AI agent for customer support",
+            "status": "Idle",
+            "appearance": {
+                "theme": "green",
+                "avatar": "https://example.com/new-avatar.png"
+            },
+            "behavior": {
+                "greeting": "Welcome! I'm here to help you."
+            },
+            "model": {
+                "display_model": null
+            },
+            "agentType": "chatbot",
+            "agent_category": "Assistant",
+            "systemPrompt": "You are an expert customer support assistant with extensive product knowledge.",
+            "knowledge_sources": [],
+            "created_at": "2026-03-09T07:28:11.656646Z",
+            "updated_at": "2026-03-09T07:30:18.694454Z",
             "conversations": 0,
             "ticketing_providers": [],
             "default_ticketing_provider": null,
@@ -199,53 +123,14 @@ The Get All Agents endpoint allows you to fetch all agents created by the user, 
                 "data_retention_message": null,
                 "gdpr_message_display": false
             },
-            "is_white_label": false,
+            "is_white_label": true,
             "total_training_usage_bytes": 0,
             "max_training_usage_bytes": 51200000,
             "character_limit": 200000
         }
-    ],
-    "subscription": {
-        "planName": "EU Sovereign",
-        "planId": "36",
-        "started_at": "2026-02-18T08:16:03+00:00",
-        "ended_at": "2026-03-18T08:16:03+00:00",
-        "cancelled_at": null,
-        "failed_at": null
-    },
-    "features": {
-        "WHITE_LABELING": false,
-        "PREMIUM_MODELS": false,
-        "AUTO_TICKET_RESPONSE": true,
-        "ADD_ON_AGENT": false,
-        "EMAIL_HANDOFF": true,
-        "AGENT_HANDOFF": true,
-        "INTEGRATION_HANDOFF": true
-    },
-    "status": "success",
-    "permissions": [
-        "VIEW_ANALYTICS",
-        "MANAGE_USERS",
-        "MANAGE_ADMIN",
-        "MANAGE_API_KEY",
-        "CONFIGURE_BUSINESS",
-        "VIEW_SETTINGS",
-        "MANAGE_CHAT",
-        "SEND_INVITE",
-        "MANAGE_AGENTS",
-        "VIEW_KNOWLEDGE",
-        "MANAGE_KNOWLEDGE",
-        "VIEW_INTEGRATIONS",
-        "MANAGE_INTEGRATIONS",
-        "MANAGE_BILLING",
-        "VIEW_CHAT",
-        "VIEW_USERS",
-        "MANAGE_SETTINGS",
-        "VIEW_AGENTS",
-        "TRAIN_AGENT",
-        "VIEW_BILLING"
     ]
 }
+
 ```
 {% /response %}
 

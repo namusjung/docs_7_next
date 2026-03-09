@@ -8,10 +8,8 @@ import {
   Home,
   Lightbulb,
   BookOpen,
-  Box,
-  FileText,
+  HelpCircle,
   Search,
-  LogIn
 } from "lucide-react";
 import MobileNavButton from "@/components/docs/MobileNavButton";
 import { usePathname } from "next/navigation";
@@ -39,6 +37,7 @@ export default function SiteHeader({ searchItems = [] }: { searchItems?: SearchI
     { name: "Home", href: "/", icon: Home },
     { name: "Docs", href: "/docs/getting-started/introduction", icon: Lightbulb },
     { name: "API Reference", href: "/api/api-reference/introduction", icon: BookOpen },
+    { name: "FAQ", href: "/faq/faq", icon: HelpCircle },
   ];
 
   return (
@@ -76,11 +75,11 @@ export default function SiteHeader({ searchItems = [] }: { searchItems?: SearchI
                 <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
                   <Search className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
                 </div>
-                <div className="w-full bg-muted/40 hover:bg-muted/60 border border-transparent hover:border-border rounded-lg py-1.5 pl-10 pr-10 text-sm text-muted-foreground text-left transition-all">
-                  Search documentation...
+                <div className="w-full bg-gray-200 dark:bg-gray-200/20 hover:bg-muted/60 border border-transparent hover:border-border rounded-lg py-1.5 pl-10 pr-10 text-sm text-muted-foreground text-left transition-all">
+                  Search...
                 </div>
                 <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
-                  <kbd className="hidden sm:inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  <kbd className="hidden sm:inline-flex h-5 select-none items-center gap-1 rounded bg-gray-300 dark:bg-gray-200/20 px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
                     <span className="text-xs">/</span>
                   </kbd>
                 </div>

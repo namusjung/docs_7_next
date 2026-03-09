@@ -19,7 +19,8 @@
       "Bash(ls -la \"d:\\\\7en\\\\docs\\\\docs_7_next\\\\lib\\\\markdoc\"*)",
       "Bash(ls \"d:/7en/docs/docs_7_next/lib/\"*markdoc*)",
       "Bash(grep -l \"<td\\\\|<tr\\\\|<th\\\\|<table\" \"d:/7en/docs/docs_7_next/public/api/api-reference\"/*.md)",
-      "Bash(grep -l \"html_inline\\\\|html_block\" \"d:/7en/docs/docs_7_next/node_modules/@markdoc/markdoc/dist/src\"/*.js)"
+      "Bash(grep -l \"html_inline\\\\|html_block\" \"d:/7en/docs/docs_7_next/node_modules/@markdoc/markdoc/dist/src\"/*.js)",
+      "Bash(cat /d/7en/Web/docs_7_next/public/api/*/_meta.json)"
     ]
   }
 }

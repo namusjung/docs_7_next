@@ -1,5 +1,4 @@
 "use client";
-import AdditionalResources from "@/components/home/AdditionalResources";
 import Image from "next/image";
 import { useState } from "react";
 import HeroSection from "@/components/home/HeroSection";
@@ -62,7 +61,6 @@ export default function HomePage() {
       title={`Thirdparty Integrations`}
       description={`Integrate 10 plus apps to 7en.ai to automate your workflow.`}
       items={items} />
-      <AdditionalResources />
       <Footer />
     </main>
   );

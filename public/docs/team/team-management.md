@@ -36,7 +36,7 @@ Assign roles carefully. Owners have full control over billing and can remove oth
 3. Select their role: **Owner** or **Member**
 4. Click **Send** to send invitation
 
-The invited person receives an email with a link to join your workspace. Invitations expire after **24 hours** — resend if they miss the window.
+The invited person receives an email with a link to join your workspace. Invitations expire after **7 days** — resend if they miss the window.
 
 {% callout type="info" %}
 Invitees must create a 7en account. The invitation link will prompt them to register.

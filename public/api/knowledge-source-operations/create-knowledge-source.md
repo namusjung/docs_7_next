@@ -121,16 +121,73 @@ The Create Knowledge Source endpoint ingests content into an agent's knowledge b
 
 {% request title="Request" %}
 ```json
-[
-  {
-    "language": "curl",
-    "code": "curl -X POST 'https://{% $api.base_url %}knowledgesource/' -H 'Authorization: {% $api.key %}' -H 'Content-Type: application/json' -d '{\"agent_id\": \"{agent_id}\" \"type\": \"url\" ,\"urls\": [\"https://example.com/knowledge-base\",\"https://example.com/tutorials\"], \"title\": \"Knowledge Base Articles\"}'"
-  },
-  {
-    "language": "javascript",
-    "code": "fetch('https://{% $api.base_url %}knowledgesource/', {\n  method: 'POST',\n  headers: {\n    'Authorization': '{% $api.key %}',\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n    agent_id: \"{agent_id}\" \n type: \"url\" ,\n urls: [\"https://example.com/knowledge-base\",\n\"https://example.com/tutorials\"],\n title: \"Knowledge Base Articles\"\n  })\n})"
-  }
-]
+{
+  "tabs": [
+    {
+      "label": "Plain Text",
+      "examples": [
+        {
+          "language": "curl",
+          "code": "curl -X POST 'https://{% $api.base_url %}/api/v1/knowledge-source/' \\\n  -H 'Authorization: {% $api.key %}' \\\n  -H 'Content-Type: application/json' \\\n  -d '{\n    \"agent_id\": \"{agent_id}\",\n    \"plain_text\": \"This is a\",\n    \"title\": \"Knowledge Base Articles\"\n  }'"
+        },
+        {
+          "language": "javascript",
+          "code": "fetch('https://{% $api.base_url %}/api/v1/knowledge-source/', {\n  method: 'POST',\n  headers: {\n    'Authorization': '{% $api.key %}',\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n    agent_id: '{agent_id}',\n    plain_text: 'This is a',\n    title: 'Knowledge Base Articles'\n  })\n})"
+        },
+        {
+          "language": "python",
+          "code": "import requests\n\nresponse = requests.post(\n    'https://{% $api.base_url %}/api/v1/knowledge-source/',\n    headers={\n        'Authorization': '{% $api.key %}',\n        'Content-Type': 'application/json'\n    },\n    json={\n        'agent_id': '{agent_id}',\n        'plain_text': 'This is a',\n        'title': 'Knowledge Base Articles'\n    }\n)\ndata = response.json()"
+        },
+        {
+          "language": "php",
+          "code": "$ch = curl_init('https://{% $api.base_url %}/api/v1/knowledge-source/');\ncurl_setopt_array($ch, [\n    CURLOPT_RETURNTRANSFER => true,\n    CURLOPT_POST => true,\n    CURLOPT_HTTPHEADER => [\n        'Authorization: {% $api.key %}',\n        'Content-Type: application/json'\n    ],\n    CURLOPT_POSTFIELDS => json_encode([\n        'agent_id' => '{agent_id}',\n        'plain_text' => 'This is a',\n        'title' => 'Knowledge Base Articles'\n    ])\n]);\n$data = json_decode(curl_exec($ch), true);\ncurl_close($ch);"
+        }
+      ]
+    },
+    {
+      "label": "URL",
+      "examples": [
+        {
+          "language": "curl",
+          "code": "curl -X POST 'https://{% $api.base_url %}/api/v1/knowledge-source/' \\\n  -H 'Authorization: {% $api.key %}' \\\n  -H 'Content-Type: application/json' \\\n  -d '{\n    \"agent_id\": \"{agent_id}\",\n    \"type\": \"url\",\n    \"urls\": [\n      \"https://example.com/knowledge-base\",\n      \"https://example.com/tutorials\"\n    ],\n    \"title\": \"Knowledge Base URLS\"\n  }'"
+        },
+        {
+          "language": "javascript",
+          "code": "fetch('https://{% $api.base_url %}/api/v1/knowledge-source/', {\n  method: 'POST',\n  headers: {\n    'Authorization': '{% $api.key %}',\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n    agent_id: '{agent_id}',\n    type: 'url',\n    urls: [\n      'https://example.com/knowledge-base',\n      'https://example.com/tutorials'\n    ],\n    title: 'Knowledge Base URLS'\n  })\n})"
+        },
+        {
+          "language": "python",
+          "code": "import requests\n\nresponse = requests.post(\n    'https://{% $api.base_url %}/api/v1/knowledge-source/',\n    headers={\n        'Authorization': '{% $api.key %}',\n        'Content-Type': 'application/json'\n    },\n    json={\n        'agent_id': '{agent_id}',\n        'type': 'url',\n        'urls': [\n            'https://example.com/knowledge-base',\n            'https://example.com/tutorials'\n        ],\n        'title': 'Knowledge Base URLS'\n    }\n)\ndata = response.json()"
+        },
+        {
+          "language": "php",
+          "code": "$ch = curl_init('https://{% $api.base_url %}/api/v1/knowledge-source/');\ncurl_setopt_array($ch, [\n    CURLOPT_RETURNTRANSFER => true,\n    CURLOPT_POST => true,\n    CURLOPT_HTTPHEADER => [\n        'Authorization: {% $api.key %}',\n        'Content-Type: application/json'\n    ],\n    CURLOPT_POSTFIELDS => json_encode([\n        'agent_id' => '{agent_id}',\n        'type' => 'url',\n        'urls' => [\n            'https://example.com/knowledge-base',\n            'https://example.com/tutorials'\n        ],\n        'title' => 'Knowledge Base URLS'\n    ])\n]);\n$data = json_decode(curl_exec($ch), true);\ncurl_close($ch);"
+        }
+      ]
+    },
+    {
+      "label": "File Upload",
+      "examples": [
+        {
+          "language": "curl",
+          "code": "curl -X POST 'https://{% $api.base_url %}/api/v1/knowledge-source/' \\\n  -H 'Authorization: {% $api.key %}' \\\n  -F 'agent_id={agent_id}' \\\n  -F 'title=Knowledge Source File' \\\n  -F 'file=@/path/to/document.pdf'"
+        },
+        {
+          "language": "javascript",
+          "code": "const formData = new FormData();\nformData.append('agent_id', '{agent_id}');\nformData.append('title', 'Knowledge Source File');\nformData.append('file', fileInput.files[0]);\n\nfetch('https://{% $api.base_url %}/api/v1/knowledge-source/', {\n  method: 'POST',\n  headers: {\n    'Authorization': '{% $api.key %}'\n  },\n  body: formData\n})"
+        },
+        {
+          "language": "python",
+          "code": "import requests\n\nwith open('/path/to/document.pdf', 'rb') as f:\n    response = requests.post(\n        'https://{% $api.base_url %}/api/v1/knowledge-source/',\n        headers={'Authorization': '{% $api.key %}'},\n        data={'agent_id': '{agent_id}', 'title': 'Knowledge Source File'},\n        files={'file': f}\n    )\ndata = response.json()"
+        },
+        {
+          "language": "php",
+          "code": "$ch = curl_init('https://{% $api.base_url %}/api/v1/knowledge-source/');\ncurl_setopt_array($ch, [\n    CURLOPT_RETURNTRANSFER => true,\n    CURLOPT_POST => true,\n    CURLOPT_HTTPHEADER => ['Authorization: {% $api.key %}'],\n    CURLOPT_POSTFIELDS => [\n        'agent_id' => '{agent_id}',\n        'title' => 'Knowledge Source File',\n        'file' => new CURLFile('/path/to/document.pdf')\n    ]\n]);\n$data = json_decode(curl_exec($ch), true);\ncurl_close($ch);"
+        }
+      ]
+    }
+  ]
+}
 ```
 {% /request %}
 
@@ -207,72 +264,16 @@ The Create Knowledge Source endpoint ingests content into an agent's knowledge b
 
 ## Error Responses
 
-##### 400 Bad Request
+##### 400
 ```json
 {
-    "message": "Character limit exceeded for this plan.",
-    "status": "error",
-    "error": {
-        "code": "character_limit_exceeded",
-        "message": "Character limit exceeded for this plan.",
-        "status": 400,
-        "fields": {
-            "general": [
-                "Character limit exceeded for this plan."
-            ]
-        }
-    }
-}
-```
-```json
-{
-    "message": "Only 0.05 MB of knowledge size per agent is allowed in your current plan.",
-    "status": "error",
-    "error": {
-        "code": "training_limit_reached",
-        "message": "Only 0.05 MB of knowledge size per agent is allowed in your current plan.",
-        "status": 400,
-        "fields": {
-            "general": [
-                "Only 0.05 MB of knowledge size per agent is allowed in your current plan."
-            ]
-        }
-    }
-}
-```
-##### 10 MB per upload
-```json
-{
-    "message": "File validation failed: File size (13.51 MB) exceeds maximum allowed size (10.0 MB)",
-    "status": "error",
     "error": {
         "code": "knowledge_source_validation_error",
-        "message": "File validation failed: File size (13.51 MB) exceeds maximum allowed size (10.0 MB)",
-        "status": 400,
-        "fields": {
-            "file": [
-                "File validation failed: File size (13.51 MB) exceeds maximum allowed size (10.0 MB)"
-            ]
-        }
+        "message": "File validation failed: File size (10.21 MB) exceeds maximum allowed size (10.0 MB)",
+        "status": 400
     }
 }
-```
-##### Not Supported Files
-```json
-{
-    "message": "File validation failed: File content does not match expected format for extension '.docx'",
-    "status": "error",
-    "error": {
-        "code": "knowledge_source_validation_error",
-        "message": "File validation failed: File content does not match expected format for extension '.docx'",
-        "status": 400,
-        "fields": {
-            "file": [
-                "File validation failed: File content does not match expected format for extension '.docx'"
-            ]
-        }
-    }
-}
+
 ```
 
 ## Best Practices
@@ -280,8 +281,3 @@ The Create Knowledge Source endpoint ingests content into an agent's knowledge b
 - **One type at a time**: Only provide one of `urls`, `file`, `plain_text`, or `google_drive_file_id` per request.
 - **Retrain after adding**: New sources are not automatically used by the agent. Call [Retrain Agent](/api/agent-training/retrain-agent) after adding sources.
 
-## Source Limits
-
-- 500 KB document size and 2000 characters in plain text for free tier
-- 30000 KB document size and 100000 characters in plain text for pro tier
-- 50000 KB document size and 500000 characters in plain text for plus tier

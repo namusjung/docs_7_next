@@ -16,6 +16,7 @@ export type NavItem = { slug: string[]; frontmatter: Frontmatter };
 
 const DOCS_DIR = path.join(process.cwd(), "public", "docs");
 const API_DIR = path.join(process.cwd(), "public", "api");
+const FAQ_DIR = path.join(process.cwd(), "public", "faq");
 
 export function readMarkdownFile(baseDir: string, slug: string[]): string {
   const filePath = path.join(baseDir, ...slug) + ".md";
@@ -111,6 +112,7 @@ function sortNavItems(items: NavItem[]) {
 let docsNavCache: GroupedNav | null = null;
 let apiNavCache: NavItem[] | null = null;
 let apiGroupedNavCache: GroupedNav | null = null;
+let faqNavCache: NavItem[] | null = null;
 
 export const getDocsNav = cache((): GroupedNav => {
   if (docsNavCache) return docsNavCache;
@@ -177,11 +179,25 @@ export const getApiGroupedNav = cache((): GroupedNav => {
   return groups;
 });
 
-export type SearchItem = { title: string; href: string; section: string; category: 'docs' | 'api' };
+export const getFaqNav = cache((): NavItem[] => {
+  if (faqNavCache) return faqNavCache;
+  const slugs = getAllSlugs(FAQ_DIR);
+  const items = buildNavItems(FAQ_DIR, slugs);
+  items.sort((a, b) => (a.frontmatter.order ?? 999) - (b.frontmatter.order ?? 999));
+  faqNavCache = items;
+  return items;
+});
+
+export function getFaqNavFlat(): NavItem[] {
+  return getFaqNav();
+}
+
+export type SearchItem = { title: string; href: string; section: string; category: 'docs' | 'api' | 'faq' };
 
 export const getSearchIndex = cache((): SearchItem[] => {
   const docsNav = getDocsNav();
   const apiNav = getApiGroupedNav();
+  const faqNav = getFaqNav();
 
   const docsItems: SearchItem[] = docsNav.flatMap(group =>
     group.items.map(item => ({
@@ -201,7 +217,14 @@ export const getSearchIndex = cache((): SearchItem[] => {
     }))
   );
 
-  return [...docsItems, ...apiItems];
+  const faqItems: SearchItem[] = faqNav.map(item => ({
+    title: item.frontmatter.title || item.slug[item.slug.length - 1],
+    href: `/faq/${item.slug.join("/")}`,
+    section: 'FAQ',
+    category: 'faq' as const
+  }));
+
+  return [...docsItems, ...apiItems, ...faqItems];
 });
 
 

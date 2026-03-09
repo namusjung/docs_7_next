@@ -46,11 +46,19 @@ Use the Bulk Delete endpoint to remove several knowledge sources at once, avoidi
 [
   {
     "language": "curl",
-    "code": "curl -X DELETE 'https://{% $api.base_url %}/v1/knowledge-source/bulk-delete/' -H 'Authorization: {% $api.key %}' -H 'Content-Type: application/json' -d '{\"ids\": [101, 102]}'"
+    "code": "curl -X DELETE 'https://{% $api.base_url %}/api/v1/knowledge-source/bulk-delete/' \\\n  -H 'Authorization: {% $api.key %}' \\\n  -H 'Content-Type: application/json' \\\n  -d '{\"ids\": [101, 102]}'"
   },
   {
     "language": "javascript",
-    "code": "fetch('https://{% $api.base_url %}/v1/knowledge-source/bulk-delete/', {\n  method: 'DELETE',\n  headers: {\n    'Authorization': '{% $api.key %}',\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({ ids: [101, 102] })\n})"
+    "code": "fetch('https://{% $api.base_url %}/api/v1/knowledge-source/bulk-delete/', {\n  method: 'DELETE',\n  headers: {\n    'Authorization': '{% $api.key %}',\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({ ids: [101, 102] })\n})"
+  },
+  {
+    "language": "python",
+    "code": "import requests\n\nresponse = requests.delete(\n    'https://{% $api.base_url %}/api/v1/knowledge-source/bulk-delete/',\n    headers={\n        'Authorization': '{% $api.key %}',\n        'Content-Type': 'application/json'\n    },\n    json={'ids': [101, 102]}\n)\ndata = response.json()"
+  },
+  {
+    "language": "php",
+    "code": "$ch = curl_init('https://{% $api.base_url %}/api/v1/knowledge-source/bulk-delete/');\ncurl_setopt_array($ch, [\n    CURLOPT_RETURNTRANSFER => true,\n    CURLOPT_CUSTOMREQUEST => 'DELETE',\n    CURLOPT_HTTPHEADER => [\n        'Authorization: {% $api.key %}',\n        'Content-Type: application/json'\n    ],\n    CURLOPT_POSTFIELDS => json_encode(['ids' => [101, 102]])\n]);\n$data = json_decode(curl_exec($ch), true);\ncurl_close($ch);"
   }
 ]
 ```
@@ -60,57 +68,24 @@ Use the Bulk Delete endpoint to remove several knowledge sources at once, avoidi
 ```json
 {
     "message": "2 knowledge source(s) deleted successfully.",
-    "subscription": {
-        "planName": "EU Sovereign",
-        "planId": "36",
-        "started_at": "2026-02-18T08:16:03+00:00",
-        "ended_at": "2026-03-18T08:16:03+00:00",
-        "cancelled_at": null,
-        "failed_at": null
-    },
-    "status": "success",
-    "permissions": [
-        "CONFIGURE_BUSINESS",
-        "MANAGE_CHAT",
-        "VIEW_AGENTS",
-        "MANAGE_USERS",
-        "VIEW_KNOWLEDGE",
-        "MANAGE_AGENTS",
-        "VIEW_SETTINGS",
-        "VIEW_ANALYTICS",
-        "SEND_INVITE",
-        "MANAGE_ADMIN",
-        "MANAGE_API_KEY",
-        "VIEW_CHAT",
-        "MANAGE_BILLING",
-        "MANAGE_SETTINGS",
-        "MANAGE_KNOWLEDGE",
-        "VIEW_INTEGRATIONS",
-        "MANAGE_INTEGRATIONS",
-        "VIEW_USERS",
-        "TRAIN_AGENT",
-        "VIEW_BILLING"
-    ]
+    "status": "success"
 }
+
 ```
 {% /response %}
 
 ## Error Responses
 
-##### 400 Bad Request
+##### 400
 ```json
 {
-    "message": "No IDs provided for bulk deletion.",
-    "subscription": {
-        "planName": "EU Sovereign",
-        "planId": "36",
-        "started_at": "2026-02-18T08:16:03+00:00",
-        "ended_at": "2026-03-18T08:16:03+00:00",
-        "cancelled_at": null,
-        "failed_at": null
-    },
-    "status": "error",
+    "error": {
+        "code": "knowledge_source_not_found",
+        "message": "Some knowledge sources were not found.",
+        "status": 404
+    }
 }
+
 ```
 
 ## Best Practices
@@ -118,8 +93,3 @@ Use the Bulk Delete endpoint to remove several knowledge sources at once, avoidi
 - **Retrain after deletion**: Call [Retrain Agent](/api/agent-training/retrain-agent) after bulk deleting to update the vector index.
 - **Prefer bulk over single**: Minimise API calls and retraining cycles by batching all deletions into one request.
 
-## Rate Limits
-
-- 100 requests per minute for free tier
-- 1000 requests per minute for pro tier
-- 10000 requests per minute for enterprise tier

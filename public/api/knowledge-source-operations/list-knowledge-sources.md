@@ -47,11 +47,19 @@ Every agent is automatically assigned a knowledge folder when created. This endp
 [
   {
     "language": "curl",
-    "code": "curl -X GET 'https://{% $api.base_url %}v1/knowledge-source/?agent_id={agent ID}' -H 'Authorization: {% $api.key %}' -H 'Content-Type: application/json'"
+    "code": "curl -X GET 'https://{% $api.base_url %}/api/v1/knowledge-source/?agent_id={agent_id}' -H 'Authorization: {% $api.key %}'"
   },
   {
     "language": "javascript",
-    "code": "fetch('https://{% $api.base_url %}v1/knowledge-source/?agent_id={agent ID}, {\n  method: 'GET',\n  headers: {\n    'Authorization': '{% $api.key %}',\n    'Content-Type': 'application/json'\n  }\n})"
+    "code": "fetch('https://{% $api.base_url %}/api/v1/knowledge-source/?agent_id={agent_id}', {\n  method: 'GET',\n  headers: {\n    'Authorization': '{% $api.key %}'\n  }\n})"
+  },
+  {
+    "language": "python",
+    "code": "import requests\n\nresponse = requests.get(\n    'https://{% $api.base_url %}/api/v1/knowledge-source/',\n    params={'agent_id': '{agent_id}'},\n    headers={'Authorization': '{% $api.key %}'}\n)\ndata = response.json()"
+  },
+  {
+    "language": "php",
+    "code": "$ch = curl_init('https://{% $api.base_url %}/api/v1/knowledge-source/?agent_id={agent_id}');\ncurl_setopt_array($ch, [\n    CURLOPT_RETURNTRANSFER => true,\n    CURLOPT_HTTPHEADER => ['Authorization: {% $api.key %}']\n]);\n$data = json_decode(curl_exec($ch), true);\ncurl_close($ch);"
   }
 ]
 ```
@@ -61,63 +69,10 @@ Every agent is automatically assigned a knowledge folder when created. This endp
 ```json
 {
     "message": "List retrieved successfully",
+    "status": "success",
     "data": [
         {
-            "id": 1149,
-            "urls": [],
-            "file": "https://api-staging.7en.ai/media/knowledge_sources/CREATE_TEST_DATA_GUIDE_Vt7rpIlmLW0.md",
-            "plain_text": null,
-            "google_drive_file_id": null,
-            "title": "CREATE_TEST_DATA_GUIDE.md",
-            "status": "Active",
-            "type": "docs",
-            "agent_knowledge_folder": 591,
-            "parent_knowledge_source": null,
-            "metadata": {
-                "format": "md",
-                "file_size": "8306B",
-                "no_of_rows": null,
-                "no_of_chars": null,
-                "no_of_pages": null,
-                "upload_date": "2026-03-04T09:07:01.031416+00:00"
-            },
-            "owner": 193,
-            "is_selected": true,
-            "training_status": "Active",
-            "sub_urls": null,
-            "total_training_usage_bytes": 0,
-            "max_training_usage_bytes": 51200000,
-            "character_limit": 200000
-        },
-        {
-            "id": 1146,
-            "urls": [],
-            "file": null,
-            "plain_text": "This is a Plain Text for the knowledge Source.This is a Plain Text for the knowledge Source.This is a Plain Text for the knowledge Source.This is a Plain Text for the knowledge Source.This is a Plain Text for the knowledge Source.",
-            "google_drive_file_id": null,
-            "title": "Knowledge Base Articles",
-            "status": "Pending",
-            "type": "plain_text",
-            "agent_knowledge_folder": 591,
-            "parent_knowledge_source": null,
-            "metadata": {
-                "format": "txt",
-                "file_size": "230B",
-                "no_of_rows": 1,
-                "no_of_chars": 230,
-                "no_of_pages": null,
-                "upload_date": "2026-03-04T08:47:23.751398+00:00"
-            },
-            "owner": 193,
-            "is_selected": true,
-            "training_status": "Idle",
-            "sub_urls": null,
-            "total_training_usage_bytes": 0,
-            "max_training_usage_bytes": 51200000,
-            "character_limit": 200000
-        },
-        {
-            "id": 1147,
+            "id": 1158,
             "urls": [],
             "file": null,
             "plain_text": "This is a",
@@ -125,7 +80,7 @@ Every agent is automatically assigned a knowledge folder when created. This endp
             "title": "Knowledge Base Articles",
             "status": "Pending",
             "type": "plain_text",
-            "agent_knowledge_folder": 591,
+            "agent_knowledge_folder": 609,
             "parent_knowledge_source": null,
             "metadata": {
                 "format": "txt",
@@ -133,9 +88,9 @@ Every agent is automatically assigned a knowledge folder when created. This endp
                 "no_of_rows": 1,
                 "no_of_chars": 9,
                 "no_of_pages": null,
-                "upload_date": "2026-03-04T08:57:37.328117+00:00"
+                "upload_date": "2026-03-09T07:38:20.411336+00:00"
             },
-            "owner": 193,
+            "owner": 2,
             "is_selected": true,
             "training_status": "Idle",
             "sub_urls": null,
@@ -144,7 +99,7 @@ Every agent is automatically assigned a knowledge folder when created. This endp
             "character_limit": 200000
         },
         {
-            "id": 1148,
+            "id": 1159,
             "urls": [
                 "https://example.com/knowledge-base",
                 "https://example.com/tutorials"
@@ -152,10 +107,10 @@ Every agent is automatically assigned a knowledge folder when created. This endp
             "file": null,
             "plain_text": null,
             "google_drive_file_id": null,
-            "title": "Knowledge Base Articles",
+            "title": "Knowledge Base URLS",
             "status": "Pending",
             "type": "website",
-            "agent_knowledge_folder": 591,
+            "agent_knowledge_folder": 609,
             "parent_knowledge_source": null,
             "metadata": {
                 "format": "url",
@@ -163,9 +118,9 @@ Every agent is automatically assigned a knowledge folder when created. This endp
                 "no_of_rows": null,
                 "no_of_chars": null,
                 "no_of_pages": 2,
-                "upload_date": "2026-03-04T09:01:02.262151+00:00"
+                "upload_date": "2026-03-09T07:38:54.854360+00:00"
             },
-            "owner": 193,
+            "owner": 2,
             "is_selected": true,
             "training_status": "Idle",
             "sub_urls": null,
@@ -173,61 +128,24 @@ Every agent is automatically assigned a knowledge folder when created. This endp
             "max_training_usage_bytes": 51200000,
             "character_limit": 200000
         }
-    ],
-    "subscription": {
-        "planName": "EU Sovereign",
-        "planId": "36",
-        "started_at": "2026-02-18T08:16:03+00:00",
-        "ended_at": "2026-03-18T08:16:03+00:00",
-        "cancelled_at": null,
-        "failed_at": null
-    },
-    "features": null,
-    "status": "success",
-    "permissions": [
-        "MANAGE_AGENTS",
-        "MANAGE_ADMIN",
-        "MANAGE_INTEGRATIONS",
-        "VIEW_INTEGRATIONS",
-        "MANAGE_API_KEY",
-        "MANAGE_BILLING",
-        "MANAGE_KNOWLEDGE",
-        "VIEW_BILLING",
-        "MANAGE_SETTINGS",
-        "VIEW_AGENTS",
-        "MANAGE_CHAT",
-        "CONFIGURE_BUSINESS",
-        "VIEW_USERS",
-        "VIEW_ANALYTICS",
-        "TRAIN_AGENT",
-        "MANAGE_USERS",
-        "VIEW_CHAT",
-        "VIEW_KNOWLEDGE",
-        "SEND_INVITE",
-        "VIEW_SETTINGS"
     ]
 }
+
 ```
 {% /response %}
 
-## Error Responses
+## Error Response
 
 ##### 404
 ```json
 {
-    "message": "Agent not found.",
-    "status": "error",
     "error": {
         "code": "agent_not_found",
         "message": "Agent not found.",
-        "status": 404,
-        "fields": {
-            "general": [
-                "Agent not found."
-            ]
-        }
+        "status": 404
     }
 }
+
 ```
 
 ## Best Practices

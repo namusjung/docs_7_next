@@ -74,7 +74,7 @@ export default function SearchModal({ items, isOpen, onClose }: SearchModalProps
                                 autoFocus
                                 type="text"
                                 placeholder="Search documentation..."
-                                className="w-full bg-transparent border-none focus:ring-0 py-5 px-3 text-base outline-none text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400"
+                                className="w-full bg-transparent border-none focus:ring-0 py-5 px-3 text-sm outline-none text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400"
                                 value={query}
                                 onChange={(e) => setQuery(e.target.value)}
                             />
@@ -120,11 +120,11 @@ export default function SearchModal({ items, isOpen, onClose }: SearchModalProps
                                                 </div>
                                                 <div className="flex-1 min-w-0">
                                                     <div className="flex items-center gap-2 mb-0.5">
-                                                        <span className={`text-[15px] font-semibold truncate ${isSelected ? "text-neutral-900 dark:text-white" : "text-neutral-700 dark:text-neutral-300"}`}>
+                                                        <span className={`text-[14px] font-semibold truncate ${isSelected ? "text-neutral-900 dark:text-white" : "text-neutral-700 dark:text-neutral-300"}`}>
                                                             {item.title}
                                                         </span>
-                                                        <span className={`text-[9px] px-1.5 py-0.5 rounded-md font-bold uppercase tracking-wider ${item.category === 'api'
-                                                            ? "bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400"
+                                                        <span className={`text-[8px] px-1.5 py-0.5 rounded-md font-semibold uppercase tracking-wider ${item.category === 'api'
+                                                            ? "bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400"
                                                             : "bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400"
                                                             }`}>
                                                             {item.category}

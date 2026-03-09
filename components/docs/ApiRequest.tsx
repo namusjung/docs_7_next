@@ -1,20 +1,4 @@
 "use client";
-// type Props = {
-//   children?: React.ReactNode;
-//   title?: string;
-// };
-
-// export default function ApiRequest({ children, title = "Request" }: Props) {
-//   return (
-//     <div className="my-4 border rounded-lg overflow-hidden">
-//       <div className="px-4 py-2 bg-muted/50 text-xs font-medium">{title}</div>
-//       <div className="p-4 text-sm">
-//         {children}
-//       </div>
-//     </div>
-//   );
-// }
-
 
 import React, { useState } from 'react';
 import { Copy, Check, ChevronDown } from 'lucide-react';
@@ -28,92 +12,93 @@ interface CodeLanguage {
   code: string;
 }
 
+interface TabItem {
+  label: string;
+  examples: CodeLanguage[];
+}
+
 interface RequestCodePanelProps {
   children: any;
   title?: string;
   className?: string;
 }
 
+function parseContent(children: any): string {
+  if (!children || typeof children !== 'object') return '';
+  if (children.props?.content) return children.props.content;
+  if (Array.isArray(children)) {
+    return children.filter((c: any) => typeof c === 'string' && c.trim()).join('');
+  }
+  if (children.props && Array.isArray(children.props.children)) {
+    return children.props.children.filter((c: any) => typeof c === 'string' && c.trim()).join('');
+  }
+  return '';
+}
 
-export const ApiRequest: React.FC<RequestCodePanelProps> = ({ 
+export const ApiRequest: React.FC<RequestCodePanelProps> = ({
   children,
   title = "Request",
   className = ''
 }) => {
   const [copied, setCopied] = useState(false);
   const [isExpanded, setIsExpanded] = useState(true);
+  const [activeTab, setActiveTab] = useState(0);
 
-  console.log('RequestCodePanel: Received children:', children);
-  console.log('RequestCodePanel: Children type:', typeof children);
-
-  const cleanBodyContent = (arr: any) => {
-      // Step 1: Filter out null and whitespace
-      const filtered = arr.filter((item: any) => typeof item === 'string' && item.trim() !== '');
-      return filtered;
-    };
-  
-
-  // Parse the JSON array from children with better error handling
+  // --- Parse content ---
+  let tabs: TabItem[] | null = null;
   let languages: CodeLanguage[] = [];
+
   try {
-    let contentString = '';
-    
-    // Handle different children structures
-    if (children && typeof children === 'object') {
-      // Check if it's a CodeBlock component (common case after Markdoc transform)
-      if (children.props && children.props.content) {
-        contentString = children.props.content;
-        console.log('RequestCodePanel: Found content in CodeBlock props:', contentString);
-      }
-      // Handle array of children
-      else if (Array.isArray(children)) {
-        const cleaned = cleanBodyContent(children);
-        contentString = cleaned.join('');
-      } 
-      // Handle props.children array
-      else if (children.props && Array.isArray(children.props.children)) {
-        const cleaned = cleanBodyContent(children.props.children);
-        contentString = cleaned.join('');
+    const raw = parseContent(children);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (parsed && !Array.isArray(parsed) && Array.isArray(parsed.tabs)) {
+        // Tab format: { tabs: [{ label, examples: [{language, code}] }] }
+        tabs = parsed.tabs as TabItem[];
+      } else if (Array.isArray(parsed)) {
+        // Flat format: [{language, code}]
+        languages = parsed as CodeLanguage[];
       }
     }
-    
-    // If we have a content string, parse it
-    if (contentString) {
-      languages = JSON.parse(contentString);
-      console.log('RequestCodePanel: Successfully parsed languages:', languages);
-    }
-  } catch (error) {
-    console.error('RequestCodePanel: Failed to parse languages JSON:', error);
-    // If parsing fails, create a single text entry
-    languages = [{ language: 'text', code: typeof children === 'string' ? children : JSON.stringify(children, null, 2) }];
+  } catch {
+    languages = [{ language: 'text', code: typeof children === 'string' ? children : '' }];
   }
 
-  const [selectedLanguage, setSelectedLanguage] = useState(languages[0]?.language || 'text');
+  // Language selector state (used in both flat and tab mode)
+  const currentExamples = tabs ? (tabs[activeTab]?.examples ?? []) : languages;
+  const [selectedLanguage, setSelectedLanguage] = useState(currentExamples[0]?.language || 'text');
 
-  const currentLanguage = languages.find(lang => lang.language === selectedLanguage) || languages[0];
-  const codeToDisplay = currentLanguage?.code || '';
+  const currentCode =
+    currentExamples.find(l => l.language === selectedLanguage)?.code ||
+    currentExamples[0]?.code || '';
+
+  const dropdownOptions = currentExamples.map(l => ({
+    value: l.language,
+    label: l.language.charAt(0).toUpperCase() + l.language.slice(1),
+  }));
+
+  const handleTabClick = (index: number) => {
+    setActiveTab(index);
+    // Reset language to first available in that tab
+    const examples = tabs?.[index]?.examples ?? [];
+    setSelectedLanguage(examples[0]?.language || 'text');
+  };
 
   const copyCode = async () => {
     try {
-      await navigator.clipboard.writeText(codeToDisplay);
+      await navigator.clipboard.writeText(currentCode);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
-      console.error('RequestCodePanel: Failed to copy code:', err);
+      console.error('Failed to copy code:', err);
     }
   };
 
-  // Convert languages to dropdown options
-  const dropdownOptions = languages.map(lang => ({
-    value: lang.language,
-    label: lang.language.charAt(0).toUpperCase() + lang.language.slice(1)
-  }));
-
   return (
     <div className={`bg-gradient-to-br from-card to-muted/20 border border-border/50 rounded-2xl overflow-hidden shadow-sm mb-6 ${className}`}>
-      {/* Header */}
-      <div className="px-4 py-1 bg-gradient-to-r from-muted/40 to-muted/20 border-b border-border/50 flex items-center justify-between">
-        <div className="flex items-center gap-3 p-0 m-0">
+      {/* Header row */}
+      <div className="px-4 py-1 dark:bg-muted/10 bg-muted border-b border-border/50 flex items-center justify-between">
+        <div className="flex items-center gap-3">
           <button
             onClick={() => setIsExpanded(!isExpanded)}
             className="p-1 rounded-md hover:bg-muted/50 text-muted-foreground hover:text-foreground transition-colors"
@@ -122,42 +107,57 @@ export const ApiRequest: React.FC<RequestCodePanelProps> = ({
           </button>
           <h4 className="text-sm font-medium text-foreground py-3 !m-0">{title}</h4>
         </div>
-        
+
         <div className="flex items-center gap-2">
-          {/* Language Selector */}
-          {languages.length > 1 && isExpanded && (
+          {isExpanded && dropdownOptions.length > 1 && (
             <ModernDropdown
               value={selectedLanguage}
               onValueChange={setSelectedLanguage}
               options={dropdownOptions}
               placeholder="Select language"
-              className='!font-secondary text-xs p-2 py-1 h-8'
+              className="!font-secondary text-xs p-2 py-1 h-8"
             />
           )}
-          
           <ModernButton
             onClick={copyCode}
-            variant='ghost'
+            variant="ghost"
             className="hover:bg-gray-400"
-            size='sm'
-            style={{borderRadius: "6px"}}
+            size="sm"
+            style={{ borderRadius: '6px' }}
             iconOnly
           >
             {copied ? <Check size={14} /> : <Copy size={14} />}
           </ModernButton>
         </div>
       </div>
-      
-      {/* Code Content with Syntax Highlighting and ScrollArea */}
+
+      {/* Tab bar (only in tab mode) */}
+      {tabs && isExpanded && (
+        <div className="flex items-center gap-1 px-4 pt-3 pb-0 border-b border-border/30 overflow-x-auto">
+          {tabs.map((tab, i) => (
+            <div
+              key={tab.label}
+              className={`px-3 py-1 rounded-t-lg text-xs font-medium cursor-pointer transition-all select-none whitespace-nowrap ${i === activeTab
+                ? 'text-foreground border-primary dark:bg-muted/10 bg-muted'
+                : 'text-muted-foreground border-transparent hover:text-foreground hover:bg-muted/20'
+                }`}
+              onClick={() => handleTabClick(i)}
+            >
+              {tab.label}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Code content */}
       {isExpanded && (
-        <ScrollArea className="">
+        <ScrollArea>
           <SyntaxHighlighter
-            code={codeToDisplay}
+            code={currentCode}
             language={selectedLanguage}
             showCopyButton={false}
             className="bg-background"
           />
-       
         </ScrollArea>
       )}
     </div>
@@ -165,6 +165,3 @@ export const ApiRequest: React.FC<RequestCodePanelProps> = ({
 };
 
 export default ApiRequest;
-
-
-

@@ -5,7 +5,7 @@ import { MediaViewer } from "@/components/ui/MediaViewer";
 
 export const variables = {
   api: {
-    base_url: "api.7en.ai",
+    base_url: "api-beta.7en.ai",
     key: "Api-Key YOUR_API_KEY",
     version: "v1",
   },
@@ -15,9 +15,13 @@ export const variables = {
 // Helper function to interpolate variables in strings
 function interpolateVariables(str: string, vars: any): string {
   if (!str || typeof str !== 'string') return str;
-  
+
   let result = str;
   if (vars.api) {
+    result = result.replace(/\{%[-~]?\s*\$api\.base_url\s*[-~]?%\}/g, vars.api.base_url || '');
+    result = result.replace(/\{%[-~]?\s*\$api\.key\s*[-~]?%\}/g, vars.api.key || '');
+    result = result.replace(/\{%[-~]?\s*\$api\.version\s*[-~]?%\}/g, vars.api.version || '');
+    // also handle bare $api.var usage (no delimiters)
     result = result.replace(/\$api\.base_url/g, vars.api.base_url || '');
     result = result.replace(/\$api\.key/g, vars.api.key || '');
     result = result.replace(/\$api\.version/g, vars.api.version || '');
@@ -36,12 +40,12 @@ export const nodes = {
     transform(node: any, config: any) {
       const attributes = node.transformAttributes(config);
       const children = node.transformChildren(config);
-      
+
       // Interpolate variables in the content
       if (attributes.content && typeof attributes.content === 'string' && config.variables) {
         attributes.content = interpolateVariables(attributes.content, config.variables);
       }
-      
+
       return new Tag(
         this.render,
         attributes,
@@ -62,7 +66,7 @@ export const nodes = {
 };
 
 export const tags = {
-  
+
   media: {
     render: 'MediaViewer',
     attributes: {
@@ -100,21 +104,21 @@ export const tags = {
   "callout": {
     render: "Callout",
     attributes: {
-        type: {
-          type: String,
-          default: 'info',
-          matches: ['info', 'warning', 'success', 'error', 'tip']
-        },
-        title: {
-          type: String,
-          required: false
-        },
-        collapsible: {
-          type: Boolean,
-          required: false,
-          default: false
-        }
+      type: {
+        type: String,
+        default: 'info',
+        matches: ['info', 'warning', 'success', 'error', 'tip']
       },
+      title: {
+        type: String,
+        required: false
+      },
+      collapsible: {
+        type: Boolean,
+        required: false,
+        default: false
+      }
+    },
   },
   "grid": {
     render: "Grid",
@@ -142,12 +146,12 @@ export const tags = {
     transform(node: any, config: any) {
       const attributes = node.transformAttributes(config);
       const children = node.transformChildren(config);
-      
+
       // Interpolate variables in the URL
       if (attributes.url && typeof attributes.url === 'string' && config.variables) {
         attributes.url = interpolateVariables(attributes.url, config.variables);
       }
-      
+
       return new Tag(
         this.render,
         attributes,

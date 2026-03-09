@@ -223,11 +223,19 @@ Create a new AI agent with custom configuration. Agents can be set up as chatbot
 [
   {
     "language": "curl",
-    "code": "curl -X POST 'https://{% $api.base_url %}v1/agents/' \\\n  -H 'Authorization: {% $api.key %}' \\\n  -H 'Content-Type: application/json' \\\n  -d '{\n    \"name\": \"Support Bot\" \n \"agent_category\": \"chatbot\" \n }'"
+    "code": "curl -X POST 'https://{% $api.base_url %}/api/v1/agents/' \\\n  -H 'Authorization: {% $api.key %}' \\\n  -H 'Content-Type: application/json' \\\n  -d '{\n    \"name\": \"Support Bot\",\n    \"agent_category\": \"chatbot\"\n  }'"
   },
   {
     "language": "javascript",
-    "code": "const res = await fetch('https://{% $api.base_url %}v1/agents/', {\n  method: 'POST',\n  headers: {\n    'Authorization': '{% $api.key %}',\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n    name: 'Support Bot' \n agent_category: \"chatbot\" \n  })\n});\nconst { data } = await res.json();"
+    "code": "const res = await fetch('https://{% $api.base_url %}/api/v1/agents/', {\n  method: 'POST',\n  headers: {\n    'Authorization': '{% $api.key %}',\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n    name: 'Support Bot',\n    agent_category: 'chatbot'\n  })\n});\nconst { data } = await res.json();"
+  },
+  {
+    "language": "python",
+    "code": "import requests\n\nresponse = requests.post(\n    'https://{% $api.base_url %}/api/v1/agents/',\n    headers={\n        'Authorization': '{% $api.key %}',\n        'Content-Type': 'application/json'\n    },\n    json={\n        'name': 'Support Bot',\n        'agent_category': 'chatbot'\n    }\n)\ndata = response.json()"
+  },
+  {
+    "language": "php",
+    "code": "$ch = curl_init('https://{% $api.base_url %}/api/v1/agents/');\ncurl_setopt_array($ch, [\n    CURLOPT_RETURNTRANSFER => true,\n    CURLOPT_POST => true,\n    CURLOPT_HTTPHEADER => [\n        'Authorization: {% $api.key %}',\n        'Content-Type: application/json'\n    ],\n    CURLOPT_POSTFIELDS => json_encode([\n        'name' => 'Support Bot',\n        'agent_category' => 'chatbot'\n    ])\n]);\n$data = json_decode(curl_exec($ch), true);\ncurl_close($ch);"
   }
 ]
 ```
@@ -238,10 +246,11 @@ Create a new AI agent with custom configuration. Agents can be set up as chatbot
 ```json
 {
     "message": "Resource created successfully",
+    "status": "success",
     "data": {
-        "id": 671,
-        "owner": 193,
-        "name": "Support Bot",
+        "id": 689,
+        "owner": 2,
+        "name": "Customer Support Agents",
         "description": null,
         "status": "Idle",
         "appearance": {},
@@ -250,11 +259,11 @@ Create a new AI agent with custom configuration. Agents can be set up as chatbot
             "display_model": null
         },
         "agentType": "General Assistant",
-        "agent_category": "chatbot",
+        "agent_category": null,
         "systemPrompt": "",
         "knowledge_sources": [],
-        "created_at": "2026-03-04T07:27:06.264485Z",
-        "updated_at": "2026-03-04T07:27:06.264500Z",
+        "created_at": "2026-03-09T07:28:11.656646Z",
+        "updated_at": "2026-03-09T07:28:11.656660Z",
         "conversations": 0,
         "ticketing_providers": [],
         "default_ticketing_provider": null,
@@ -265,52 +274,13 @@ Create a new AI agent with custom configuration. Agents can be set up as chatbot
             "data_retention_message": null,
             "gdpr_message_display": false
         },
-        "is_white_label": false,
+        "is_white_label": true,
         "total_training_usage_bytes": 0,
         "max_training_usage_bytes": 51200000,
         "character_limit": 200000
-    },
-    "subscription": {
-        "planName": "EU Sovereign",
-        "planId": "36",
-        "started_at": "2026-02-18T08:16:03+00:00",
-        "ended_at": "2026-03-18T08:16:03+00:00",
-        "cancelled_at": null,
-        "failed_at": null
-    },
-    "features": {
-        "WHITE_LABELING": false,
-        "PREMIUM_MODELS": false,
-        "AUTO_TICKET_RESPONSE": true,
-        "ADD_ON_AGENT": false,
-        "EMAIL_HANDOFF": true,
-        "AGENT_HANDOFF": true,
-        "INTEGRATION_HANDOFF": true
-    },
-    "status": "success",
-    "permissions": [
-        "VIEW_ANALYTICS",
-        "MANAGE_USERS",
-        "MANAGE_ADMIN",
-        "MANAGE_API_KEY",
-        "CONFIGURE_BUSINESS",
-        "VIEW_SETTINGS",
-        "MANAGE_CHAT",
-        "SEND_INVITE",
-        "MANAGE_AGENTS",
-        "VIEW_KNOWLEDGE",
-        "MANAGE_KNOWLEDGE",
-        "VIEW_INTEGRATIONS",
-        "MANAGE_INTEGRATIONS",
-        "MANAGE_BILLING",
-        "VIEW_CHAT",
-        "VIEW_USERS",
-        "MANAGE_SETTINGS",
-        "VIEW_AGENTS",
-        "TRAIN_AGENT",
-        "VIEW_BILLING"
-    ]
+    }
 }
+
 ```
 {% /response %}
 
@@ -327,54 +297,36 @@ Create a new AI agent with custom configuration. Agents can be set up as chatbot
 ##### 400
 ```json
 {
-    "message": "Validation error",
-    "status": "error",
-    "error": {
-        "code": "api_error",
-        "message": "Validation error",
-        "status": 400,
-        "fields": {
-            "name": [
-                "This field is required."
-            ]
-        }
-    }
+    "error": {
+        "code": "name_required",
+        "message": "The name field is required.",
+        "status": 400
+    }
 }
+
 ```
 
 ##### 403
 ```json
 {
-    "message": "Invalid or inactive API key.",
-    "status": "error",
-    "error": {
-        "code": "error",
-        "message": "Invalid or inactive API key.",
-        "status": 403,
-        "fields": {
-            "general": [
-                "Invalid or inactive API key."
-            ]
-        }
-    }
+    "error": {
+        "code": "invalid_api_key",
+        "message": "The provided API key is invalid or has been revoked.",
+        "status": 403
+    }
 }
 
 ```
 
 ##### 400
 ```json
+
 {
-    "message": "Agent limit reached. Upgrade your plan or add seats.",
-    "error": {
-        "code": "agent_limit_reached",
-        "message": "Agent limit reached. Upgrade your plan or add seats.",
-        "status": 400,
-        "fields": {
-            "general": [
-                "Agent limit reached. Upgrade your plan or add seats."
-            ]
-        }
-    }
+    "error": {
+        "code": "agent_limit_reached",
+        "message": "Agent limit reached. Upgrade your plan or add seats.",
+        "status": 400
+    }
 }
 ```
 

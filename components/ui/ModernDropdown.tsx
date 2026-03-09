@@ -7,7 +7,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/DropdownMenu';
-import  ModernButton  from '@/components/ui/ModernButton';
+import ModernButton from '@/components/ui/ModernButton';
 import { ScrollArea } from '@/components/ui/ScrollArea';
 
 interface ModernDropdownOption {
@@ -33,10 +33,10 @@ interface ModernDropdownProps {
   showSearch?: boolean;
 }
 
-export const ModernDropdown = ({ 
-  value, 
-  onValueChange, 
-  options, 
+export const ModernDropdown = ({
+  value,
+  onValueChange,
+  options,
   placeholder = "Select option...",
   className,
   disabled = false,
@@ -58,7 +58,7 @@ export const ModernDropdown = ({
     }
 
     const query = searchQuery.toLowerCase().trim();
-    return options.filter(option => 
+    return options.filter(option =>
       option.label.toLowerCase().includes(query) ||
       option.value.toLowerCase().includes(query) ||
       option.description?.toLowerCase().includes(query)
@@ -86,14 +86,14 @@ export const ModernDropdown = ({
             variant="outline"
             disabled={disabled}
             className={cn(
-              "w-full justify-between rounded-xl border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 font-normal text-gray-900 hover:text-gray-950 dark:text-gray-100 px-3 py-2 h-10",
+              "w-full justify-between rounded-xl border-gray-200 bg-white dark:bg-transparent dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 font-normal text-gray-900 hover:text-gray-950 dark:text-gray-100 px-3 py-2 h-10",
               className
             )}
           >
             <span className="truncate flex items-center gap-2">
               {selectedOption?.logo && (
-                <img 
-                  src={selectedOption.logo} 
+                <img
+                  src={selectedOption.logo}
                   alt={`${selectedOption.label} flag`}
                   className="w-5 h-4 object-cover rounded-sm flex-shrink-0"
                   onError={(e) => {
@@ -107,17 +107,17 @@ export const ModernDropdown = ({
           </ModernButton>
         )}
       </DropdownMenuTrigger>
-      <DropdownMenuContent 
+      <DropdownMenuContent
         className={cn(
-          "w-full min-w-[var(--radix-dropdown-menu-trigger-width)] bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 rounded-xl shadow-lg z-[9999] pb-3",
+          "w-full min-w-[var(--radix-dropdown-menu-trigger-width)] bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-700 rounded-xl shadow-lg z-[9999] pb-3",
           (searchable && showSearch) && "p-0"
         )}
         sideOffset={4}
         align={align}
       >
-        
-        
-        <div 
+
+
+        <div
           className={cn(
             (searchable && showSearch) ? "p-1" : "",
             "w-full",
@@ -128,7 +128,7 @@ export const ModernDropdown = ({
             showSearch && "[&::-webkit-scrollbar-thumb]:rounded-full",
             showSearch && "[&::-webkit-scrollbar-thumb:hover]:bg-gray-400 [&::-webkit-scrollbar-thumb:hover]:dark:bg-gray-500"
           )}
-          style={{ 
+          style={{
             maxHeight: showSearch ? maxHeight : "auto",
             overflowY: showSearch ? "auto" : "visible"
           }}
@@ -148,8 +148,8 @@ export const ModernDropdown = ({
                     <div className="flex items-center justify-between w-full">
                       <div className="flex items-center gap-3">
                         {option.logo && (
-                          <img 
-                            src={option.logo} 
+                          <img
+                            src={option.logo}
                             alt={`${option.label} logo`}
                             className="w-5 h-5 object-contain"
                             onError={(e) => {

@@ -16,9 +16,9 @@ interface ResponseExampleProps {
   statusBadge?: boolean;
 }
 
-export const ApiResponse: React.FC<ResponseExampleProps> = ({ 
-  status = '', 
-  children, 
+export const ApiResponse: React.FC<ResponseExampleProps> = ({
+  status = '',
+  children,
   title = "Response",
   className = '',
   language = 'text',
@@ -30,11 +30,13 @@ export const ApiResponse: React.FC<ResponseExampleProps> = ({
   const [isExpanded, setIsExpanded] = useState(true);
   const [cleanCode, setCleanCode] = useState("");
 
+  const code = children?.props?.children || "";
+
   const copyResponse = async () => {
     if (!copy) return;
-    
+
     try {
-      await navigator.clipboard.writeText(children);
+      await navigator.clipboard.writeText(code);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
@@ -42,13 +44,11 @@ export const ApiResponse: React.FC<ResponseExampleProps> = ({
     }
   };
 
-  const code = children?.props?.children || "";
- 
 
   return (
     <div className={`bg-card border border-border rounded-2xl overflow-hidden ${className}`}>
       {/* Header */}
-      <div className="px-4 py-1 bg-muted/30 border-b border-border flex items-center justify-between">
+      <div className="px-4 py-1 bg-muted dark:bg-muted/10 border-b border-border flex items-center justify-between">
         <div className="flex items-center gap-3 p-0 m-0">
           {hasDropDown && (
             <button
@@ -71,7 +71,7 @@ export const ApiResponse: React.FC<ResponseExampleProps> = ({
           </button>
         )}
       </div>
-      
+
       {/* Code Content with Syntax Highlighting and ScrollArea */}
       {isExpanded && (
         <ScrollArea className="max-h-96">

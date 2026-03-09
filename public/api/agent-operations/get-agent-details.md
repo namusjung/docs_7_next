@@ -46,11 +46,19 @@ The Get Agent Details endpoint returns the full configuration object for a speci
 [
   {
     "language": "curl",
-    "code": "curl -X GET 'https://{% $api.base_url %}api/v1/agents/{id}' -H 'Authorization: {% $api.key %}' -H 'Content-Type: application/json'"
+    "code": "curl -X GET 'https://{% $api.base_url %}/api/v1/agents/{id}' -H 'Authorization: {% $api.key %}' -H 'Content-Type: application/json'"
   },
   {
     "language": "javascript",
-    "code": "fetch('https://{% $api.base_url %}api/v1/agents/{id}', {\n  method: 'GET',\n  headers: {\n    'Authorization': '{% $api.key %}',\n    'Content-Type': 'application/json'\n  }\n})"
+    "code": "fetch('https://{% $api.base_url %}/api/v1/agents/{id}', {\n  method: 'GET',\n  headers: {\n    'Authorization': '{% $api.key %}',\n    'Content-Type': 'application/json'\n  }\n})"
+  },
+  {
+    "language": "python",
+    "code": "import requests\n\nresponse = requests.get(\n    'https://{% $api.base_url %}/api/v1/agents/{id}',\n    headers={'Authorization': '{% $api.key %}'}\n)\ndata = response.json()"
+  },
+  {
+    "language": "php",
+    "code": "$ch = curl_init('https://{% $api.base_url %}/api/v1/agents/{id}');\ncurl_setopt_array($ch, [\n    CURLOPT_RETURNTRANSFER => true,\n    CURLOPT_HTTPHEADER => ['Authorization: {% $api.key %}']\n]);\n$data = json_decode(curl_exec($ch), true);\ncurl_close($ch);"
   }
 ]
 ```
@@ -60,10 +68,11 @@ The Get Agent Details endpoint returns the full configuration object for a speci
 ```json
 {
     "message": "Resource retrieved successfully",
+    "status": "success",
     "data": {
-        "id": 671,
-        "owner": 193,
-        "name": "Support Bot",
+        "id": 689,
+        "owner": 2,
+        "name": "Customer Support Agents",
         "description": null,
         "status": "Idle",
         "appearance": {},
@@ -75,8 +84,8 @@ The Get Agent Details endpoint returns the full configuration object for a speci
         "agent_category": null,
         "systemPrompt": "",
         "knowledge_sources": [],
-        "created_at": "2026-03-04T07:27:06.264485Z",
-        "updated_at": "2026-03-04T07:27:06.264500Z",
+        "created_at": "2026-03-09T07:28:11.656646Z",
+        "updated_at": "2026-03-09T07:28:11.656660Z",
         "conversations": 0,
         "ticketing_providers": [],
         "default_ticketing_provider": null,
@@ -87,91 +96,27 @@ The Get Agent Details endpoint returns the full configuration object for a speci
             "data_retention_message": null,
             "gdpr_message_display": false
         },
-        "is_white_label": false,
+        "is_white_label": true,
         "total_training_usage_bytes": 0,
         "max_training_usage_bytes": 51200000,
         "character_limit": 200000
-    },
-    "subscription": {
-        "planName": "EU Sovereign",
-        "planId": "36",
-        "started_at": "2026-02-18T08:16:03+00:00",
-        "ended_at": "2026-03-18T08:16:03+00:00",
-        "cancelled_at": null,
-        "failed_at": null
-    },
-    "features": {
-        "WHITE_LABELING": false,
-        "PREMIUM_MODELS": false,
-        "AUTO_TICKET_RESPONSE": true,
-        "ADD_ON_AGENT": false,
-        "EMAIL_HANDOFF": true,
-        "AGENT_HANDOFF": true,
-        "INTEGRATION_HANDOFF": true
-    },
-    "status": "success",
-    "permissions": [
-        "VIEW_ANALYTICS",
-        "MANAGE_INTEGRATIONS",
-        "SEND_INVITE",
-        "MANAGE_AGENTS",
-        "CONFIGURE_BUSINESS",
-        "MANAGE_BILLING",
-        "VIEW_CHAT",
-        "MANAGE_SETTINGS",
-        "VIEW_SETTINGS",
-        "MANAGE_USERS",
-        "VIEW_KNOWLEDGE",
-        "VIEW_BILLING",
-        "MANAGE_CHAT",
-        "VIEW_INTEGRATIONS",
-        "VIEW_AGENTS",
-        "MANAGE_KNOWLEDGE",
-        "MANAGE_ADMIN",
-        "VIEW_USERS",
-        "TRAIN_AGENT",
-        "MANAGE_API_KEY"
-    ]
+    }
 }
 ```
 {% /response %}
 
-## Error Responses
-
-##### 403
-```json
-{
-    "message": "Invalid or inactive API key.",
-    "status": "error",
-    "error": {
-        "code": "error",
-        "message": "Invalid or inactive API key.",
-        "status": 403,
-        "fields": {
-            "general": [
-                "Invalid or inactive API key."
-            ]
-        }
-    }
-}
-```
+## Error Response
 
 ##### 404
 ```json
 {
-    "message": "Agent not found.",
-    "status": "error",
-    "error": {
-        "code": "agent_not_found",
-        "message": "Agent not found.",
-        "status": 404,
-        "fields": {
-            "general": [
-                "Agent not found."
-            ]
-        }
-    }
+    "error": {
+        "code": "agent_not_found",
+        "message": "Agent not found.",
+        "status": 404
+    }
 }
+
 ```
 
 ## Best Practices
