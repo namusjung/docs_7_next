@@ -1,6 +1,7 @@
 ---
 type: docs
 title: Zapier
+hidden: true
 order: 8
 breadcrumb_chain:
   - { label: "Home", href: "/" }

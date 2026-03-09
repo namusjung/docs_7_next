@@ -50,7 +50,7 @@ const FeatureGrid: React.FC = () => {
       ),
       title: "FAQ & Support",
       description: "Quick answers and community support to unlock 7en.ai's full potential.",
-      link: "/faq/faq"
+      link: "/support/faq"
     }
   ];
 

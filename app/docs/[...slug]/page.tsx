@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import React from "react";
 import Link from "next/link";
 import * as Markdoc from "@markdoc/markdoc";
-import { getDocsNav, getDocsNavFlat, parseFrontmatter, readMarkdownFile } from "@/lib/docs-utils";
+import { getDocsNav, getDocsNavFlat, getAllDocsSlugs, parseFrontmatter, readMarkdownFile } from "@/lib/docs-utils";
 import { config } from "@/lib/markdoc.config";
 import Callout from "@/components/docs/Callout";
 import DocSection from "@/components/docs/DocSection";
@@ -23,8 +23,7 @@ import { MediaViewer } from "@/components/ui/MediaViewer";
 type Params = any;
 
 export function generateStaticParams() {
-  const navItems = getDocsNavFlat();
-  return navItems.map((n) => ({ slug: n.slug }));
+  return getAllDocsSlugs().map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: { params: Params }) {

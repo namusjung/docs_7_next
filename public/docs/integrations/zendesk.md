@@ -1,6 +1,7 @@
 ---
 type: docs
 title: Zendesk
+hidden: true
 order: 2
 breadcrumb_chain:
   - { label: "Home", href: "/" }

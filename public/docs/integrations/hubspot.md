@@ -2,6 +2,7 @@
 title: "HubSpot"
 type: "docs"
 order: 4
+hidden: true
 breadcrumb_chain:
   - { label: "Home", href: "/" }
   - { label: "Docs", href: "/docs/intro" }

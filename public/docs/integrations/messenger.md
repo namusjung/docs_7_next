@@ -1,5 +1,6 @@
 ---
 title: "Messenger"
+hidden: true
 type: "docs"
 order: 7
 breadcrumb_chain:

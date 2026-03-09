@@ -16,7 +16,7 @@ export type NavItem = { slug: string[]; frontmatter: Frontmatter };
 
 const DOCS_DIR = path.join(process.cwd(), "public", "docs");
 const API_DIR = path.join(process.cwd(), "public", "api");
-const FAQ_DIR = path.join(process.cwd(), "public", "faq");
+const FAQ_DIR = path.join(process.cwd(), "public", "support");
 
 export function readMarkdownFile(baseDir: string, slug: string[]): string {
   const filePath = path.join(baseDir, ...slug) + ".md";
@@ -90,11 +90,13 @@ export function getOrderedFolders(root: string): FolderInfo[] {
 }
 
 function buildNavItems(baseDir: string, slugs: string[][]): NavItem[] {
-  return slugs.map((slug) => {
-    const raw = readMarkdownFile(baseDir, slug);
-    const { frontmatter } = parseFrontmatter(raw);
-    return { slug, frontmatter };
-  });
+  return slugs
+    .map((slug) => {
+      const raw = readMarkdownFile(baseDir, slug);
+      const { frontmatter } = parseFrontmatter(raw);
+      return { slug, frontmatter };
+    })
+    .filter((item) => !item.frontmatter.hidden);
 }
 
 function sortNavItems(items: NavItem[]) {
@@ -190,6 +192,31 @@ export const getFaqNav = cache((): NavItem[] => {
 
 export function getFaqNavFlat(): NavItem[] {
   return getFaqNav();
+}
+
+// These return ALL slugs including hidden pages — use only in generateStaticParams
+export function getAllDocsSlugs(): string[][] {
+  const folders = getOrderedFolders(DOCS_DIR);
+  const all: string[][] = [];
+  for (const folder of folders) {
+    const folderPath = path.join(DOCS_DIR, folder.slug);
+    getAllSlugs(folderPath).forEach((s) => all.push([folder.slug, ...s]));
+  }
+  return all;
+}
+
+export function getAllApiSlugs(): string[][] {
+  const folders = getOrderedFolders(API_DIR);
+  const all: string[][] = [];
+  for (const folder of folders) {
+    const folderPath = path.join(API_DIR, folder.slug);
+    getAllSlugs(folderPath).forEach((s) => all.push([folder.slug, ...s]));
+  }
+  return all;
+}
+
+export function getAllFaqSlugs(): string[][] {
+  return getAllSlugs(FAQ_DIR);
 }
 
 export type SearchItem = { title: string; href: string; section: string; category: 'docs' | 'api' | 'faq' };

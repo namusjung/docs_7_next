@@ -20,7 +20,13 @@
       "Bash(ls \"d:/7en/docs/docs_7_next/lib/\"*markdoc*)",
       "Bash(grep -l \"<td\\\\|<tr\\\\|<th\\\\|<table\" \"d:/7en/docs/docs_7_next/public/api/api-reference\"/*.md)",
       "Bash(grep -l \"html_inline\\\\|html_block\" \"d:/7en/docs/docs_7_next/node_modules/@markdoc/markdoc/dist/src\"/*.js)",
-      "Bash(cat /d/7en/Web/docs_7_next/public/api/*/_meta.json)"
+      "Bash(cat /d/7en/Web/docs_7_next/public/api/*/_meta.json)",
+      "Bash(mkdir -p \"d:\\\\7en\\\\Web\\\\docs_7_next\\\\app\\\\support\\\\[...slug]\")",
+      "Bash(cp \"d:\\\\7en\\\\Web\\\\docs_7_next\\\\app\\\\faq\\\\[...slug]\\\\page.tsx\" \"d:\\\\7en\\\\Web\\\\docs_7_next\\\\app\\\\support\\\\[...slug]\\\\page.tsx\")",
+      "Bash(rm -f \"d:\\\\7en\\\\Web\\\\docs_7_next\\\\app\\\\faq\\\\[...slug]\\\\page.tsx\")",
+      "Bash(rmdir \"d:\\\\7en\\\\Web\\\\docs_7_next\\\\app\\\\faq\\\\[...slug]\")",
+      "Bash(npm run dev)",
+      "Bash(taskkill /F /IM node.exe)"
     ]
   }
 }

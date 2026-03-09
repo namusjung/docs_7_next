@@ -84,19 +84,6 @@ Follow these quick steps to connect Zoho Desk to 7en.ai, with visual aids to sim
 
 {% /section %}
 
-{% section id="troubleshooting" title="Troubleshooting and Support" %}
-
-If you encounter issues during setup:
-
-- **Login Errors**: Verify your Zoho credentials and ensure you’re using an admin account.
-- **Connection Failures**: Check your internet connection and try re-authorizing.
-- **Review Logs**: Inspect 7en.ai’s integration logs for error details.
-- **Get Support**:
-  - **Documentation**: Explore [/docs/integrations](/docs/integrations) for detailed guides.
-  - **Support Tickets**: Submit a ticket via the 7en.ai dashboard.
-  - **Community**: Join the 7en.ai Discord for peer assistance.
-  - **Tutorials**: Watch integration-focused videos in the 7en.ai learning hub.
-
 ### Next Steps
 
 1. [Test your Zoho Desk integration →](/integrations/test)

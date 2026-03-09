@@ -37,7 +37,7 @@ export default function SiteHeader({ searchItems = [] }: { searchItems?: SearchI
     { name: "Home", href: "/", icon: Home },
     { name: "Docs", href: "/docs/getting-started/introduction", icon: Lightbulb },
     { name: "API Reference", href: "/api/api-reference/introduction", icon: BookOpen },
-    { name: "FAQ", href: "/faq/faq", icon: HelpCircle },
+    { name: "FAQ", href: "/support/faq", icon: HelpCircle },
   ];
 
   return (

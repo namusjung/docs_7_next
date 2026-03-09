@@ -241,4 +241,5 @@ export type Frontmatter = {
   breadcrumb_chain?: { label?: string; href?: string }[];
   next?: {};
   prev?: {};
+  hidden?: boolean;
 };

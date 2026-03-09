@@ -1,6 +1,7 @@
 ---
 title: "WhatsApp"
 type: "docs"
+hidden: true
 order: 6
 breadcrumb_chain:
   - { label: "Home", href: "/" }

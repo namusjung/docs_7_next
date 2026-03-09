@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import React from "react";
 import Link from "next/link";
 import * as Markdoc from "@markdoc/markdoc";
-import { getFaqNav, getFaqNavFlat, parseFrontmatter, readMarkdownFile } from "@/lib/docs-utils";
+import { getFaqNav, getFaqNavFlat, getAllFaqSlugs, parseFrontmatter, readMarkdownFile } from "@/lib/docs-utils";
 import { config } from "@/lib/markdoc.config";
 import Callout from "@/components/docs/Callout";
 import DocSection from "@/components/docs/DocSection";
@@ -17,14 +17,13 @@ import MobileNav from "@/components/docs/MobileNav";
 type Params = any;
 
 export function generateStaticParams() {
-  const navItems = getFaqNavFlat();
-  return navItems.map((n) => ({ slug: n.slug }));
+  return getAllFaqSlugs().map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: { params: Params }) {
   try {
     const { slug } = await params;
-    const raw = readMarkdownFile(process.cwd() + "/public/faq", slug);
+    const raw = readMarkdownFile(process.cwd() + "/public/support", slug);
     const { frontmatter } = parseFrontmatter(raw);
     const title = frontmatter.title ? `${frontmatter.title} | 7en.ai` : "7en.ai FAQ";
     const description = frontmatter.description || "Frequently asked questions about 7en.ai.";
@@ -39,10 +38,10 @@ export async function generateMetadata({ params }: { params: Params }) {
   }
 }
 
-export default async function FaqPage({ params }: { params: Params }) {
+export default async function SupportPage({ params }: { params: Params }) {
   try {
     params = await params;
-    const raw = readMarkdownFile(process.cwd() + "/public/faq", params.slug);
+    const raw = readMarkdownFile(process.cwd() + "/public/support", params.slug);
     const { frontmatter, markdown } = parseFrontmatter(raw);
     const ast = Markdoc.parse(markdown);
     const content = Markdoc.transform(ast, config);
@@ -57,11 +56,11 @@ export default async function FaqPage({ params }: { params: Params }) {
       : []) as { name: string; href?: string }[];
 
     const navItems = getFaqNavFlat();
-    const groupedNav = [{ section: "FAQ", items: navItems }];
+    const groupedNav = [{ section: "Support", items: navItems }];
 
     return (
       <>
-        <MobileNav groupedNav={groupedNav} currentSlug={params.slug} basePath="/faq" />
+        <MobileNav groupedNav={groupedNav} currentSlug={params.slug} basePath="/support" />
         <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[280px_minmax(0,1fr)_200px] gap-8 py-10">
           <aside className="hidden lg:block">
             <nav className="sidebar-nav sticky top-28 h-[calc(100vh-7rem)] overflow-y-auto space-y-4 pr-2">
@@ -72,7 +71,7 @@ export default async function FaqPage({ params }: { params: Params }) {
                     {group.items.map((item) => (
                       <Link
                         key={item.slug.join("/")}
-                        href={`/faq/${item.slug.join("/")}`}
+                        href={`/support/${item.slug.join("/")}`}
                         className={`block text-sm px-4 py-1.5 pl-2 dark:hover:bg-muted/10 hover:bg-gray-100 hover:!text-black dark:hover:!text-white rounded-lg ${
                           params.slug.join("/") === item.slug.join("/")
                             ? "dark:!bg-muted/20 bg-gray-200 !text-black dark:!text-white"

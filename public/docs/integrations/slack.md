@@ -1,5 +1,6 @@
 ---
 type: docs
+hidden: true
 title: Slack
 order: 5
 breadcrumb_chain:

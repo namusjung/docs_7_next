@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import React from "react";
 import Link from "next/link";
 import * as Markdoc from "@markdoc/markdoc";
-import { parseFrontmatter, readMarkdownFile, getApiNav, getApiGroupedNav } from "@/lib/docs-utils";
+import { parseFrontmatter, readMarkdownFile, getApiNav, getApiGroupedNav, getAllApiSlugs } from "@/lib/docs-utils";
 import { apiConfig, config, variables } from "@/lib/markdoc.config";
 import { customTransform } from "@/lib/markdoc-utils";
 import Callout from "@/components/docs/Callout";
@@ -25,7 +25,7 @@ import { MediaViewer } from "@/components/ui/MediaViewer";
 type Params = any;
 
 export function generateStaticParams() {
-  return getApiNav().map((n) => ({ slug: n.slug }));
+  return getAllApiSlugs().map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: { params: Params }) {
