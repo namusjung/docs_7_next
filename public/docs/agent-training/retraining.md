@@ -1,12 +1,27 @@
 ---
-title: "Retraining Your Agent"
+title: "Retrain Your Agent"
 type: "docs"
 order: 5
+breadcrumb_chain:
+  - { label: "Home", href: "/" }
+  - { label: "Docs", href: "/docs/intro" }
+  - { label: "Agent Training", href: "" }
+  - { label: "Retrain Your Agent" }
+prev:
+  href: /docs/agent-training/using-gdrive
+  title: "Using Google Drive"
+next:
+  href: /docs/knowledge-management/knowledge-folder
+  title: "Knowledge Folder"
 ---
 
-# Retraining Your Agent
+# ReTrain Your Agent
+
+{% section id="overview" title="Overview" %}
 
 Adding a knowledge source does not automatically update your agent. You must trigger a training run to rebuild the agent's knowledge index. This page explains when to retrain, how to do it, and how to monitor progress.
+
+{% /section %}
 
 {% section id="when" title="When to Retrain" %}
 
@@ -18,8 +33,8 @@ Retrain your agent whenever:
 - You notice the agent giving **outdated** answers after a product or policy change
 
 You do **not** need to retrain when:
-- You change the system prompt or guidelines
-- You adjust model settings (temperature, max tokens)
+- You change the guidelines or escalation rules
+- You adjust model settings
 - You update appearance settings
 
 {% /section %}
@@ -28,8 +43,8 @@ You do **not** need to retrain when:
 
 ### From the Agent Dashboard
 
-1. Open your agent from the [7en Dashboard](https://app.7en.ai)
-2. Navigate to **Agent Training**
+1. Open your **AI Agents** page from the [7en Dashboard](https://app.7en.ai)
+2. Navigate to desired agent
 3. Click **Train Agent**
 
 Training begins immediately. The agent status changes to **Training** while the process runs.
@@ -42,11 +57,11 @@ If you need to add multiple sources or delete several outdated ones, make all of
 
 {% section id="status" title="Monitoring Training Status" %}
 
-Training status is shown in the agent header and the Knowledge Management section:
+Training status is shown in the agent header and the Knowledge Management panel:
 
 | Status | Meaning |
 |---|---|
-| **Active** | Training complete — agent is live and using the latest sources |
+| **Trained** | Training complete — agent is live and using the latest sources |
 | **Training** | Retraining in progress — wait before testing or deploying |
 | **Issues** | One or more sources failed to train — see Knowledge Management for details |
 
@@ -58,20 +73,3 @@ Your agent remains available to users during retraining, but it continues to use
 
 {% /section %}
 
-{% section id="troubleshooting" title="Troubleshooting Failed Training" %}
-
-If a source fails to train, it will be flagged in your Knowledge Folder with an error status. Common causes:
-
-**URL sources:**
-- The page was behind a login or paywall
-- The URL returned a 404 or redirect
-- The content was blocked by `robots.txt`
-
-**Document sources:**
-- The file format was unsupported
-- The file was corrupted or password-protected
-- The document exceeded the size limit (10 MB)
-
-**Fix:** Delete the failed source, resolve the underlying issue, re-add it, and trigger a new training run.
-
-{% /section %}

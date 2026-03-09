@@ -1,18 +1,27 @@
 ---
 type: docs
 title: Using Documents
-order: 6
-next: 
-  href: /docs/integrations
-  title: "Integrations"
-prev: 
-  href: /docs/getting-started/introduction
-  title: "Getting Started with 7en.ai"
+order: 1
+breadcrumb_chain:
+  - { label: "Home", href: "/" }
+  - { label: "Docs", href: "/docs/intro" }
+  - { label: "Agent Training", href: "" }
+  - { label: "Using Documents" }
+prev:
+  href: /docs/build-your-agent/chat-integration
+  title: "Chat Integration"
+next:
+  href: /docs/agent-training/using-urls
+  title: "Using URLs"
 ---
 
+# Train Agent Using Documents
 
+{% section id="overview" title="Overview" %}
 
-{% section id="using-documents" title="Training agent using Documents" %}
+The "Documents" tab within the "Add Knowledge Sources" modal allows you to train your AI agent using static files such as PDFs or text documents. This method is ideal for ingesting internal company policies, product manuals, or legacy data that resides offline rather than on a public website.
+
+{% /section %}
 
 {% media
   type="iframe"
@@ -23,8 +32,6 @@ prev:
   title="Build and Train Knowledge Sources for AI Agents"
   caption="Interactive demo showing agent training using documents"
 /%}
-
-The "Documents" tab within the "Add Knowledge Sources" modal allows you to train your AI agent using static files such as PDFs or text documents. This method is ideal for ingesting internal company policies, product manuals, or legacy data that resides offline rather than on a public website.
 
 {% section id="input-configure" title="Input Configuration" %}
 

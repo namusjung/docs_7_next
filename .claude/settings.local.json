@@ -15,7 +15,11 @@
       "Bash(while read f)",
       "Bash(if ! grep -q \"breadcrumb_chain\" \"$f\")",
       "Bash(then echo \"MISSING: $f\")",
-      "Bash(fi)"
+      "Bash(fi)",
+      "Bash(ls -la \"d:\\\\7en\\\\docs\\\\docs_7_next\\\\lib\\\\markdoc\"*)",
+      "Bash(ls \"d:/7en/docs/docs_7_next/lib/\"*markdoc*)",
+      "Bash(grep -l \"<td\\\\|<tr\\\\|<th\\\\|<table\" \"d:/7en/docs/docs_7_next/public/api/api-reference\"/*.md)",
+      "Bash(grep -l \"html_inline\\\\|html_block\" \"d:/7en/docs/docs_7_next/node_modules/@markdoc/markdoc/dist/src\"/*.js)"
     ]
   }
 }

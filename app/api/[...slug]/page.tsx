@@ -141,7 +141,7 @@ export default async function ApiDocPage({ params }: { params: Promise<Params> }
         <MobileNav groupedNav={getApiGroupedNav()} currentSlug={slug} basePath="/api" />
         <div className={`w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 ${gridCols} gap-8 py-10`}>
           <aside className="hidden lg:block w-[220px]">
-            <nav className="sticky top-28 space-y-4">
+            <nav className="sidebar-nav sticky top-28 h-[calc(100vh-7rem)] overflow-y-auto space-y-4 pr-2">
               {getApiGroupedNav().map((group) => (
                 <div key={group.section}>
                   <p className="text-xs uppercase tracking-wide !text-gray-600/40 dark:!text-gray-200 mb-1">{group.section.replace(/-/g, " ")}</p>

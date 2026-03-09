@@ -2,6 +2,17 @@
 title: "Response Quality"
 type: "docs"
 order: 4
+breadcrumb_chain:
+  - { label: "Home", href: "/" }
+  - { label: "Docs", href: "/docs/intro" }
+  - { label: "Getting Started", href: "" }
+  - { label: "Response Quality" }
+prev:
+  title: "Best Practices"
+  href: "/docs/getting-started/best-practices"
+next:
+  title: "Basic Settings"
+  href: "/docs/build-your-agent/basic-settings"
 ---
 
 # Response Quality
@@ -29,11 +40,11 @@ Most quality issues trace back to the knowledge base, not the model.
 
 **Check coverage.** Go to **Knowledge Management** and look at what sources are trained. If users are asking about something not covered, add a source for it and retrain.
 
-**Check training status.** A source that failed to train (shown as an error in the knowledge folder) is invisible to the agent. Re-add or re-upload it and trigger a new training run.
+**Check training status.** A source that failed to train is invisible to the agent. Re-upload it and trigger a new training run.
 
 **Remove duplicate or conflicting sources.** If you have two documents that say different things about the same topic, consolidate them into one authoritative version.
 
-**Add Q&A pairs for stubborn issues.** If the agent keeps getting a specific question wrong despite having relevant content, add an explicit Q&A pair in plain text. Direct Q&A pairs take priority over scraped content.
+**Add Q&A pairs for stubborn issues.** If the agent keeps getting a specific question wrong despite having relevant content, add an explicit Q&A pair in plain text or upload a excel sheet containing the Q&A pairs. Direct Q&A pairs take priority over scraped content.
 
 {% /section %}
 
@@ -42,7 +53,7 @@ Most quality issues trace back to the knowledge base, not the model.
 The system prompt controls how the agent uses its knowledge. Small changes can have a big impact.
 
 **Add explicit scope boundaries:**
-> *"Only answer questions about [your product]. If a user asks about anything outside this scope, politely redirect them and offer to connect them with a human agent."*
+> *"Only answer questions about [your product]. If a user asks about anything outside this scope, politely tell them that you cannot answer the question."*
 
 **Specify citation behaviour:**
 > *"When answering, reference the relevant section of our help center where applicable."*
@@ -61,8 +72,6 @@ The system prompt controls how the agent uses its knowledge. Small changes can h
 - Drop it to **0.1–0.3** for factual support agents where accuracy matters most.
 - Raise it to **0.6–0.8** if answers feel robotic and you want more natural phrasing.
 
-**Max Tokens** controls response length. If answers are getting cut off mid-sentence, increase the token limit. If they're unnecessarily verbose, reduce it.
-
 Changes to model settings take effect immediately — no retraining needed.
 
 {% /section %}
@@ -72,9 +81,9 @@ Changes to model settings take effect immediately — no retraining needed.
 Adding or editing knowledge sources does **not** automatically update the agent. You must retrain it.
 
 After updating any source:
-1. Go to **Agent Training**
+1. Go to **Agent Builder**
 2. Click **Train Agent**
-3. Wait for the training status to show **Active** before testing
+3. Wait for the training status to show **Trained** before testing
 
 If you've made several changes, batch them all before retraining to avoid multiple cycles.
 

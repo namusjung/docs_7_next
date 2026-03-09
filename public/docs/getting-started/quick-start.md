@@ -1,7 +1,18 @@
 ---
 title: "Quick Start Guide"
-type: "docs" 
-order: 1
+type: "docs"
+order: 2
+breadcrumb_chain:
+  - { label: "Home", href: "/" }
+  - { label: "Docs", href: "/docs/intro" }
+  - { label: "Getting Started", href: "" }
+  - { label: "Quick Start Guide" }
+prev:
+  title: "Introduction"
+  href: "/docs/getting-started/introduction"
+next:
+  title: "Best Practices"
+  href: "/docs/getting-started/best-practices"
 ---
 
 # Quick Start Guide
@@ -48,7 +59,7 @@ Once your data is ready, navigate to the side panel to customize how your agent 
 
 If you are building a Chatbot, configure the Escalation settings to handle queries the AI cannot answer.
 
-**Human Handoff**: Enable this to let users request a real person.
+Enable **Human Handoff** option to let users request a real person by creating a ticket or sending an email.
 
 **Ticketing**: Connect to Zoho, Zendesk, or Freshdesk to automatically log unresolved queries as tickets.
 
@@ -63,8 +74,6 @@ Once trained, make your agent accessible to your users via the Chat Integration 
 **Web Widget**: Embed the chat window directly on your website.
 
 **Messaging Apps**: Enable channels like Slack, WhatsApp, Instagram, or Messenger with a single click.
-
-**Quick Suggestions**: Set up preset questions (e.g., "What is your pricing?") to help users start the conversation effortlessly.
 
 {% /section %}
 

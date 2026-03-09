@@ -79,7 +79,7 @@ export function DocsCard({ title, icon, children }: Props) {
             link={card.link && card.link}
             clickable={true}
             hideLink={true}>
-              <ArrowUpRight className="hidden w-5 h-5 absolute right-5 top-5 group-hover:block" />
+              {card.link && <ArrowUpRight className="hidden w-5 h-5 absolute right-5 top-5 group-hover:block" />}
               <ModernCardHeader variant="horizontal">
                     <ModernCardTitleRow>
                     <ModernCardIcon variant="horizontal" className="bg-background p-0 w-4 h-4">

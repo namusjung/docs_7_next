@@ -1,18 +1,31 @@
 ---
 type: docs
 title: Using Google Drive
-order: 6
-next: 
-  href: /docs/integrations
-  title: "Integrations"
-prev: 
-  href: /docs/getting-started/introduction
-  title: "Getting Started with 7en.ai"
+order: 4
+breadcrumb_chain:
+  - { label: "Home", href: "/" }
+  - { label: "Docs", href: "/docs/intro" }
+  - { label: "Agent Training", href: "" }
+  - { label: "Using Google Drive" }
+prev:
+  href: /docs/agent-training/using-plain-texts
+  title: "Using Plain Text"
+next:
+  href: /docs/agent-training/retraining
+  title: "Retrain Your Agent"
 ---
 
+# Train Agent Using Google Drive Files
 
+{% section id="overview" title="Overview" %}
 
-{% section id="using-gdrive" title="Training agent using Google Drive" %}
+The "Integrations" tab streamlines data ingestion by connecting directly to your cloud storage, eliminating the need to download files locally before uploading them to the chatbot.
+
+{% /section %}  
+
+{% callout type="warning" %}
+You must connect your Google drive first.  [How to connect?](https://docs.7en.ai//docs/integrations/gdrive)
+{% /callout %}
 
 {% media
   type="iframe"
@@ -23,12 +36,6 @@ prev:
   maxHeight="80vh"
   caption="Interactive demo showing agent training using Google Drive files"
 /%}
-
-The "Integrations" tab streamlines data ingestion by connecting directly to your cloud storage, eliminating the need to download files locally before uploading them to the chatbot.
-
-{% callout type="info" %}
-You must connect your Google drive first.  [How to connect?](https://docs.7en.ai//docs/integrations/gdrive)
-{% /callout %}
 
 {% section id="input-configure" title="Input Configuration" %}
 

@@ -1,11 +1,18 @@
 ---
 type: docs
 title: Zapier
+order: 8
 breadcrumb_chain:
   - { label: "Home", href: "/" }
   - { label: "Docs", href: "/docs/intro" }
   - { label: "Integrations", href: "" }
   - { label: "Zapier" }
+prev:
+  title: "Messenger"
+  href: "/docs/integrations/messenger"
+next:
+  title: "Team Management"
+  href: "/docs/team/team-management"
 ---
 # How to connect Zapier to 7en Platform
 

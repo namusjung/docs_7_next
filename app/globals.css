@@ -28,6 +28,31 @@ body {
   font-feature-settings: "rlig" 1, "calt" 1;
 }
 
+/* Sidebar scrollbar — thin, no arrows, visible only on hover */
+.sidebar-nav {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+.sidebar-nav:hover {
+  scrollbar-color: hsl(var(--border)) transparent;
+}
+.sidebar-nav::-webkit-scrollbar {
+  width: 4px;
+}
+.sidebar-nav::-webkit-scrollbar-track {
+  background: transparent;
+}
+.sidebar-nav::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 9999px;
+}
+.sidebar-nav:hover::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+}
+.sidebar-nav::-webkit-scrollbar-button {
+  display: none;
+}
+
 .gradient-text {
   @apply bg-clip-text text-transparent;
   background-image: linear-gradient(

@@ -2,6 +2,17 @@
 title: "Best Practices"
 type: "docs"
 order: 3
+breadcrumb_chain:
+  - { label: "Home", href: "/" }
+  - { label: "Docs", href: "/docs/intro" }
+  - { label: "Getting Started", href: "" }
+  - { label: "Best Practices" }
+prev:
+  title: "Quick Start Guide"
+  href: "/docs/getting-started/quick-start"
+next:
+  title: "Response Quality"
+  href: "/docs/getting-started/response-quality"
 ---
 
 # Best Practices
@@ -49,7 +60,7 @@ Different tasks benefit from different models. As a starting point:
 | Creative or long-form content | Higher temperature (0.7–0.9) |
 | Technical documentation | Lower temperature (0.1–0.3) for precision |
 
-You can change the model and temperature at any time from **Build Agent → Model Settings** without retraining.
+You can change the model and temperature at any time from **Model Settings** without retraining.
 
 {% /section %}
 

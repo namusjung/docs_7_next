@@ -1,18 +1,27 @@
 ---
 type: docs
 title: Using Plain Text
-order: 6
-next: 
-  href: /docs/integrations
-  title: "Integrations"
-prev: 
-  href: /docs/getting-started/introduction
-  title: "Getting Started with 7en.ai"
+order: 3
+breadcrumb_chain:
+  - { label: "Home", href: "/" }
+  - { label: "Docs", href: "/docs/intro" }
+  - { label: "Agent Training", href: "" }
+  - { label: "Using Plain Text" }
+prev:
+  href: /docs/agent-training/using-urls
+  title: "Using URLs"
+next:
+  href: /docs/agent-training/using-gdrive
+  title: "Using Google Drive"
 ---
 
+# Train Agent Using Plain Text
 
+{% section id="overview" title="Overview" %}
 
-{% section id="using-plain-text" title="Training agent using Plain Text" %}
+The "Plain Text" tab in the "Add Knowledge Sources" modal provides a direct way to paste raw information into your agent's brain. This is the fastest method for adding specific snippets, FAQs, or structured data that doesn't exist in a standalone file or public URL.
+
+{% /section %}
 
 {% media
   type="iframe"
@@ -23,9 +32,6 @@ prev:
   maxHeight="80vh"
   caption="Interactive demo showing agent training using plain text"
 /%}
-
-
-The "Plain Text" tab in the "Add Knowledge Sources" modal provides a direct way to paste raw information into your agent's brain. This is the fastest method for adding specific snippets, FAQs, or structured data that doesn't exist in a standalone file or public URL.
 
 {% section id="input-configure" title="Input Configuration" %}
 

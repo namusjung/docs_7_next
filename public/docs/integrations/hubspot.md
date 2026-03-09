@@ -1,6 +1,18 @@
 ---
 title: "HubSpot"
 type: "docs"
+order: 4
+breadcrumb_chain:
+  - { label: "Home", href: "/" }
+  - { label: "Docs", href: "/docs/intro" }
+  - { label: "Integrations", href: "" }
+  - { label: "HubSpot" }
+prev:
+  title: "Zoho"
+  href: "/docs/integrations/zoho"
+next:
+  title: "Slack"
+  href: "/docs/integrations/slack"
 ---
 
 # HubSpot

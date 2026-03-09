@@ -1,18 +1,27 @@
 ---
 type: docs
 title: Using URLs
-order: 6
-next: 
-  href: /docs/integrations
-  title: "Integrations"
-prev: 
-  href: /docs/getting-started/introduction
-  title: "Getting Started with 7en.ai"
+order: 2
+breadcrumb_chain:
+  - { label: "Home", href: "/" }
+  - { label: "Docs", href: "/docs/intro" }
+  - { label: "Agent Training", href: "" }
+  - { label: "Using URLs" }
+prev:
+  href: /docs/agent-training/using-documents
+  title: "Using Documents"
+next:
+  href: /docs/agent-training/using-plain-texts
+  title: "Using Plain Text"
 ---
 
+# Train Agent Using URLs
 
+{% section id="overview" title="Overview" %}
 
-{% section id="using-urls" title="Train agent using URLs" %}
+The Website import feature in the "Add Knowledge Sources" modal enables you to train your AI agent using content directly from live web pages. Whether you need to import an entire site structure or just a few specific landing pages, this interface gives you granular control over the data ingestion process.
+
+{% /section %}
 
 {% media
   type="iframe"
@@ -25,8 +34,6 @@ prev:
 /%}
 
 {% section id="input-configure" title="Input Configuration" %}
-
-The Website import feature in the "Add Knowledge Sources" modal enables you to train your AI agent using content directly from live web pages. Whether you need to import an entire site structure or just a few specific landing pages, this interface gives you granular control over the data ingestion process.
 
 **Source Name** \
 Assign a custom name (e.g., "Company Knowledge Base") to categorize this data source.

@@ -2,28 +2,37 @@
 type: docs
 title: Escalation
 order: 5
-next: 
-  href: /docs/integrations
-  title: "Integrations"
-prev: 
-  href: /docs/getting-started/introduction
-  title: "Getting Started with 7en.ai"
+breadcrumb_chain:
+  - { label: "Home", href: "/" }
+  - { label: "Docs", href: "/docs/intro" }
+  - { label: "Build Your Agent", href: "" }
+  - { label: "Escalation" }
+prev:
+  href: /docs/build-your-agent/guidelines
+  title: "Guidelines"
+next:
+  href: /docs/build-your-agent/chat-integration
+  title: "Chat Integration"
 ---
+# Escalation
 
-{% section id="escalation" title="Escalation" %}
+{% section id="escalation" title="Overview" %}
 
 The Escalation section defines the fail-safe mechanisms for your chatbot. This is where you configure how the agent handles unanswered queries or complex issues, ensuring a smooth transition to human support or specialized agents when the AI reaches its knowledge limits.
 
-### Configuration Fields
+
+{% section id="configuration-fields" title="Configuration Fields" %}
 
 | Field | Description | Example |
 |-------|-------------|---------|
 | **Human Handoff** | A master toggle that determines if the bot should seek external help when it cannot answer a user query. | `Enabled` (Toggle On) |
-| **Handoff Method** | Selects the channel for the handoff. Options include:**Create Ticket:** Integrates with support tools. **Send Email:** Sends the chat transcript directly to an admin. | `Create Ticket` (via Freshdesk) |
+| **Handoff Method** | Selects the channel for the handoff. Options include: {% br /%} **Create Ticket:** Integrates with support tools. {% br /%} **Send Email:** Sends the chat transcript directly to an admin. | `Create Ticket` (via Freshdesk) |
 | **Auto Ticket Reply** | *(Add-on)* An advanced feature that allows the AI to not only create a ticket but also send a reply within the ticketing tool automatically. | `Checked` |
 | **AI Agent Transfer** | Enables the current bot to route specific queries to other specialized departmental bots (e.g., Support Bot routing to Sales Bot). | `Enabled` (Toggle On) |
 
-### Handoff Mechanisms
+{% /section %}
+
+{% section id="handoff-mechanisms" title="Handoff Mechanisms" %}
 
 When the LLM encounters a query it cannot answer with high confidence, it triggers the selected escalation path.
 
@@ -51,33 +60,14 @@ If the user agrees, a ticket is created in your connected helpdesk (Zoho, Zendes
 
 ### Custom Handoff Rules
 
-Beyond the default behaviour, you can write custom instructions in the **System Prompt** or **Guidelines** to give the agent more precise control over when and how it escalates.
+Beyond the default behaviour, you can write custom instructions in the **Escalation Rules** to give the agent more precise control over when and how it escalates.
 
-**Examples of custom rules:**
+**Example of custom rules:**
 
 Escalate immediately for billing questions, without attempting an answer:
 ```
-If the user asks about billing, refunds, or payment issues, do not attempt to answer. Immediately offer to create a support ticket and transfer them to the billing team.
+If the user asks about billing, refunds, or payment issues, do not attempt to answer. Immediately offer to create a support ticket.
 ```
-
-Escalate after a fixed number of failed attempts:
-```
-If you are unable to answer the same question after two attempts, offer to escalate to a human agent rather than continuing to guess.
-```
-
-Escalate based on user sentiment:
-```
-If the user expresses frustration or uses words like "angry", "unacceptable", or "cancel", skip the standard response and immediately offer human handoff.
-```
-
-Customise the escalation message itself:
-```
-When escalating to a human, always say: "I'll connect you with our support team right away. Typical response time is under 2 hours."
-```
-
-{% callout type="tip" title="Tip" %}
-Place handoff rules at the top of your system prompt so they are evaluated before general response instructions.
-{% /callout %}
 
 {% /section %}
 
@@ -86,6 +76,10 @@ Place handoff rules at the top of your system prompt so they are evaluated befor
 ### Default Behaviour
 
 When **AI Agent Transfer** is enabled, the agent automatically routes the conversation to another agent in your workspace if that agent is better suited to answer the query. This happens silently and instantly — the user stays in the same chat window without interruption.
+
+{% callout type="tip" title="Important" %}
+For two-way handoff to work between two agents, **AI Agent Transfer** must be enabled on both agents. This ensures that either agent can route the conversation back if the user's needs change.
+{% /callout %}
 
 **This default triggers when:**
 - The current agent detects the query falls outside its trained scope
@@ -96,37 +90,20 @@ The receiving agent picks up the conversation with full context from the previou
 
 ### Custom Transfer Rules
 
-You can write explicit transfer rules in the **System Prompt** to control exactly when and to which agent the handoff occurs.
+You can write explicit transfer rules in the **Escalation Rules** to control exactly when and to which agent the handoff occurs.
 
-**Examples of custom rules:**
+**Example of custom rules:**
 
 Route specific topics to a named agent:
 ```
 If the user asks about pricing, plans, or upgrades, transfer the conversation to the Sales Agent. Do not attempt to answer pricing questions yourself.
 ```
 
-Transfer after failing to answer:
-```
-If you cannot answer a query from your knowledge base, check whether the Sales Agent or Technical Support Agent can help before creating a ticket.
-```
-
-Define a transfer priority order:
-```
-For technical issues: first attempt to answer from your own knowledge. If unable, transfer to the Technical Support Agent. If that agent is also unable to help, create a support ticket.
-```
-
-Prevent unnecessary transfers:
-```
-Only transfer to another agent if the query is entirely outside your domain. Do not transfer for partial matches — attempt a best-effort answer first.
-```
-
 {% callout type="tip" title="Tip" %}
-Give each specialised agent a clear, narrow system prompt. The more focused each agent's scope, the more accurately the routing decisions will be made.
+Give each specialised agent a clear, narrow prompt. The more focused each agent's scope, the more accurately the routing decisions will be made.
 {% /callout %}
 
 {% /section %}
-
-{% section id="examples" title="Example Configurations" %}
 
 {% callout type="tip" title="Best Practices for Escalation" collapsible=true %}
 
@@ -138,11 +115,13 @@ Give each specialised agent a clear, narrow system prompt. The more focused each
 
 {% /callout %}
 
+{% section id="examples" title="Example Configurations" %}
+
 | Use Case | Configuration Details |
 |----------|-----------------------|
-| **Startup / Small Business** | **Human Handoff:** Enabled  **Method:** Send Email **Why:** Ensures the founder sees every unanswered question immediately without managing a complex helpdesk. |
-| **Enterprise SaaS** | **Human Handoff:** Enabled **Method:** Create Ticket (Zendesk) **Auto Reply:** Enabled **Why:** Seamless integration into existing support queues to speed up resolution. |
-| **Multi-Department Org** | **AI Agent Transfer:** Enabled **Scenario:** User asks "Tech Support Bot" for a refund. **Outcome:** Chat transfers to "Billing Bot" rather than creating a generic ticket. |
+| **Startup / Small Business** | **Human Handoff:** Enabled  {% br /%} **Method:** Send Email {% br /%} **Why:** Ensures the founder sees every unanswered question immediately without managing a complex helpdesk. |
+| **Enterprise SaaS** | **Human Handoff:** Enabled {% br /%} **Method:** Create Ticket (Zendesk) {% br /%} **Auto Reply:** Enabled {% br /%} **Why:** Seamless integration into existing support queues to speed up resolution. |
+| **Multi-Department Org** | **AI Agent Transfer:** Enabled {% br /%} **Scenario:** User asks "Tech Support Bot" for a refund. {% br /%} **Outcome:** Chat transfers to "Billing Bot" rather than creating a generic ticket. |
 
 {% /section %}
 

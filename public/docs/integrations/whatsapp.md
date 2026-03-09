@@ -1,6 +1,18 @@
 ---
 title: "WhatsApp"
 type: "docs"
+order: 6
+breadcrumb_chain:
+  - { label: "Home", href: "/" }
+  - { label: "Docs", href: "/docs/intro" }
+  - { label: "Integrations", href: "" }
+  - { label: "WhatsApp" }
+prev:
+  title: "Slack"
+  href: "/docs/integrations/slack"
+next:
+  title: "Messenger"
+  href: "/docs/integrations/messenger"
 ---
 
 # WhatsApp

@@ -66,9 +66,6 @@ export default function SiteHeader({ searchItems = [] }: { searchItems?: SearchI
                   priority
                 />
               </Link>
-              <span className="text-sm font-medium text-muted-foreground hidden sm:block pt-1">
-                Documentation
-              </span>
             </div>
 
             <div className="flex-1 max-w-xl px-8 hidden md:block">

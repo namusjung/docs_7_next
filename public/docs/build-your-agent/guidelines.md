@@ -2,29 +2,33 @@
 type: docs
 title: Guidelines
 order: 4
-next: 
-  href: /docs/integrations
-  title: "Integrations"
-prev: 
-  href: /docs/getting-started/introduction
-  title: "Getting Started with 7en.ai"
+breadcrumb_chain:
+  - { label: "Home", href: "/" }
+  - { label: "Docs", href: "/docs/intro" }
+  - { label: "Build Your Agent", href: "" }
+  - { label: "Guidelines" }
+prev:
+  href: /docs/build-your-agent/appearance
+  title: "Appearance"
+next:
+  href: /docs/build-your-agent/escalation
+  title: "Escalation"
 ---
-{% section id="behavior-guidelines" title="Guidelines" %}
+#  Guidelines
+
+{% section id="behavior-guidelines" title="Overview" %}
 
 The Behavior Guidelines section defines how your chatbot interacts with users. This is where you configure the agent’s personality, tone, and boundaries to ensure consistent, brand-appropriate responses.
 
-### Configuration Fields
+{% /section %}
 
-| Field | Description | Example |
-|-------|-------------|---------|
-| **Agent Type** | Selects a predefined role for the chatbot. Each agent type comes with a recommended system prompt template. Options include: - General Assistant - Sales Agent - Language Tutor - Tech Expert - Life Coach - Travel Agent | `General Assistant` |
-| **System Prompt** | The foundational instruction that guides the chatbot’s behavior. You can: 1. Use the default template provided. 2.  Customize the text to fine-tune tone, scope, and style. | “You are a helpful General Assistant designed to provide accurate...” |
-| **Do’s** | Add specific behaviors the chatbot should **always** follow. | Always greet the user politely. |
-| **Don’ts** | Add specific behaviors the chatbot should **avoid**. | Do not provide legal or medical advice. |
-
-### Agent Type Templates
+{% section id="agent-type-templates" title="Agent Type Templates" %}
 
 Each Agent Type comes with a ready-to-use system prompt template. This can be applied as-is or modified to suit your requirements.
+
+{% callout type="tip" title="Generate from Knowledge Sources" %}
+Instead of writing a system prompt from scratch, use the **Prompt Generate** icon in the System Prompt field. The platform analyzes your uploaded knowledge sources — documents, websites, spreadsheets — and automatically generates a tailored system prompt that reflects your content, domain, and tone. This is the fastest way to get an accurate, context-aware prompt for your agent.
+{% /callout %}
 
 **Example: General Assistant**
 > "Respond with accurate, relevant, and up-to-date information. Maintain a friendly, helpful, and conversational tone. Respect user privacy and avoid unnecessary personal data requests. Provide balanced perspectives on complex topics. Use simple, clear language."
@@ -43,18 +47,19 @@ _Example interaction starter:_
 | | **Travel Agent:** For itinerary planning, destination tips, and booking guidance. |
 | **Customize the Prompt** | Start with the provided template, then tailor it to your brand’s voice. |
 | | _Example:_ Make a Sales Agent sound more persuasive but still polite. |
+| **Generate from Knowledge** | Use it to auto-generate a system prompt based on your uploaded knowledge sources. Ideal when you have rich documentation but aren’t sure how to phrase the prompt. |
 | **Use Do’s and Don’ts** | **Do:** Add behaviors for brand alignment (e.g., “Always thank the user”). |
 | | **Don't:** Add rules for compliance (e.g., “Don’t provide investment recommendations”). |
 
 {% /callout %}
 
-### Example Configurations
+{% section id="example-configurations" title="Example Configurations" %}
 
 | Use Case | Configuration Details |
 |----------|-----------------------|
-| **E-commerce Bot (Sales Agent)** | **Do's:** • Recommend related products • Offer discounts when available  **Don'ts:** • Never disclose internal pricing strategy |
-| **Health Bot (General Assistant)** | **Do's:** • Provide links to trusted resources — **Don'ts:** • Never provide diagnosis or prescriptions |
-| **Travel Bot (Travel Agent)** | **Do's:** • Suggest attractions, flights, hotels — **Don'ts:** • Avoid making financial commitments |
+| **E-commerce Bot (Sales Agent)** | **Do's:** Recommend related products • Offer discounts when available {% br /%} **Don'ts:** Never disclose internal pricing strategy |
+| **Health Bot (General Assistant)** | **Do's:** Provide links to trusted resources {% br /%} **Don'ts:** Never provide diagnosis or prescriptions |
+| **Travel Bot (Travel Agent)** | **Do's:** Suggest attractions, flights, hotels {% br /%} **Don'ts:** Avoid making financial commitments |
 
 
 {% /section %}

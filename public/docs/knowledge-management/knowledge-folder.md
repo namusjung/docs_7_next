@@ -1,16 +1,23 @@
 ---
 type: docs
 title: Knowledge Folder
-order: 6
-next: 
-  href: /docs/integrations
-  title: "Integrations"
-prev: 
-  href: /docs/getting-started/introduction
-  title: "Getting Started with 7en.ai"
+order: 1
+breadcrumb_chain:
+  - { label: "Home", href: "/" }
+  - { label: "Docs", href: "/docs/intro" }
+  - { label: "Knowledge Management", href: "" }
+  - { label: "Knowledge Folder" }
+prev:
+  href: /docs/agent-training/retraining
+  title: "Retrain Your Agent"
+next:
+  href: /docs/knowledge-management/management
+  title: "Manage Sources"
 ---
 
-{% section id="knowledge-folders" title="Knowledge Folders" %}
+# Knowledge Folder
+
+{% section id="knowledge-folders" title="Overview" %}
 
 The Knowledge page serves as a centralized library for all your AI agents' training data. While you can add sources during the initial build, this dashboard allows you to audit, update, and manage that information efficiently post-deployment.
 

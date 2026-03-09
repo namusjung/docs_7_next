@@ -7,13 +7,15 @@ breadcrumb_chain:
   - { label: "Integrations", href: "" }
   - { label: "Freshdesk" }
 prev:
-  title: "Demo"
-  href: "/docs/getting-started/demo"
+  title: "Manage Sources"
+  href: "/docs/knowledge-management/management"
 next: 
   title: "Zendesk Integration"
   href: "/docs/integrations/zendesk"
 ---
-# How to connect Freshdesk to 7en Platform
+
+# Connect Freshdesk to 7en
+
 {% image src="/img/banner-freshdesk.png" alt="7en ai x Freshdesk" lightbox=true /%}
 
 {% section id="introduction" title="Introduction to Freshdesk Integration" %}

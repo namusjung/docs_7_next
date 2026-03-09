@@ -86,7 +86,7 @@ export default async function DocPage({ params }: { params: Params }) {
         <MobileNav groupedNav={groupedNav} currentSlug={params.slug} basePath="/docs" />
         <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[280px_minmax(0,1fr)_200px] gap-8 py-10">
           <aside className="hidden lg:block">
-            <nav className="sticky top-28 space-y-4">
+            <nav className="sidebar-nav sticky top-28 h-[calc(100vh-7rem)] overflow-y-auto space-y-4 pr-2">
               {groupedNav.map((group) => (
                 <div key={group.section}>
                   <p className="text-xs uppercase tracking-wide !text-gray-600/40 dark:!text-gray-200 mb-1">{group.section.replace(/-/g, " ")}</p>

@@ -161,6 +161,10 @@ export const tags = {
       title: { type: String, required: false },
     },
   },
+  "br": {
+    render: "br",
+    selfClosing: true,
+  },
   "code-block": {
     render: "CodeBlock",
   },

@@ -1,11 +1,18 @@
 ---
 type: docs
 title: Zoho
+order: 3
 breadcrumb_chain:
   - { label: "Home", href: "/" }
   - { label: "Docs", href: "/docs/intro" }
   - { label: "Integrations", href: "" }
   - { label: "Zoho" }
+prev:
+  title: "Zendesk"
+  href: "/docs/integrations/zendesk"
+next:
+  title: "HubSpot"
+  href: "/docs/integrations/hubspot"
 ---
 
 {% image src="/img/banner-zoho.png" alt="7en ai x Zoho" lightbox=false /%}

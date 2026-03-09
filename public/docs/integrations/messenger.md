@@ -1,6 +1,18 @@
 ---
 title: "Messenger"
 type: "docs"
+order: 7
+breadcrumb_chain:
+  - { label: "Home", href: "/" }
+  - { label: "Docs", href: "/docs/intro" }
+  - { label: "Integrations", href: "" }
+  - { label: "Messenger" }
+prev:
+  title: "WhatsApp"
+  href: "/docs/integrations/whatsapp"
+next:
+  title: "Zapier"
+  href: "/docs/integrations/zapier"
 ---
 
 # Messenger

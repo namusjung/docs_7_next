@@ -2,18 +2,26 @@
 type: docs
 title: Appearance
 order: 3
-next: 
-  href: /docs/integrations
-  title: "Integrations"
-prev: 
-  href: /docs/getting-started/introduction
-  title: "Getting Started with 7en.ai"
+breadcrumb_chain:
+  - { label: "Home", href: "/" }
+  - { label: "Docs", href: "/docs/intro" }
+  - { label: "Build Your Agent", href: "" }
+  - { label: "Appearance" }
+prev:
+  href: /docs/build-your-agent/model-settings
+  title: "Model Settings"
+next:
+  href: /docs/build-your-agent/guidelines
+  title: "Guidelines"
 ---
-{% section id="appearance-settings" title="Appearance" %}
+
+# Appearance
+
+{% section id="appearance-settings" title="Overview" %}
 
 The Appearance Settings section allows you to customize the visual look and feel of your chatbot widget. These options ensure that the chatbot aligns with your brand identity and creates a seamless experience for your users.
 
-### Configuration Fields
+{% section id="configuration-fields" title="Configuration Fields" %}
 
 | Field | Description | Example |
 |-------|-------------|---------|
@@ -38,12 +46,12 @@ The Appearance Settings section allows you to customize the visual look and feel
 
 {% /callout %}
 
-### Example Configurations
+{% section id="example-configurations" title="Example Use Cases" %}
 
 | Use Case | Configuration Details |
 |----------|-----------------------|
-| **Corporate Website Support Bot** | **Primary:** Dark Blue<br>**Secondary:** White<br>**Font:** Inter<br>**Button Position:** Bottom Right<br>**Disclaimer:** “Your chat may be recorded for support purposes.” |
-| **E-commerce Sales Assistant** | **Primary:** Bright Green<br>**Secondary:** Light Grey<br>**Font:** Roboto<br>**Button Text:** “Shop Assistant”<br>**Avatar:** Store Logo |
-| **Healthcare Information Bot** | **Primary:** Teal<br>**Secondary:** White<br>**Font:** Arial<br>**Disclaimer:** “This chatbot does not replace professional medical advice.” |
+| **Corporate Website Support Bot** | **Primary:** Dark Blue {% br/%} **Secondary:** White {% br/%} **Font:** Inter {% br/%} **Button Position:** Bottom Right {% br/%} **Disclaimer:** “Your chat may be recorded for support purposes.” |
+| **E-commerce Sales Assistant** | **Primary:** Bright Green {% br/%} **Secondary:** Light Grey {% br/%} **Font:** Roboto {% br/%} **Button Text:** “Shop Assistant” {% br/%} **Avatar:** Store Logo |
+| **Healthcare Information Bot** | **Primary:** Teal {% br/%} **Secondary:** White {% br/%} **Font:** Arial {% br/%} **Disclaimer:** “This chatbot does not replace professional medical advice.” |
 
 {% /section %}

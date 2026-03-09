@@ -1,12 +1,20 @@
 ---
-title: "Team Management"
+title: "Invite member"
 type: "docs"
 order: 1
+breadcrumb_chain:
+  - { label: "Home", href: "/" }
+  - { label: "Docs", href: "/docs/intro" }
+  - { label: "Team", href: "" }
+  - { label: "Team Management" }
+prev:
+  title: "Zapier"
+  href: "/docs/integrations/zapier"
 ---
 
-# Team Management
+# Invite Team Member
 
-7en supports multi-user workspaces so your team can collaborate on agent configuration, knowledge management, and conversations. This page covers inviting members, managing roles, and controlling access.
+7en supports multi-users so your team can collaborate on agent configuration, knowledge management, and conversations. This page covers inviting members to your 7en account.
 
 {% section id="roles" title="User Roles" %}
 
@@ -23,16 +31,15 @@ Assign roles carefully. Owners have full control over billing and can remove oth
 
 {% section id="inviting" title="Inviting Team Members" %}
 
-1. Go to **Workspace Settings** → **Team**
-2. Click **Invite Member**
-3. Enter the person's email address
-4. Select their role: **Owner** or **Member**
-5. Click **Send Invite**
+1. Go to **Settings** → **Team**
+2. Enter the person's email address
+3. Select their role: **Owner** or **Member**
+4. Click **Send** to send invitation
 
 The invited person receives an email with a link to join your workspace. Invitations expire after **24 hours** — resend if they miss the window.
 
 {% callout type="info" %}
-Invitees must create a 7en account if they don't have one. The invitation link will prompt them to register.
+Invitees must create a 7en account. The invitation link will prompt them to register.
 {% /callout %}
 
 {% /section %}
@@ -41,15 +48,15 @@ Invitees must create a 7en account if they don't have one. The invitation link w
 
 To view, change roles, or remove team members:
 
-1. Go to **Workspace Settings** → **Team**
+1. Go to **Settings** → **Team**
 2. The member list shows all active members and their roles
 
-**Change a role:** Click the role badge next to a member's name and select the new role.
+**Assign agent:** Click **+** icon to assign the specific AI agents to the member. The team member will get access to that specific agent and its conversations history.
 
-**Remove a member:** Click the menu icon next to a member and select **Remove from workspace**. This immediately revokes their access — they will no longer be able to log in to your workspace.
+**Remove a member:** Click the menu **trash** icon next to a member and confirm deletion. This immediately revokes their access — they will no longer be able to log in to your workspace.
 
 {% callout type="warning" title="Removing an Owner" %}
-You cannot remove yourself if you are the only Owner in the workspace. Promote another member to Owner first.
+You cannot remove yourself if you are the only Owner in the workspace.
 {% /callout %}
 
 {% /section %}

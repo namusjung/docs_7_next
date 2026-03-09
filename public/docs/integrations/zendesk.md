@@ -1,11 +1,18 @@
 ---
 type: docs
 title: Zendesk
+order: 2
 breadcrumb_chain:
   - { label: "Home", href: "/" }
   - { label: "Docs", href: "/docs/intro" }
   - { label: "Integrations", href: "" }
   - { label: "Zendesk" }
+prev:
+  title: "Freshdesk"
+  href: "/docs/integrations/freshdesk"
+next:
+  title: "Zoho"
+  href: "/docs/integrations/zoho"
 ---
 
 {% image src="/img/banner-zendesk.png" alt="7en ai x Zendesk" lightbox=false /%}

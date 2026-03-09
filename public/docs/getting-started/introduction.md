@@ -19,11 +19,6 @@ next:
 
 Whether you're looking to automate customer support tickets, integrate with popular platforms like WhatsApp and Slack, or build sophisticated knowledge-driven AI agents, 7en.ai provides everything you need in one comprehensive solution.
 
-{% callout type="warning" title="Getting Started" %}
-Ensure you have your API token ready. You can obtain it after logging in. Check the dashboard under Settings > API Keys for your token. Rate limits apply (10 requests per minute per IP for authentication endpoints, 60 requests per minute per token for team management endpoints).
-{% /callout %}
-
-
 {% /section %}
 
 {% section id="key-features" title="Key Features" %}
@@ -33,38 +28,32 @@ Ensure you have your API token ready. You can obtain it after logging in. Check 
   {
     "icon": "quickstart",
     "title": "AI Agent Builder",
-    "description": "Create and customize AI agents with our intuitive visual builder. Configure prompts, train with custom knowledge sources, and deploy across multiple channels with ease.",
-    "link": "/docs/agent-builder"
+    "description": "Create and customize AI agents with our intuitive visual builder. Configure prompts, train with custom knowledge sources, and deploy across multiple channels with ease."
   },
   {
     "icon": "tool",
-    "title": "Knowledge Manage",
-    "description": "Upload documents, connect websites, integrate spreadsheets, and manage plain text sources to train your AI agents with domain-specific knowledge.",
-    "link": "/docs/knowledge"
+    "title": "Auto Ticket Reply",
+    "description": "Automatically respond to support tickets on Zendesk, Freshdesk, and Zoho Desk using your AI agents — resolving common issues instantly without human intervention."
   },
   {
     "icon": "chat",
     "title": "Integrations",
-    "description": "Connect your AI agents to popular platforms including WhatsApp Business, Slack, Facebook Messenger, Instagram, and major ticketing systems.",
-    "link": "/docs/integrations"
+    "description": "Connect your AI agents to popular platforms including WhatsApp Business, Slack, Facebook Messenger, Instagram, and major ticketing systems."
   },
   {
     "icon": "guide",
-    "title": "Conversation Manage",
-    "description": "Monitor and manage all customer conversations in real-time with advanced filtering, agent handoff capabilities, and comprehensive analytics.",
-    "link": "/docs/conversations"
+    "title": "Auto Handoff",
+    "description": "Set custom rules to hand off between AI agents or escalate to humans. Human handoff automatically creates a support ticket or sends an email."
   },
   {
     "icon": "api",
     "title": "Team Collaboration",
-    "description": "Invite team members, manage permissions, and collaborate on agent development with role-based access controls.",
-    "link": "/docs/team"
+    "description": "Invite team members, manage permissions, and collaborate on agent development with role-based access controls."
   },
   {
     "icon": "image",
     "title": "Analytics & Insights",
-    "description": "Track agent performance, conversation metrics, customer satisfaction, and gain valuable insights into your AI operations.",
-    "link": "/docs/analytics"
+    "description": "Track agent performance, conversation metrics, customer satisfaction, and gain valuable insights into your AI operations."
   }
 ]
 {% /card %}
@@ -73,6 +62,7 @@ Ensure you have your API token ready. You can obtain it after logging in. Check 
 
 - **Multi-Model Support**: Choose from various LLM providers and models
 - **Real-time Training**: Train agents with live knowledge source updates
+- **Auto Ticket Reply**: AI agents automatically handle and respond to tickets on Zendesk, Freshdesk, and Zoho Desk
 - **Advanced Analytics**: Comprehensive dashboards and reporting
 - **Enterprise Security**: Role-based permissions and secure integrations
 - **API Access**: Programmatic control via REST APIs
@@ -91,14 +81,14 @@ Get up and running with 7en.ai in just a few minutes:
 4. Choose your preferred language model
 
 ### Step 2: Add Knowledge Sources
-1. Go to the **Knowledge** tab in the agent builder
-2. Upload documents, add website URLs, or import spreadsheets
+1. Go to the **Knowledge** panel in the agent builder
+2. Upload documents, add plain text, website URLs, or import from Google drive
 3. Wait for the training process to complete
 4. Test your agent's understanding of the knowledge
 
 ### Step 3: Configure Integrations
 1. Visit the **Integrations** page
-2. Connect your preferred messaging platforms
+2. Connect your preferred ticketing or messaging platforms
 3. Configure webhooks and authentication
 4. Test the integration with sample messages
 
@@ -128,10 +118,10 @@ Get up and running with 7en.ai in just a few minutes:
 
 - **Messaging**: WhatsApp Business, Facebook Messenger, Instagram DM
 - **Communication**: Slack, Microsoft Teams
-- **Ticketing**: Zendesk, Freshdesk, Zoho Desk, Salesforce Service Cloud
-- **CRM**: HubSpot Service Hub
+- **Ticketing** *(with auto ticket reply)*: Zendesk, Freshdesk, Zoho Desk
+- **CRM**: HubSpot Service Hub (coming soon)
 - **Storage**: Google Drive
-- **Automation**: Zapier
+- **Automation**: Zapier (coming soon)
 
 ### Knowledge Source Types
 
@@ -139,18 +129,35 @@ Get up and running with 7en.ai in just a few minutes:
 - **Websites**: URL crawling and content extraction
 - **Spreadsheets**: CSV, Excel files
 - **Plain Text**: Direct text input
-- **APIs**: Custom data source integrations
+- **Google Drive**: Google Drive files
 
 {% /section %}
 
-{% section id="getting-help" title="Getting Help" %}
+{% section id="handoff" title="Agent Handoff & Human Handoff" %}
 
-Need assistance? We're here to help:
+7en.ai provides seamless handoff capabilities that ensure customers always reach the right resource — whether that's another AI agent or a human agent.
 
-- **Documentation**: Comprehensive guides and API references
-- **Support Tickets**: Create tickets directly from the platform
-- **Community**: Join our Discord community for discussions
-- **Training**: Video tutorials and best practices
+### Agent Handoff
+
+Agent handoff allows one AI agent to transfer a conversation to another specialized AI agent based on context, intent, or topic. This enables you to:
+
+- **Route by expertise**: Direct conversations to agents trained on specific knowledge domains (e.g., billing, technical support, onboarding)
+- **Chain workflows**: Build multi-step automation where each agent handles a distinct stage of the conversation
+- **Fallback handling**: Automatically escalate to a more capable or broadly trained agent when the primary agent cannot resolve the query
+- **Custom routing rules**: Define triggers and conditions that determine when and where a handoff occurs
+
+### Human Handoff
+
+Human handoff escalates the conversation out of the AI agent and into your human support workflow. Instead of transferring to a live chat agent, it triggers an automated action:
+
+- **Ticket creation**: Automatically opens a ticket in Zendesk, Freshdesk, or Zoho Desk with the full conversation context attached
+- **Email notification**: Sends an email to the appropriate team or individual so they can follow up with the customer directly
+- **Custom rules**: Define your own conditions — keywords or topic — to decide when human handoff fires
+- **Context included**: The ticket or email always includes the full chat history so no context is lost
+
+Handoff rules are configured per agent in the **Agent Builder** under the **Escalation** settings tab.
+
+{% /section %}
 
 ### Next Steps
 
@@ -158,5 +165,3 @@ Need assistance? We're here to help:
 2. [Upload knowledge sources →](/knowledge/upload)
 3. [Configure integrations →](/integrations)
 4. [Monitor conversations →](/conversations)
-
-{% /section %}
