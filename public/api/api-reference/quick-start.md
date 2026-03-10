@@ -79,7 +79,7 @@ curl -X POST 'https://api.7en.ai/api/v1/knowledge-source/' \
 
 {% section id="step-3" title="Step 3 — Train the Agent" %}
 
-Trigger training to index all attached knowledge sources. Poll the [training progress](/api/agent-training/training-progress) endpoint until `status` is `Trained`.
+Trigger training to index all attached knowledge sources. The agent's status immediately changes to `"Training"` and transitions to `"Active"` on success.
 
 [Full reference →](/api/agent-training/train-agent)
 
@@ -88,18 +88,24 @@ curl -X POST 'https://api.7en.ai/api/v1/agents/671/train-agent/' \
   -H 'Authorization: Api-Key YOUR_API_KEY'
 ```
 
-```json
-{
-  "message": "Agent training initiated",
-  "data": {
-    "agent_id": 671,
-    "status": "Training"
-  }
-}
+The endpoint streams back SSE events as training progresses:
+
+```
+training_started
+{"message": "Agent training has started", "agent_id": "671", "status": "Training", ...}
+
+training_training
+{"train_data": {"phase": "extracting", "message": "Starting text extraction", ...}}
+
+training_training
+{"train_data": {"phase": "embedding_start", "message": "Starting embedding for 1 chunks", ...}}
+
+training_active
+{"agent_id": "671", "status": "Active", "train_data": {"phase": "embedding_completed", ...}}
 ```
 
 {% callout type="info" title="Training time" %}
-Training typically completes within a few seconds to a few minutes depending on the size of the knowledge sources. Wait for `status: "Trained"` before starting a chat session.
+Training typically completes within seconds to a few minutes depending on the size of the knowledge sources. Wait for `status: "Active"` before starting a chat session.
 {% /callout %}
 
 {% /section %}

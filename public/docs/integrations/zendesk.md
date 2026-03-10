@@ -1,7 +1,7 @@
 ---
 type: docs
 title: Zendesk
-hidden: true
+hidden: false
 order: 2
 breadcrumb_chain:
   - { label: "Home", href: "/" }
@@ -38,6 +38,22 @@ Integrating Zendesk with 7en.ai unlocks powerful automation for your support ope
 
 This connection transforms your AI agents into a robust extension of your customer support team.
 
+
+### Auto Ticket Reply
+
+**Let your AI agent reply to Zendesk tickets automatically**
+
+Once connected, you can enable **Auto Ticket Reply** on any agent — your 7en.ai agent will automatically respond to incoming Zendesk tickets using its trained knowledge, without any manual intervention.
+
+
+To enable it:
+1. Go to your **Agent builder** page in 7en.ai.
+2. Under the **Escalation** section, toggle on **Auto Ticket Reply**.
+3. Select **Zendesk** as the ticketing provider.
+
+From that point on, every new Zendesk ticket is picked up by the agent and replied to instantly — cutting response times and reducing support load.
+
+
 {% /section %}
 
 {% section id="connection-guide" title="Step-by-Step Connection Guide" %}
@@ -46,10 +62,10 @@ Follow these steps to connect Zendesk to 7en.ai, with visual aids to ensure a sm
 
 ### Step 1: Access Integrations in 7en.ai
 1. Log in to your 7en.ai account.
-2. Navigate to the **Integrations** page at [https://staging.7en.ai/integrations](https://staging.7en.ai/integrations).
-3. In the **Support** section, locate Zendesk and click **Configure Integration**.
+2. Navigate to the [Integrations](https://app.7en.ai/integrations) page.
+3. In the **Support** section, locate Zendesk and click **Configure**.
 
-{% image src="/img/zendesk/step-1.jpeg" alt="Screenshot of 7en.ai Integrations page with Zendesk option" caption="Selecting Zendesk integration in 7en.ai" /%}
+{% image src="/img/zendesk/step-1.png" alt="Screenshot of 7en.ai Integrations page with Zendesk option" caption="Selecting Zendesk integration in 7en.ai" /%}
 
 ### Step 2: Generate Zendesk API Token
 1. Open a new browser tab and log in to your Zendesk account.
@@ -61,38 +77,24 @@ Follow these steps to connect Zendesk to 7en.ai, with visual aids to ensure a sm
 
 {% image src="/img/zendesk/step-2.jpeg" alt="Screenshot of Zendesk API Tokens page with token creation" caption="Creating and copying the Zendesk API token" /%}
 
-### Step 3: Input API Token in 7en.ai
+### Step 3: Enter API Token in 7en.ai
 1. Return to the 7en.ai tab.
-2. Paste the copied Zendesk API token into the **API Key** field on the Zendesk integration page.
+2. Enter your Zendesk domain and email address.
+3. Paste the Zendesk API token into the **API Key** field on the Zendesk integration page.
 
-{% image src="/img/zendesk/step-3.jpeg" alt="Screenshot of 7en.ai Zendesk integration page with API key field" caption="Pasting the Zendesk API token in 7en.ai" /%}
 
-### Step 4: Retrieve Zendesk Email
-1. Switch back to the Zendesk tab.
-2. Click your **Profile** icon and select **View Profile**.
-3. Copy your primary email address from the profile page.
+{% callout type="info" title="Zendesk domain" %}
+Get your Zendesk domain (e.g., `company.zendesk.com`) from the browser’s address bar or account settings.
+{% /callout %}
 
-{% image src="/img/zendesk/step-4.jpeg" alt="Screenshot of Zendesk profile page with email address" caption="Copying the primary email from Zendesk" /%}
+{% image src="/img/zendesk/step-3.png" alt="Screenshot of 7en.ai Zendesk integration page with API key field" caption="Paste the Zendesk API token in 7en.ai" /%}
 
-### Step 5: Enter Email in 7en.ai
-1. Return to the 7en.ai tab.
-2. Paste the copied email address into the **Email Address** field on the Zendesk integration page.
 
-{% image src="/img/zendesk/step-5.jpeg" alt="Screenshot of 7en.ai Zendesk integration page with email field" caption="Entering the Zendesk email in 7en.ai" /%}
-
-### Step 6: Retrieve and Enter Zendesk Domain
-1. Switch to the Zendesk Admin Center tab.
-2. Copy your Zendesk domain (e.g., `yourcompany.zendesk.com`) from the browser’s address bar or account settings.
-3. Return to the 7en.ai tab.
-4. Paste the domain into the **Zendesk Domain** field.
-
-{% image src="/img/zendesk/step-6.jpeg" alt="Screenshot of copying Zendesk domain and pasting in 7en.ai" caption="Entering the Zendesk domain in 7en.ai" /%}
-
-### Step 7: Finalize the Connection
-1. Click **Connect Zendesk** to complete the integration.
+### Step 4: Finalize the Connection
+1. Click **Connect** to complete the integration.
 2. Confirm the connection status, which should display **Zendesk Connected** upon success.
 
-{% image src="/img/zendesk/step-7.jpeg" alt="Screenshot of successful Zendesk connection in 7en.ai" caption="Confirming the Zendesk integration" /%}
+{% image src="/img/zendesk/step-7.png" alt="Screenshot of successful Zendesk connection in 7en.ai" caption="Confirming the Zendesk integration" /%}
 
 {% /section %}
 
@@ -101,27 +103,5 @@ Follow these steps to connect Zendesk to 7en.ai, with visual aids to ensure a sm
 - **Secure Tokens**: Keep your Zendesk API token confidential and avoid sharing it publicly.
 - **Test Integration**: Create a test ticket via your 7en.ai agent to verify the connection.
 - **Monitor Activity**: Use the 7en.ai **Conversations** page to track ticket-related interactions.
-- **Check Permissions**: Ensure your Zendesk account has API access enabled for seamless integration.
-
-{% /section %}
-
-{% section id="troubleshooting" title="Troubleshooting and Support" %}
-
-If you face issues during setup:
-
-- **Verify Token**: Ensure the API token is valid and not revoked.
-- **Check Domain**: Confirm the Zendesk domain is correct (e.g., `yourcompany.zendesk.com`).
-- **Review Errors**: Check 7en.ai’s integration logs for detailed error messages.
-- **Get Help**:
-  - **Documentation**: Visit [/docs/integrations](/docs/integrations) for guides.
-  - **Support Tickets**: Submit a ticket via the 7en.ai dashboard.
-  - **Community**: Join the 7en.ai Discord for peer support.
-  - **Tutorials**: Explore video tutorials in the 7en.ai learning hub.
-
-### Next Steps
-
-1. [Test your Zendesk integration →](/integrations/test)
-2. [Configure agent ticketing settings →](/agents/settings)
-3. [Monitor ticket interactions →](/conversations)
 
 {% /section %}

@@ -110,15 +110,7 @@ function sortNavItems(items: NavItem[]) {
   });
 }
 
-// Cache for the entire process lifetime (or until restart)
-let docsNavCache: GroupedNav | null = null;
-let apiNavCache: NavItem[] | null = null;
-let apiGroupedNavCache: GroupedNav | null = null;
-let faqNavCache: NavItem[] | null = null;
-
 export const getDocsNav = cache((): GroupedNav => {
-  if (docsNavCache) return docsNavCache;
-
   const folders = getOrderedFolders(DOCS_DIR);
   const groups: GroupedNav = [];
 
@@ -134,7 +126,6 @@ export const getDocsNav = cache((): GroupedNav => {
     });
   }
 
-  docsNavCache = groups;
   return groups;
 });
 
@@ -144,8 +135,6 @@ export function getDocsNavFlat(groups?: GroupedNav): NavItem[] {
 }
 
 export const getApiNav = cache((): NavItem[] => {
-  if (apiNavCache) return apiNavCache;
-
   const folders = getOrderedFolders(API_DIR);
   const allItems: NavItem[] = [];
   for (const folder of folders) {
@@ -156,15 +145,12 @@ export const getApiNav = cache((): NavItem[] => {
     allItems.push(...items);
   }
 
-  apiNavCache = allItems;
   return allItems;
 });
 
 export type GroupedNav = { section: string; items: NavItem[] }[];
 
 export const getApiGroupedNav = cache((): GroupedNav => {
-  if (apiGroupedNavCache) return apiGroupedNavCache;
-
   const folders = getOrderedFolders(API_DIR);
   const groups: GroupedNav = [];
   for (const folder of folders) {
@@ -177,16 +163,13 @@ export const getApiGroupedNav = cache((): GroupedNav => {
       items,
     });
   }
-  apiGroupedNavCache = groups;
   return groups;
 });
 
 export const getFaqNav = cache((): NavItem[] => {
-  if (faqNavCache) return faqNavCache;
   const slugs = getAllSlugs(FAQ_DIR);
   const items = buildNavItems(FAQ_DIR, slugs);
   items.sort((a, b) => (a.frontmatter.order ?? 999) - (b.frontmatter.order ?? 999));
-  faqNavCache = items;
   return items;
 });
 

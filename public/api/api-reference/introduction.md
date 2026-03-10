@@ -22,7 +22,9 @@ The 7en Platform API is built around REST principles and WebSocket for real-time
 2. Navigate to **Settings** → **API Keys**
 3. Click **Create API Key** and copy the generated key
 
-> **Security Note:** Store your API key securely. Never expose it in client-side code or commit it to version control.
+{% callout type="warning" title="Security Note" %}
+Store your API key securely. Never expose it in client-side code or commit it to version control.
+{% /callout %}
 
 ### 2. Get your Agent ID
 
@@ -35,7 +37,7 @@ The 7en Platform API is built around REST principles and WebSocket for real-time
 Integrate real-time chat into your application using our WebSocket endpoint. This allows for persistent connections and low-latency bot responses.
 
 **WebSocket URL**
-```
+``` json
 wss://api-staging.7en.ai/ws/api/chat/YOUR_AGENT_ID/?api_key=YOUR_API_KEY
 ```
 

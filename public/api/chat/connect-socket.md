@@ -22,7 +22,7 @@ Connect to the 7en chat WebSocket to enable real-time messaging with your agent.
   {
     "name": "api-key",
     "type": "string",
-    "description": "Your 7en API key. Example: Api-Key 43NKLN3LKN4nlkn"
+    "description": "Your 7en API key. Example: 43NKLN3LKN4nlkn"
   }
 ]
 ```

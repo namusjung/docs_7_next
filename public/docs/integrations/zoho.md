@@ -1,6 +1,7 @@
 ---
 type: docs
 title: Zoho
+hidden: false
 order: 3
 breadcrumb_chain:
   - { label: "Home", href: "/" }
@@ -37,6 +38,20 @@ Connecting Zoho Desk with 7en.ai empowers your AI agents to:
 
 This integration transforms your AI agents into a powerful extension of your customer support operations.
 
+### Auto Ticket Reply
+
+**Let your AI agent reply to Zoho tickets automatically**
+
+Once connected, you can enable **Auto Ticket Reply** on any agent — your 7en.ai agent will automatically respond to incoming Zoho tickets using its trained knowledge, without any manual intervention.
+
+
+To enable it:
+1. Go to your **Agent builder** page in 7en.ai.
+2. Under the **Escalation** section, toggle on **Auto Ticket Reply**.
+3. Select **Zoho** as the ticketing provider.
+
+From that point on, every new Zoho ticket is picked up by the agent and replied to instantly — cutting response times and reducing support load.
+
 {% /section %}
 
 {% section id="connection-guide" title="Step-by-Step Connection Guide" %}
@@ -45,15 +60,15 @@ Follow these quick steps to connect Zoho Desk to 7en.ai, with visual aids to sim
 
 ### Step 1: Navigate to Integrations
 1. Log in to your 7en.ai account.
-2. Go to the **Integrations** page at [https://staging.7en.ai/integrations](https://staging.7en.ai/integrations).
-3. Locate the Zoho Desk integration and click **Configure Integration**.
+2. Navigate to the [Integrations](https://app.7en.ai/integrations) page.
+3. Locate the Zoho Desk integration and click **Configure**.
 
-{% image src="/img/zoho/step-1.jpeg" alt="Screenshot of 7en.ai Integrations page with Zoho Desk option" caption="Selecting Zoho Desk integration in 7en.ai" /%}
+{% image src="/img/zoho/step-1.png" alt="Screenshot of 7en.ai Integrations page with Zoho Desk option" caption="Selecting Zoho Desk integration in 7en.ai" /%}
 
 ### Step 2: Initiate Zoho Desk Connection
-1. Click **Connect Zoho Desk** on the integration configuration page.
+1. Click **Connect** on the integration configuration page.
 
-{% image src="/img/zoho/step-2.jpeg" alt="Screenshot of Zoho Desk integration page with Connect button" caption="Initiating the Zoho Desk connection" /%}
+{% image src="/img/zoho/step-2.png" alt="Screenshot of Zoho Desk integration page with Connect button" caption="Initiating the Zoho Desk connection" /%}
 
 ### Step 3: Sign In to Zoho
 1. You’ll be redirected to the Zoho login page.
@@ -81,13 +96,5 @@ Follow these quick steps to connect Zoho Desk to 7en.ai, with visual aids to sim
 - **Test Integration**: Create a test ticket via your 7en.ai agent to verify the connection works as expected.
 - **Monitor Interactions**: Use the 7en.ai **Conversations** page to track ticket-related activities.
 - **Keep Credentials Secure**: Avoid sharing your Zoho login details publicly.
-
-{% /section %}
-
-### Next Steps
-
-1. [Test your Zoho Desk integration →](/integrations/test)
-2. [Configure agent ticketing settings →](/agents/settings)
-3. [Monitor ticket interactions →](/conversations)
 
 {% /section %}

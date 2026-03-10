@@ -78,7 +78,7 @@ To authenticate your requests, you have to send your API key in the `Authorizati
 
 ### Example of request
 
-```json
+```bash
 
 curl --location '{base_url}/api/v1/agents/' \
 --header 'Authorization: Api-Key {YOUR_API_KEY}'

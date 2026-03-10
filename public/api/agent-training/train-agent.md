@@ -124,8 +124,4 @@ Connected to https://api-staging.7en.ai/api/v1/agents/687/train-agent/
 - **Batch Changes First**: Make all knowledge source additions and removals before triggering retrain to avoid multiple training cycles.
 - **Do Not Retrain Unnecessarily**: Retraining is resource-intensive. Only trigger it when the knowledge base has actually changed.
 
-## Training Progress via SSE
-
-- **Url**: `{{BASE_URL}}/api/v1/agents/{{Agent ID}}/train-agent-sse/`
-- **Events**: `training_connected` | `training_progress` | `training_completed` | `training_failed`
 

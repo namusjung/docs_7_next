@@ -103,6 +103,14 @@ const HeroSection: React.FC<HeroSectionProps> = ({ theme, type = "", title, desc
                 maxOpacity={0.9}
               />
             </div>
+
+            {/* Edge fade overlays */}
+            <div className="absolute inset-0 z-20 pointer-events-none">
+              <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-background to-transparent" />
+              <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-background to-transparent" />
+              <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-background to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-background to-transparent" />
+            </div>
           </div>
         </div>
       </div>

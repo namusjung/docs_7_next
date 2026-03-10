@@ -1,6 +1,7 @@
 ---
 type: api
 title: Error handling
+hidden: true
 next: 
   href: /api/api-reference/agent/agent-object
   title: "Agent Object"
