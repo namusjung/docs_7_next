@@ -1,7 +1,7 @@
 ---
 type: api
 title: "Chat Socket"
-endpoint: WSS /ws/api/chat/{agent_id}/?api_key={API Key}
+endpoint: WSS /ws/api/chat/{agent_id}/?api-key={API Key}
 order: 1
 breadcrumb_chain:
   - { label: "Home", href: "/" }
@@ -20,7 +20,7 @@ Connect to the 7en chat WebSocket to enable real-time messaging with your agent.
 ```
 [
   {
-    "name": "api_key",
+    "name": "api-key",
     "type": "string",
     "description": "Your 7en API key. Example: Api-Key 43NKLN3LKN4nlkn"
   }
