@@ -158,10 +158,3 @@ Human handoff escalates the conversation out of the AI agent and into your human
 Handoff rules are configured per agent in the **Agent Builder** under the **Escalation** settings tab.
 
 {% /section %}
-
-### Next Steps
-
-1. [Create your first AI agent →](/agents/builder)
-2. [Upload knowledge sources →](/knowledge/upload)
-3. [Configure integrations →](/integrations)
-4. [Monitor conversations →](/conversations)
