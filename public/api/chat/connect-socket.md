@@ -14,6 +14,10 @@ breadcrumb_chain:
 
 Connect to the 7en chat WebSocket to enable real-time messaging with your agent. This endpoint provides a persistent connection for sending user messages and receiving agent responses, including streaming text and structured events.
 
+{% callout type="warning" title="Attention" %}
+Add your domain to the allowed domains list in the settings to allow connections from your domain. You can add multiple domains to the allowed domains list.
+{% /callout %}
+
 ## Parameters
 
 {% parameter-list title="Query parameters" %}
